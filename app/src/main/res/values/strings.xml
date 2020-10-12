@@ -1,3 +1,45 @@
 <resources>
-    <string name="app_name">PhotographerBooking</string>
+    <string name="app_name">ShotBook</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lets_start">Lets start!</string>
+    <string name="image_view_client">Image View Client</string>
+    <string name="search_photographer">Search Photographer</string>
+    <string name="image_view_photographer">Image View Photographer</string>
+    <string name="be_a_photographer">Be a Photographer</string>
+    <string name="continue_string">Continue</string>
+    <string name="personal_detail">Your personal detail</string>
+    <string name="first_name">FIRST NAME</string>
+    <string name="last_name">LAST NAME</string>
+    <string name="your_email_address">Your email address</string>
+    <string name="email_address">EMAIL ADDRESS</string>
+    <string name="protect_your_account_with_password">Protect your account with Password</string>
+    <string name="password">PASSWORD</string>
+    <string name="confirm_password">CONFIRM PASSWORD</string>
+    <string name="password_harus_terdiri_dari">Password harus terdiri dari :</string>
+    <string name="huruf_kecil">Huruf kecil</string>
+    <string name="angka">Angka</string>
+    <string name="huruf_kapital">Huruf Kapital</string>
+    <string name="minimal_8_karakter">Minimal 8 Karakter</string>
+    <string name="password_tidak_sama">Password Tidak Sama</string>
+    <string name="find_or_be_a_personal_photographer">Find or be a Personal Photographer</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">EMAIL</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="photo_profil">photo profil</string>
+    <string name="city">CITY</string>
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="save">Save</string>
+    <string name="tell_us_about">Tell us about yourself, it will be increase your chance to be hired</string>
+    <string name="home">Home</string>
+    <string name="order">Order</string>
+    <string name="inbox">Inbox</string>
+    <string name="profile">Profile</string>
+    <string name="portofolio_image">Portofolio Image</string>
+    <string name="edit_button">edit button</string>
+    <string name="about_me">About Me</string>
+    <string name="add_portofolio">Add Portofolio</string>
+    <string name="add_package">Add Package</string>
+    <string name="fullname">FULLNAME</string>
 </resources>

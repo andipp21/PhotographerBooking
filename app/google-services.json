@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "670072612109",
+    "firebase_url": "https://photographerbooking-7d086.firebaseio.com",
+    "project_id": "photographerbooking-7d086",
+    "storage_bucket": "photographerbooking-7d086.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670072612109:android:65cd292b455f9ae2dc3c44",
+        "android_client_info": {
+          "package_name": "com.tugasakhir.photographerbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670072612109-6pivjg0s70s01i8mpij58jfj29pabns0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_XnfD8xJ4WSpX5GzTyphwVhazl30sfLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "670072612109-6pivjg0s70s01i8mpij58jfj29pabns0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
