@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityLoginBinding
+import com.tugasakhir.photographerbooking.model.pojo.auth.User
 import com.tugasakhir.photographerbooking.utils.AuthHelper
 import com.tugasakhir.photographerbooking.view.client.ClientActivity
 import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
@@ -67,16 +68,18 @@ class LoginActivity : AppCompatActivity() {
                 .setActionTextColor(getColor(R.color.colorWhite))
                 .show()
 
-            if (it.role == "photographer"){
+            val user: User = it
+
+            if (user.role == "photographer"){
                 val intent = Intent(this, PhotographerActivity::class.java)
-                intent.putExtra("user",it)
+                intent.putExtra("user",user)
 
                 startActivity(intent)
 
                 finish()
-            } else if (it.role == "client"){
+            } else if (user.role == "client"){
                 val intent = Intent(this,ClientActivity::class.java)
-                intent.putExtra("user",it)
+                intent.putExtra("user",user)
 
                 startActivity(intent)
 

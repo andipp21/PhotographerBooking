@@ -10,7 +10,7 @@ data class User (
     val email: String,
     val password: String,
     val role: String,
-    val city: String,
+    val city : String,
     val phoneNumber: String,
-    val profilePicture: String
+    val profilePicture: String,
 ) : Parcelable

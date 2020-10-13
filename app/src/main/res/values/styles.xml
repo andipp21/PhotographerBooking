@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/colorWhite</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/open_sans</item>
+        <item name="background">@color/colorWhite</item>
     </style>
 
     <style name="Toolbar.Theme" parent="Theme.AppCompat.Light.DarkActionBar">

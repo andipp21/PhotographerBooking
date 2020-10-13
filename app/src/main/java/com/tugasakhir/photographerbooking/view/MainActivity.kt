@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityMainBinding
+import com.tugasakhir.photographerbooking.model.pojo.auth.User
 import com.tugasakhir.photographerbooking.utils.AuthHelper
 import com.tugasakhir.photographerbooking.view.auth.login.LoginActivity
 import com.tugasakhir.photographerbooking.view.auth.register.RegisterActivity
@@ -58,16 +59,18 @@ class MainActivity : AppCompatActivity() {
                 .setActionTextColor(getColor(R.color.colorWhite))
                 .show()
 
-            if (it.role == "photographer"){
+            val user: User = it
+
+            if (user.role == "photographer"){
                 val intent = Intent(this, PhotographerActivity::class.java)
-                intent.putExtra("user",it)
+                intent.putExtra("user",user)
 
                 startActivity(intent)
 
                 finish()
-            } else if (it.role == "client"){
+            } else if (user.role == "client"){
                 val intent = Intent(this, ClientActivity::class.java)
-                intent.putExtra("user",it)
+                intent.putExtra("user",user)
 
                 startActivity(intent)
 
