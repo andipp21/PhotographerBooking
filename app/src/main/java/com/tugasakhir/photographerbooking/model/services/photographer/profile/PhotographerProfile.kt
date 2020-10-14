@@ -138,4 +138,51 @@ class PhotographerProfile @Inject constructor() {
                 Log.d("Errors: ", it.localizedMessage)
             }
     }
+
+    fun changePortofolio(idPortofolio: String,path: Uri, response: (String) -> Unit){
+        val ref = storageRef.child("users/${auth.uid}/portofolio/${UUID.randomUUID()}")
+
+        ref.putFile(path).continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            ref.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                Log.d("Upload Storage Success", "Download url : $downloadUri")
+                if (downloadUri != null) {
+                    val dt = hashMapOf("portofolio_image" to downloadUri.toString())
+
+                    Log.d("Id Portofolio", idPortofolio)
+
+                    portofolioCollection.document(idPortofolio)
+                        .set(dt, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Log.d("Update Portofolio", "Successfully Update Portofolio")
+                            response.invoke("Successfully Update Portofolio")
+                        }
+                        .addOnFailureListener {
+                            Log.e("Update Portofolio", it.localizedMessage!!)
+                            response.invoke("Error Update Portofolio: ${it.localizedMessage}")
+                        }
+                }
+            }
+        }
+    }
+
+    fun deletePortofolio(idPortofolio: String, response: (String) -> Unit){
+        portofolioCollection.document(idPortofolio)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("Delete Portofolio", "Successfully Delete Portofolio")
+                response.invoke("Successfully Delete Portofolio")
+            }
+            .addOnFailureListener {
+                Log.e("Delete Portofolio", it.localizedMessage!!)
+                response.invoke("Error Delete Portofolio: ${it.localizedMessage}")
+            }
+    }
 }

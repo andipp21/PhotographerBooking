@@ -1,22 +1,59 @@
 package com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestListener
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import kotlinx.android.synthetic.main.item_portofolio_photographer.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 
 class PhotographerPortofolioAdapter(val listPortofolio: MutableList<Portofolio> = mutableListOf()) :
     RecyclerView.Adapter<PhotographerPortofolioAdapter.ViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bind(item: Portofolio){
-            Glide.with(itemView)
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(item: Portofolio) {
+
+//            GlobalScope.launch {
+////                val path = Glide.with(itemView.context)
+////                    .downloadOnly()
+////                    .diskCacheStrategy(DiskCacheStrategy.DATA) // Cache resource before it's decoded
+////                    .load(item.portofolioImage)
+////                    .submit()
+////                    .get()
+////
+////                (coroutineContext as PhotographerActivity).runOnUiThread {
+////                    Glide.with(itemView.context)
+////                        .load(path)
+////                        .onlyRetrieveFromCache(true)
+////                        .into(itemView.ivPortofolio)
+////                    //context.refreshInbox();
+////                }
+//
+//                val path =
+//                    Glide.with(itemView.context).downloadOnly()
+//                        .load("your_image_url").submit().get().absolutePath
+//
+//                (coroutineContext as PhotographerActivity).runOnUiThread {
+//                    Glide.with(itemView.context)
+//                        .load(path)
+//                        .onlyRetrieveFromCache(true)
+//                        .into(itemView.ivPortofolio)
+//                    //context.refreshInbox();
+//                }
+//            }
+
+            Glide.with(itemView.context)
                 .load(item.portofolioImage)
                 .into(itemView.ivPortofolio)
 
@@ -48,7 +85,7 @@ class PhotographerPortofolioAdapter(val listPortofolio: MutableList<Portofolio> 
         notifyDataSetChanged()
     }
 
-    interface OnItemClickCallback{
+    interface OnItemClickCallback {
         fun onItemClicked(data: Portofolio)
     }
 

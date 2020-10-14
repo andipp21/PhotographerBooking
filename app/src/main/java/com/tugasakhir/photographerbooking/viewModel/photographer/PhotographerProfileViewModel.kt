@@ -60,4 +60,16 @@ class PhotographerProfileViewModel : ViewModel(){
             _responseListPortofolio.postValue(it)
         }
     }
+
+    fun updatePortofolio(idPortofoli: String, path:Uri){
+        photographerProfile.changePortofolio(idPortofoli,path){
+            _responseLiveData.postValue(it)
+        }
+    }
+
+    fun deletePortofolio(idPortofoli: String){
+        photographerProfile.deletePortofolio(idPortofoli){
+            _responseLiveData.postValue(it)
+        }
+    }
 }

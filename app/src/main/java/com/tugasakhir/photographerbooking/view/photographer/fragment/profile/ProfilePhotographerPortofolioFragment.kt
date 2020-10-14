@@ -10,6 +10,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPortofolioAddFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPortofolioDetailFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile_photographer_portofolio.*
 import kotlinx.coroutines.GlobalScope
@@ -75,7 +76,7 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
                 adapter.updateLists(it)
                 adapter.setOnItemClickCallback(object : PhotographerPortofolioAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: Portofolio) {
-
+                        PhotographerProfilPortofolioDetailFragment(viewModel, data).show(childFragmentManager, "Portofolio Detail")
                     }
                 })
             }
