@@ -66,7 +66,8 @@ class RegisterActivity : AppCompatActivity() {
             role = role,
             city = city,
             phoneNumber = phoneNumber,
-            profilePicture = "https://firebasestorage.googleapis.com/v0/b/photographerbooking-7d086.appspot.com/o/blank_profile_picture.png?alt=media&token=d6258a77-c499-4fa8-a019-9f780bba1d31"
+            profilePicture = "https://firebasestorage.googleapis.com/v0/b/photographerbooking-7d086.appspot.com/o/blank_profile_picture.png?alt=media&token=d6258a77-c499-4fa8-a019-9f780bba1d31",
+            about = ""
         )
         viewModel.registerUser(user)
 

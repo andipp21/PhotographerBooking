@@ -22,9 +22,4 @@ class PhotographerViewModel : ViewModel() {
         Toothpick.inject(this, scope)
     }
 
-    fun getUser(){
-        photographerProfile.getUser(){
-            _responseLiveUser.postValue(it)
-        }
-    }
 }

@@ -13,4 +13,5 @@ data class User (
     val city : String,
     val phoneNumber: String,
     val profilePicture: String,
+    val about: String
 ) : Parcelable

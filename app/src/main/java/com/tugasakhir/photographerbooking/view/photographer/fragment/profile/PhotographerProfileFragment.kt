@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
 import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.PhotographerProfileTabAdapter
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPictureFragment
+import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_profile.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,6 +32,9 @@ class PhotographerProfileFragment : Fragment() {
     private var param2: String? = null
 
     private var user: User? = null
+
+    private val viewModel: PhotographerProfileViewModel
+        get() = ViewModelProvider(this).get(PhotographerProfileViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,12 +59,6 @@ class PhotographerProfileFragment : Fragment() {
 
         (activity as PhotographerActivity).supportActionBar?.title = "Profile"
 
-        viewPagerProfile.adapter = PhotographerProfileTabAdapter(
-            childFragmentManager,
-            FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-        )
-        tabLayout.setupWithViewPager(viewPagerProfile)
-
         Glide.with(this)
             .load(user?.profilePicture)
             .circleCrop()
@@ -66,6 +66,24 @@ class PhotographerProfileFragment : Fragment() {
 
         namaPhotographer.text = user?.fullname
         kotaTinggal.text = user?.city
+
+        ivPhotographerPhotoProfil.setOnClickListener {
+            PhotographerProfilPictureFragment(viewModel).show(childFragmentManager,"Upload Profile Picture")
+        }
+
+        viewPagerProfile.adapter = user?.let {
+            PhotographerProfileTabAdapter(
+                childFragmentManager,
+                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+                viewModel,
+                it
+            )
+        }
+        tabLayout.setupWithViewPager(viewPagerProfile)
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     companion object {

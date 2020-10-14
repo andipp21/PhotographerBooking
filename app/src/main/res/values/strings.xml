@@ -42,4 +42,10 @@
     <string name="add_portofolio">Add Portofolio</string>
     <string name="add_package">Add Package</string>
     <string name="fullname">FULLNAME</string>
+    <string name="select_image">Select Image</string>
+    <string name="save_image">Save Image</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="delete_image">Delete Image</string>
+    <string name="change_image">Change Image</string>
+    <string name="portofolio_detail">Portofolio Detail</string>
 </resources>

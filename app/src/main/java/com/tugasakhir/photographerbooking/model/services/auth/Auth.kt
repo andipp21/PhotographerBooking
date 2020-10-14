@@ -22,7 +22,7 @@ class Auth @Inject constructor() {
                 data["city"] = user.city
                 data["phone_number"] = user.phoneNumber
                 data["profil_picture"] = user.profilePicture
-
+                data["about"] = user.about
 
                 val profileChangeRequest =
                     UserProfileChangeRequest.Builder().setDisplayName(user.fullname).build()
@@ -69,7 +69,8 @@ class Auth @Inject constructor() {
                         doc.data?.getValue("role").toString(),
                         doc.data?.getValue("city").toString(),
                         doc.data?.getValue("phone_number").toString(),
-                        doc.data?.getValue("profile_picture").toString()
+                        doc.data?.getValue("profile_picture").toString(),
+                        doc.data?.getValue("about").toString()
                     )
                     Log.d("user", user.toString())
 
