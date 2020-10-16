@@ -49,4 +49,16 @@
     <string name="change_image">Change Image</string>
     <string name="portofolio_detail">Portofolio Detail</string>
     <string name="delete_button">Delete Button</string>
+
+    <string-array name="photoshoot_package">
+        <item>Wedding Photoshoot</item>
+        <item>Graduation Photoshoot</item>
+        <item>Event Photoshoot</item>
+        <item>Endorsement Photoshoot</item>
+    </string-array>
+
+    <string-array name="photoshoot_time">
+        <item>Daily</item>
+        <item>Hourly</item>
+    </string-array>
 </resources>

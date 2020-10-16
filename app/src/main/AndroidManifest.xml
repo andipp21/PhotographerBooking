@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.client.ClientActivity"></activity>
+        <activity android:name=".view.photographer.activity.profile.PhotographerAddPackageActivity"></activity>
+        <activity android:name=".view.client.ClientActivity" />
         <activity android:name=".view.photographer.activity.PhotographerActivity" />
         <activity android:name=".view.auth.register.RegisterActivity" />
         <activity android:name=".view.auth.login.LoginActivity" />
