@@ -16,7 +16,7 @@ class PhotographerProfileTabAdapter(fragmentManager: FragmentManager, behavior: 
     override fun getItem(position: Int): Fragment = when (position) {
         0 -> ProfilePhotographerDataFragment(viewModel, user)
         1 -> ProfilePhotographerPortofolioFragment(viewModel)
-        2 -> ProfilePhotographerPackageFragment()
+        2 -> ProfilePhotographerPackageFragment(viewModel)
         else -> ProfilePhotographerDataFragment(viewModel, user)
     }
 

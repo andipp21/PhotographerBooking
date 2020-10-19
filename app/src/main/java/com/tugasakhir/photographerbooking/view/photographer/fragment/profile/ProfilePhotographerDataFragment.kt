@@ -20,12 +20,8 @@ import kotlinx.coroutines.launch
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfilePhotographerDataFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewModel,val user: User) : Fragment() {
+class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewModel, val user: User) :
+    Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -155,9 +151,9 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
         }
     }
 
-    private fun observerViewModel(viewModel: PhotographerProfileViewModel){
+    private fun observerViewModel(viewModel: PhotographerProfileViewModel) {
         viewModel.responseLiveData.observe(viewLifecycleOwner, {
-            Log.d("Data Update",it)
+            Log.d("Data Update", it)
             activity?.runOnUiThread {
                 disableButton()
             }

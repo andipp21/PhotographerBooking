@@ -49,16 +49,21 @@
     <string name="change_image">Change Image</string>
     <string name="portofolio_detail">Portofolio Detail</string>
     <string name="delete_button">Delete Button</string>
+    <string name="add_benefit">Add Benefit</string>
+    <string name="input_package_title">Input Package Title</string>
+    <string name="select_photoshoot_type">Select Photoshoot Type</string>
+    <string name="select_photoshoot_time">Select Photoshoot Time</string>
+    <string name="daily">Daily</string>
+    <string name="hourly">Hourly</string>
+    <string name="input_photoshoot_price">Input Photoshoot Price</string>
+    <string name="input_photoshoot_benefit">Input Photoshoot Benefit</string>
+    <string name="button_add_benefit">Button Add Benefit</string>
 
     <string-array name="photoshoot_package">
+        <item>--Select Photoshoot Type--</item>
         <item>Wedding Photoshoot</item>
         <item>Graduation Photoshoot</item>
         <item>Event Photoshoot</item>
         <item>Endorsement Photoshoot</item>
-    </string-array>
-
-    <string-array name="photoshoot_time">
-        <item>Daily</item>
-        <item>Hourly</item>
     </string-array>
 </resources>
