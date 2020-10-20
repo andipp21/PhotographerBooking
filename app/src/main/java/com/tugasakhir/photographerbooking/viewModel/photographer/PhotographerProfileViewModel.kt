@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
 import com.tugasakhir.photographerbooking.model.services.photographer.profile.PhotographerProfile
 import toothpick.Toothpick
@@ -19,6 +20,9 @@ class PhotographerProfileViewModel : ViewModel(){
 
     private val _responseListPortofolio = MutableLiveData<List<Portofolio>>()
     val responseListPortofolio = _responseListPortofolio
+
+    private val _responseListPackage = MutableLiveData<List<Package>>()
+    val responseListPackage = _responseListPackage
 
     private val _responseLiveUser = MutableLiveData<User>()
     val responseLiveUser = _responseLiveUser
@@ -70,6 +74,18 @@ class PhotographerProfileViewModel : ViewModel(){
     fun deletePortofolio(idPortofoli: String){
         photographerProfile.deletePortofolio(idPortofoli){
             _responseLiveData.postValue(it)
+        }
+    }
+
+    fun addPackage(photoshootPackage : Package){
+        photographerProfile.addPackage(photoshootPackage){
+            _responseLiveData.postValue(it)
+        }
+    }
+
+    fun fetchPackage(){
+        photographerProfile.fetchPackage {
+            _responseListPackage.postValue(it)
         }
     }
 }

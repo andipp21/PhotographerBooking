@@ -8,23 +8,23 @@
     tools:context=".view.photographer.fragment.profile.ProfilePhotographerPackageFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPortofolio"
+        android:id="@+id/rvPackage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:spanCount="3"
         tools:listitem="@layout/item_package_photographer"
         android:layout_marginBottom="@dimen/margin_content"
-        app:layout_constraintBottom_toTopOf="@id/btnAddPortofolio"
+        app:layout_constraintBottom_toTopOf="@id/btnAddPackage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnAddPortofolio"
+        android:id="@+id/btnAddPackage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_content"
         android:background="@drawable/button_enabled"
-        android:text="@string/add_portofolio"
+        android:text="@string/add_package"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent" />

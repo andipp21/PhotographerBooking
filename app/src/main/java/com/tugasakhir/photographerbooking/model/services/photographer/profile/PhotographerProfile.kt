@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
 import java.util.*
 import javax.inject.Inject
@@ -72,7 +73,7 @@ class PhotographerProfile @Inject constructor() {
                                 Log.d("User Data Update", "Successfully Update User")
                                 response.invoke("Successfully Upload Image")
                             }
-                            .addOnFailureListener {error ->
+                            .addOnFailureListener { error ->
                                 Log.e("User Data Update", error.localizedMessage!!)
                                 response.invoke("Error Update: ${error.localizedMessage}")
                             }
@@ -117,12 +118,12 @@ class PhotographerProfile @Inject constructor() {
         }
     }
 
-    fun fetchPortofolio(response: (List<Portofolio>) -> Unit){
+    fun fetchPortofolio(response: (List<Portofolio>) -> Unit) {
         portofolioCollection.get()
             .addOnSuccessListener {
                 val listData: MutableList<Portofolio> = mutableListOf()
-                for (doc in it){
-                    if (doc["user_id"] == auth.uid){
+                for (doc in it) {
+                    if (doc["user_id"] == auth.uid) {
                         listData.add(
                             Portofolio(
                                 doc.id,
@@ -139,7 +140,7 @@ class PhotographerProfile @Inject constructor() {
             }
     }
 
-    fun changePortofolio(idPortofolio: String,path: Uri, response: (String) -> Unit){
+    fun changePortofolio(idPortofolio: String, path: Uri, response: (String) -> Unit) {
         val ref = storageRef.child("users/${auth.uid}/portofolio/${UUID.randomUUID()}")
 
         ref.putFile(path).continueWithTask { task ->
@@ -173,7 +174,7 @@ class PhotographerProfile @Inject constructor() {
         }
     }
 
-    fun deletePortofolio(idPortofolio: String, response: (String) -> Unit){
+    fun deletePortofolio(idPortofolio: String, response: (String) -> Unit) {
         portofolioCollection.document(idPortofolio)
             .delete()
             .addOnSuccessListener {
@@ -183,6 +184,52 @@ class PhotographerProfile @Inject constructor() {
             .addOnFailureListener {
                 Log.e("Delete Portofolio", it.localizedMessage!!)
                 response.invoke("Error Delete Portofolio: ${it.localizedMessage}")
+            }
+    }
+
+    fun addPackage(data: Package, response: (String) -> Unit) {
+        val dt = HashMap<String, Any>()
+        dt["title"] = data.title
+        dt["type"] = data.type
+        dt["time"] = data.time
+        dt["price"] = data.price
+        dt["benefit"] = data.benefit
+        dt["user_id"] = data.userID
+
+        packageCollection.document().set(dt)
+            .addOnSuccessListener {
+                Log.d("Add Package", "Successfully Add Package")
+                response.invoke("Successfully Add Package")
+            }
+            .addOnFailureListener {
+                Log.d("Add Package", it.localizedMessage)
+                response.invoke("Error Add Package : ${it.localizedMessage}")
+            }
+    }
+
+    fun fetchPackage(response: (List<Package>) -> Unit){
+        packageCollection.get()
+            .addOnSuccessListener {
+                val listData: MutableList<Package> = mutableListOf()
+                for (doc in it) {
+                    if (doc["user_id"] == auth.uid) {
+                        listData.add(
+                            Package(
+                                doc.id,
+                                doc["title"].toString(),
+                                doc["type"].toString(),
+                                doc["time"].toString(),
+                                doc["price"] as Long,
+                                doc["benefit"] as List<String>,
+                                doc["userID"].toString()
+                            )
+                        )
+                    }
+                }
+                response.invoke(listData)
+            }
+            .addOnFailureListener {
+                Log.d("Errors: ", "${it}")
             }
     }
 }

@@ -24,35 +24,6 @@ class PhotographerPortofolioAdapter(val listPortofolio: MutableList<Portofolio> 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: Portofolio) {
 
-//            GlobalScope.launch {
-////                val path = Glide.with(itemView.context)
-////                    .downloadOnly()
-////                    .diskCacheStrategy(DiskCacheStrategy.DATA) // Cache resource before it's decoded
-////                    .load(item.portofolioImage)
-////                    .submit()
-////                    .get()
-////
-////                (coroutineContext as PhotographerActivity).runOnUiThread {
-////                    Glide.with(itemView.context)
-////                        .load(path)
-////                        .onlyRetrieveFromCache(true)
-////                        .into(itemView.ivPortofolio)
-////                    //context.refreshInbox();
-////                }
-//
-//                val path =
-//                    Glide.with(itemView.context).downloadOnly()
-//                        .load("your_image_url").submit().get().absolutePath
-//
-//                (coroutineContext as PhotographerActivity).runOnUiThread {
-//                    Glide.with(itemView.context)
-//                        .load(path)
-//                        .onlyRetrieveFromCache(true)
-//                        .into(itemView.ivPortofolio)
-//                    //context.refreshInbox();
-//                }
-//            }
-
             Glide.with(itemView.context)
                 .load(item.portofolioImage)
                 .into(itemView.ivPortofolio)
