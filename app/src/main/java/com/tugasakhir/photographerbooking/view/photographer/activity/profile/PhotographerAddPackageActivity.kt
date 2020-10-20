@@ -57,6 +57,14 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         rvBenefit.adapter = adapter
 
+        adapter.setOnItemClickCallback(object : PhotographerBenefitAdapter.OnItemClickCallback {
+            override fun deleteButtonOnClick(position: Int) {
+                benefit.removeAt(position)
+
+                adapter.updateLists(benefit)
+            }
+        })
+
         btnAddBenefit.setOnClickListener {
             PhotographerProfilPackageBenefitAddFragment().show(
                 supportFragmentManager,
@@ -147,6 +155,8 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
                     }
             }
         }
+
+
     }
 
     fun addBenefit(data: String) {

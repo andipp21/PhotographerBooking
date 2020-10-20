@@ -15,8 +15,6 @@ class PhotographerBenefitAdapter(
     var listBenefit: MutableList<String> = mutableListOf()
 ) : RecyclerView.Adapter<PhotographerBenefitAdapter.ViewHolder>() {
 
-
-
     private var onItemClickCallback: OnItemClickCallback? = null
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,14 +22,6 @@ class PhotographerBenefitAdapter(
             Log.d("benefit Adapter", benefit)
 
             itemView.benefitView.text = benefit
-
-            itemView.btnEditBenefit.setOnClickListener {
-
-            }
-
-            itemView.btnDeleteBenefit.setOnClickListener {
-
-            }
         }
     }
 
@@ -48,6 +38,10 @@ class PhotographerBenefitAdapter(
     override fun onBindViewHolder(holder: PhotographerBenefitAdapter.ViewHolder, position: Int) {
         holder.bind(listBenefit[position])
 
+        holder.itemView.btnDeleteBenefit.setOnClickListener {
+            onItemClickCallback?.deleteButtonOnClick(position)
+        }
+
         Log.d("benefit Adapter", listBenefit.toString())
     }
 
@@ -63,8 +57,7 @@ class PhotographerBenefitAdapter(
     }
 
     interface OnItemClickCallback {
-        fun editButtonOnCLick(benefit: String)
-        fun deleteButtonOnClick(benefit: String)
+        fun deleteButtonOnClick(position: Int)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
