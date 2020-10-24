@@ -3,7 +3,6 @@ package com.tugasakhir.photographerbooking.model.services.photographer.profile
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
@@ -207,7 +206,7 @@ class PhotographerProfile @Inject constructor() {
             }
     }
 
-    fun fetchPackage(response: (List<Package>) -> Unit){
+    fun fetchPackage(response: (List<Package>) -> Unit) {
         packageCollection.get()
             .addOnSuccessListener {
                 val listData: MutableList<Package> = mutableListOf()
@@ -230,6 +229,40 @@ class PhotographerProfile @Inject constructor() {
             }
             .addOnFailureListener {
                 Log.d("Errors: ", "${it}")
+            }
+    }
+
+    fun editPackage(data: Package, response: (String) -> Unit) {
+        val dt = HashMap<String, Any>()
+        dt["title"] = data.title
+        dt["type"] = data.type
+        dt["time"] = data.time
+        dt["price"] = data.price
+        dt["benefit"] = data.benefit
+        dt["user_id"] = data.userID
+
+        packageCollection.document(data.uid!!)
+            .set(dt, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.d("Update Package", "Successfully Update Package")
+                response.invoke("Successfully Update Package")
+            }
+            .addOnFailureListener {
+                Log.d("Update Package", it.localizedMessage)
+                response.invoke("Error Update Package : ${it.localizedMessage}")
+            }
+    }
+
+    fun deletePackage(data: Package, response: (String) -> Unit) {
+        packageCollection.document(data.uid!!)
+            .delete()
+            .addOnSuccessListener {
+                Log.d("Delete Package", "Successfully Delete Package")
+                response.invoke("Successfully Delete Package")
+            }
+            .addOnFailureListener {
+                Log.d("Delete Package", it.localizedMessage)
+                response.invoke("Error Delete Package : ${it.localizedMessage}")
             }
     }
 }

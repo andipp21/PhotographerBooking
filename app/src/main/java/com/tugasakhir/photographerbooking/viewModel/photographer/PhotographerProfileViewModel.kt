@@ -88,4 +88,16 @@ class PhotographerProfileViewModel : ViewModel(){
             _responseListPackage.postValue(it)
         }
     }
+
+    fun deletePackage(photoshootPackage: Package){
+        photographerProfile.deletePackage(photoshootPackage){
+            _responseLiveData.postValue(it)
+        }
+    }
+
+    fun updatePackage(photoshootPackage: Package){
+        photographerProfile.editPackage(photoshootPackage){
+            _responseLiveData.postValue(it)
+        }
+    }
 }

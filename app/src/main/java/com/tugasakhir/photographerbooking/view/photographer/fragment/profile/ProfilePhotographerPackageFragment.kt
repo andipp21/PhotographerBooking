@@ -6,23 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
 import com.tugasakhir.photographerbooking.view.photographer.activity.profile.PhotographerAddPackageActivity
+import com.tugasakhir.photographerbooking.view.photographer.activity.profile.PhotographerEditPackageActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerPackageAdapter
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile_photographer_package.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class ProfilePhotographerPackageFragment(val viewModel: PhotographerProfileViewModel) : Fragment() {
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -69,11 +70,29 @@ class ProfilePhotographerPackageFragment(val viewModel: PhotographerProfileViewM
             activity?.runOnUiThread {
                 adapter.updateLists(it)
                 adapter.setOnItemClickCallback(object : PhotographerPackageAdapter.OnItemClickCallback {
-                    override fun onItemClicked(data: Package) {
+                    override fun editPackageClicked(data: Package) {
+                        val intent = Intent(activity, PhotographerEditPackageActivity::class.java)
+                        intent.putExtra("packageData", data)
 
+                        startActivity(intent)
+                    }
+
+                    override fun deletePacakageClicked(data: Package) {
+                        viewModel.deletePackage(data)
+                        observeViewModelDelete(viewModel, viewLifecycleOwner)
                     }
                 })
             }
+        })
+    }
+
+    fun observeViewModelDelete(actionDelegate: PhotographerProfileViewModel, lifecycleOwner: LifecycleOwner){
+        actionDelegate.responseLiveData.observe(lifecycleOwner, {
+            Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
+            GlobalScope.launch {
+                viewModel.fetchPackage()
+            }
+            observeViewModel(viewModel, viewLifecycleOwner)
         })
     }
 }

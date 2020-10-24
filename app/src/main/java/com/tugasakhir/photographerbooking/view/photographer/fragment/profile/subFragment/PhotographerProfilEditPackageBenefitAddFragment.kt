@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_photographer_profil_package_add.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class PhotographerProfilPackageBenefitAddFragment : BottomSheetDialogFragment() {
+class PhotographerProfilEditPackageBenefitAddFragment : BottomSheetDialogFragment() {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -41,7 +41,7 @@ class PhotographerProfilPackageBenefitAddFragment : BottomSheetDialogFragment() 
         super.onViewCreated(view, savedInstanceState)
 
         btnAddBenefit.setOnClickListener {
-            (activity as PhotographerAddPackageActivity).addBenefit(etBenefit.text.toString())
+            (activity as PhotographerEditPackageActivity).addBenefit(etBenefit.text.toString())
             dismiss()
         }
 

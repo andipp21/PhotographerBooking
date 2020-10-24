@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tugasakhir.photographerbooking.R
 import kotlinx.android.synthetic.main.item_benefit_photoshoot.view.*
-import kotlin.math.log
 
 class PhotographerBenefitAdapter(
     val context: Context,

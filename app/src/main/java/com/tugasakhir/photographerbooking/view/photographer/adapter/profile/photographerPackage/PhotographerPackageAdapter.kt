@@ -28,7 +28,13 @@ class PhotographerPackageAdapter(val listPackage: MutableList<Package> = mutable
             itemView.tvTimerType.text = item.time
             itemView.tvPhotoshootRate.text = convertMoney(item.price)
 
-            itemView.setOnClickListener { onItemClickCallback?.onItemClicked(item) }
+            itemView.btnEditPackage.setOnClickListener {
+                onItemClickCallback?.editPackageClicked(item)
+            }
+
+            itemView.btnDeletePackage.setOnClickListener {
+                onItemClickCallback?.deletePacakageClicked(item)
+            }
         }
 
         fun convertMoney(input: Long): String {
@@ -72,7 +78,8 @@ class PhotographerPackageAdapter(val listPackage: MutableList<Package> = mutable
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: Package)
+        fun editPackageClicked(data: Package)
+        fun deletePacakageClicked(data: Package)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
