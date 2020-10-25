@@ -1,4 +1,4 @@
-package com.tugasakhir.photographerbooking.view.photographer.fragment.profile
+package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
+import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPortofolioAddFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPortofolioDetailFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPortofolioAddFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPortofolioDetailFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile_photographer_portofolio.*
 import kotlinx.coroutines.GlobalScope
@@ -52,6 +54,7 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as ClientActivity).supportActionBar?.title = "Explorer"
 
         btnAddPortofolio.setOnClickListener {
             PhotographerProfilPortofolioAddFragment(viewModel).show(childFragmentManager,"Fragment Add Portofolio")

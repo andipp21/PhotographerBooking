@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.ProfilePhotographerDataFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.ProfilePhotographerPackageFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.ProfilePhotographerPortofolioFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.ProfilePhotographerDataFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.ProfilePhotographerPackageFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.ProfilePhotographerPortofolioFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 
 class PhotographerProfileTabAdapter(fragmentManager: FragmentManager, behavior: Int, val viewModel: PhotographerProfileViewModel, val user:User) :

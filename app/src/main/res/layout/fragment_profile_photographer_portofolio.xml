@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/margin_content"
-    tools:context=".view.photographer.fragment.profile.ProfilePhotographerPortofolioFragment">
+    tools:context=".view.photographer.fragment.profile.subFragment.ProfilePhotographerPortofolioFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPortofolio"

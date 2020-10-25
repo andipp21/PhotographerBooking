@@ -1,20 +1,23 @@
 package com.tugasakhir.photographerbooking.view.photographer.fragment.profile
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.view.MainActivity
 import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.PhotographerProfileTabAdapter
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPictureFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPictureFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_profile.*
+
+
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -32,6 +35,8 @@ class PhotographerProfileFragment : Fragment() {
 
     private val viewModel: PhotographerProfileViewModel
         get() = ViewModelProvider(this).get(PhotographerProfileViewModel::class.java)
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +61,8 @@ class PhotographerProfileFragment : Fragment() {
 
         (activity as PhotographerActivity).supportActionBar?.title = "Profile"
 
+        auth = FirebaseAuth.getInstance()
+
         Glide.with(this)
             .load(user?.profilePicture)
             .circleCrop()
@@ -65,7 +72,10 @@ class PhotographerProfileFragment : Fragment() {
         kotaTinggal.text = user?.city
 
         ivPhotographerPhotoProfil.setOnClickListener {
-            PhotographerProfilPictureFragment(viewModel).show(childFragmentManager,"Upload Profile Picture")
+            PhotographerProfilPictureFragment(viewModel).show(
+                childFragmentManager,
+                "Upload Profile Picture"
+            )
         }
 
         viewPagerProfile.adapter = user?.let {
@@ -77,10 +87,6 @@ class PhotographerProfileFragment : Fragment() {
             )
         }
         tabLayout.setupWithViewPager(viewPagerProfile)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     companion object {
@@ -107,5 +113,23 @@ class PhotographerProfileFragment : Fragment() {
                     putParcelable("user", user)
                 }
             }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.logout_menu, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.btnLogout -> {
+                auth.signOut()
+                startActivity(Intent(activity, MainActivity::class.java))
+                activity?.finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

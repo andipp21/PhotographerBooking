@@ -1,6 +1,5 @@
-package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment
+package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.bottomSheet
 
-import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.view.photographer.activity.profile.PhotographerAddPackageActivity
 import com.tugasakhir.photographerbooking.view.photographer.activity.profile.PhotographerEditPackageActivity
 import kotlinx.android.synthetic.main.fragment_photographer_profil_package_add.*
 
@@ -17,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_photographer_profil_package_add.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class PhotographerProfilPackageBenefitAddFragment : BottomSheetDialogFragment() {
+class PhotographerProfilEditPackageBenefitAddFragment : BottomSheetDialogFragment() {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -41,7 +39,7 @@ class PhotographerProfilPackageBenefitAddFragment : BottomSheetDialogFragment() 
         super.onViewCreated(view, savedInstanceState)
 
         btnAddBenefit.setOnClickListener {
-            (activity as PhotographerAddPackageActivity).addBenefit(etBenefit.text.toString())
+            (activity as PhotographerEditPackageActivity).addBenefit(etBenefit.text.toString())
             dismiss()
         }
 

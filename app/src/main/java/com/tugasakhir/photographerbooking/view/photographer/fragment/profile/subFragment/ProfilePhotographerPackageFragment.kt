@@ -1,4 +1,4 @@
-package com.tugasakhir.photographerbooking.view.photographer.fragment.profile
+package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment
 
 import android.content.Intent
 import android.os.Bundle

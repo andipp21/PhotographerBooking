@@ -14,7 +14,7 @@ import com.tugasakhir.photographerbooking.model.pojo.auth.User
 import com.tugasakhir.photographerbooking.utils.AuthHelper
 import com.tugasakhir.photographerbooking.view.auth.login.LoginActivity
 import com.tugasakhir.photographerbooking.view.auth.register.RegisterActivity
-import com.tugasakhir.photographerbooking.view.client.ClientActivity
+import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
 import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.viewModel.auth.login.LoginViewModel
 

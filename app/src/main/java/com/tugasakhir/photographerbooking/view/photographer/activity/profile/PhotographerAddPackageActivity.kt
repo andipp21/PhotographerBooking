@@ -14,7 +14,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerAddPackageBinding
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerBenefitAdapter
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.PhotographerProfilPackageBenefitAddFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.bottomSheet.PhotographerProfilPackageBenefitAddFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.activity_photographer_add_package.*
 import kotlinx.coroutines.GlobalScope

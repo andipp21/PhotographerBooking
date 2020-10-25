@@ -1,4 +1,4 @@
-package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment
+package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog
 
 import android.app.Activity
 import android.content.Intent

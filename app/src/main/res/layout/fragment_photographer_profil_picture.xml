@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="320dp"
-    tools:context=".view.photographer.fragment.profile.subFragment.PhotographerProfilPictureFragment">
+    tools:context=".view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPictureFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

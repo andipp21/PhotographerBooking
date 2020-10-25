@@ -24,12 +24,6 @@ class PhotographerProfileViewModel : ViewModel(){
     private val _responseListPackage = MutableLiveData<List<Package>>()
     val responseListPackage = _responseListPackage
 
-    private val _responseLiveUser = MutableLiveData<User>()
-    val responseLiveUser = _responseLiveUser
-
-    private val _responseLiveUri = MutableLiveData<Uri>()
-    val responseLiveUri = _responseLiveUri
-
     init {
         val scope = Toothpick.openScope(this)
         Toothpick.inject(this, scope)
