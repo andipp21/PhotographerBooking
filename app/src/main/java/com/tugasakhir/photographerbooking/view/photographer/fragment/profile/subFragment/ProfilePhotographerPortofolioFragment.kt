@@ -23,11 +23,6 @@ import kotlinx.coroutines.launch
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfilePhotographerPortofolioFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileViewModel) : Fragment() {
 
     private var param1: String? = null
@@ -54,7 +49,6 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as ClientActivity).supportActionBar?.title = "Explorer"
 
         btnAddPortofolio.setOnClickListener {
             PhotographerProfilPortofolioAddFragment(viewModel).show(childFragmentManager,"Fragment Add Portofolio")

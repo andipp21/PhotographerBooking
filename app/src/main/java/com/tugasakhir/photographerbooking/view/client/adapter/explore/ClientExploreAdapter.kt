@@ -21,7 +21,7 @@ class ClientExploreAdapter(val listPhotographer: MutableList<User> = mutableList
 
             Glide.with(itemView.context)
                 .load(item.profilePicture)
-                .into(itemView.ivPortofolio)
+                .into(itemView.ivProfilePicturePhotographer)
 
             itemView.photographerName.text = item.fullname
             itemView.photographerLocation.text = item.city

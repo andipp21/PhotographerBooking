@@ -13,7 +13,7 @@
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:contentDescription="@string/photographer_profile_picture"
         android:src="@drawable/line_divider" />
 

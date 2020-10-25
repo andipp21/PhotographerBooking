@@ -114,22 +114,4 @@ class PhotographerProfileFragment : Fragment() {
                 }
             }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.logout_menu, menu)
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
-            R.id.btnLogout -> {
-                auth.signOut()
-                startActivity(Intent(activity, MainActivity::class.java))
-                activity?.finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }

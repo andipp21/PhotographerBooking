@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.explore.ClientExploreAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
@@ -55,6 +56,7 @@ class ClientExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as ClientActivity).supportActionBar?.title = "Explorer"
 
         adapter = ClientExploreAdapter()
         rvExploreClient.adapter = adapter
