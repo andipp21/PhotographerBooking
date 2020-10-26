@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
-import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
-import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPortofolioAddFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPortofolioDetailFragment
@@ -23,7 +21,8 @@ import kotlinx.coroutines.launch
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileViewModel) : Fragment() {
+class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileViewModel) :
+    Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -36,7 +35,6 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -51,7 +49,10 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
         super.onViewCreated(view, savedInstanceState)
 
         btnAddPortofolio.setOnClickListener {
-            PhotographerProfilPortofolioAddFragment(viewModel).show(childFragmentManager,"Fragment Add Portofolio")
+            PhotographerProfilPortofolioAddFragment(viewModel).show(
+                childFragmentManager,
+                "Fragment Add Portofolio"
+            )
         }
 
         adapter = PhotographerPortofolioAdapter()
@@ -77,13 +78,20 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
         Log.d("portofolio", " on start")
     }
 
-    private fun observeViewModel(actionDelegate: PhotographerProfileViewModel, lifecycleOwner: LifecycleOwner) {
+    private fun observeViewModel(
+        actionDelegate: PhotographerProfileViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
         actionDelegate.responseListPortofolio.observe(lifecycleOwner, {
             activity?.runOnUiThread {
                 adapter.updateLists(it)
-                adapter.setOnItemClickCallback(object : PhotographerPortofolioAdapter.OnItemClickCallback {
+                adapter.setOnItemClickCallback(object :
+                    PhotographerPortofolioAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: Portofolio) {
-                        PhotographerProfilPortofolioDetailFragment(viewModel, data).show(childFragmentManager, "Portofolio Detail")
+                        PhotographerProfilPortofolioDetailFragment(viewModel, data).show(
+                            childFragmentManager,
+                            "Portofolio Detail"
+                        )
                     }
                 })
             }

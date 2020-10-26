@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.client.fragment.photographerDetail.PhotographerDetailAboutFragment">
+
+    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/aboutPhotographer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:id="@+id/contactMe"
+        app:layout_constraintTop_toBottomOf="@id/aboutPhotographer"
+        android:text="@string/you_can_contact_me_on"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ivEmail"
+        android:padding="16dp"
+        android:src="@drawable/ic_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivPhone"
+        app:layout_constraintTop_toBottomOf="@id/contactMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/ivPhone"
+        android:padding="16dp"
+        android:src="@drawable/ic_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivEmail"
+        app:layout_constraintTop_toBottomOf="@id/contactMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,4 +40,16 @@ class ClientHomeViewModel : ViewModel() {
             _responseLivePhotographer.postValue(it)
         }
     }
+
+    fun getPhotographerPortofolio(idPhotographer: String){
+        clientHome.fetchPotofolioByPhotographerID(idPhotographer){
+            _responseListPortofolio.postValue(it)
+        }
+    }
+
+    fun getPhotographerPackage(idPhotographer: String){
+        clientHome.fetchPackageByPhotographerID(idPhotographer){
+            _responseListPackage.postValue(it)
+        }
+    }
 }

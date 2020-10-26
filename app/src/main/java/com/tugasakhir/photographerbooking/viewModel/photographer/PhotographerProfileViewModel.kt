@@ -59,14 +59,14 @@ class PhotographerProfileViewModel : ViewModel(){
         }
     }
 
-    fun updatePortofolio(idPortofoli: String, path:Uri){
-        photographerProfile.changePortofolio(idPortofoli,path){
+    fun updatePortofolio(idPortofolio: String, path:Uri){
+        photographerProfile.changePortofolio(idPortofolio,path){
             _responseLiveData.postValue(it)
         }
     }
 
-    fun deletePortofolio(idPortofoli: String){
-        photographerProfile.deletePortofolio(idPortofoli){
+    fun deletePortofolio(idPortofolio: String){
+        photographerProfile.deletePortofolio(idPortofolio){
             _responseLiveData.postValue(it)
         }
     }

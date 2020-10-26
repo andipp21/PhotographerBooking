@@ -1,5 +1,6 @@
 package com.tugasakhir.photographerbooking.view.client.fragment.explore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
 import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
+import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.explore.ClientExploreAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
@@ -78,7 +80,9 @@ class ClientExploreFragment : Fragment() {
                 adapter.updateLists(it)
                 adapter.setOnItemClickCallback(object : ClientExploreAdapter.OnItemClickCallback {
                     override fun onItemClicked(data: User) {
-
+                        val intent= Intent(activity, PhotographerDetailActivity::class.java)
+                        intent.putExtra("photographer", data)
+                        startActivity(intent)
                     }
                 })
             }
