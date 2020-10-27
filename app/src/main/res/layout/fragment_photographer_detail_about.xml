@@ -1,43 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_content"
     tools:context=".view.client.fragment.photographerDetail.PhotographerDetailAboutFragment">
 
     <TextView
+        android:id="@+id/about"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/aboutPhotographer"
+        android:text="@string/about_photographer"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <TextView
-        android:layout_marginTop="8dp"
-        android:id="@+id/contactMe"
-        app:layout_constraintTop_toBottomOf="@id/aboutPhotographer"
-        android:text="@string/you_can_contact_me_on"
+        android:layout_marginTop="4dp"
+        android:id="@+id/aboutPhotographer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/about" />
 
-    <ImageView
-        android:id="@+id/ivEmail"
+    <View
+        android:id="@+id/lineDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/line_divider_dua"
+        app:layout_constraintTop_toBottomOf="@id/aboutPhotographer" />
+
+    <TextView
+        android:id="@+id/contactMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:text="@string/you_can_contact_me_on"
+        app:layout_constraintTop_toBottomOf="@id/lineDivider" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="16dp"
-        android:src="@drawable/ic_email"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/email"
+        app:drawableTopCompat="@drawable/ic_email"
         app:layout_constraintEnd_toStartOf="@id/ivPhone"
-        app:layout_constraintTop_toBottomOf="@id/contactMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contactMe" />
 
-    <ImageView
+    <TextView
         android:id="@+id/ivPhone"
-        android:padding="16dp"
-        android:src="@drawable/ic_phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivEmail"
-        app:layout_constraintTop_toBottomOf="@id/contactMe"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/phone"
+        app:drawableTopCompat="@drawable/ic_phone"
+        app:layout_constraintStart_toEndOf="@id/tvEmail"
+        app:layout_constraintTop_toBottomOf="@id/contactMe" />
+
+    <View
+        android:id="@+id/lineDivider2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/line_divider_dua"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,18 @@
 package com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
-import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerPackageAdapter
+import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailActivity
+import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailPackageActivity
+import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.`package`.PhotographerDetailPackageAdapter
 import kotlinx.android.synthetic.main.fragment_photographer_detail_package.*
-import kotlinx.android.synthetic.main.fragment_profile_photographer_package.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,12 +20,12 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class PhotographerDetailPackageFragment(val listPackage: MutableList<Package>) : Fragment() {
+class PhotographerDetailPackageFragment(private val listPackage: MutableList<Package>) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var adapter: PhotographerPackageAdapter
+    private lateinit var adapter: PhotographerDetailPackageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +46,15 @@ class PhotographerDetailPackageFragment(val listPackage: MutableList<Package>) :
 
         Log.d("List Package", listPackage.toString())
 
-        adapter = PhotographerPackageAdapter()
+        adapter = PhotographerDetailPackageAdapter()
         rvPhotographerDetailPackage.adapter = adapter
 
         adapter.updateLists(listPackage)
+        adapter.setOnItemClickCallback(object : PhotographerDetailPackageAdapter.OnItemClickCallback {
+            override fun showDetailPackage(data: Package) {
+               (activity as PhotographerDetailActivity).goOrderFromPackage(data)
+            }
+        })
     }
 
 //    companion object {

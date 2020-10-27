@@ -1,8 +1,9 @@
 package com.tugasakhir.photographerbooking.view.client.activity.photographerDetail
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerDetailBinding
 import com.tugasakhir.photographerbooking.model.pojo.auth.User
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
 import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.PhotographerDetailTabAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
 import kotlinx.android.synthetic.main.activity_photographer_detail.view.*
@@ -20,17 +20,20 @@ class PhotographerDetailActivity : AppCompatActivity() {
 
     lateinit var photographer: User
 
-    private var listPortofolio: MutableList<Portofolio> = mutableListOf()
-    private var listPackage: MutableList<Package> = mutableListOf()
+    private lateinit var tabAdapter: PhotographerDetailTabAdapter
 
-    lateinit var tabAdapter: PhotographerDetailTabAdapter
+    private var viewModel: ClientHomeViewModel? = null
 
-    private val viewModel: ClientHomeViewModel
-        get() = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotographerDetailBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
         setContentView(binding.root)
 
         photographer = intent.getParcelableExtra("photographer")!!
@@ -54,18 +57,23 @@ class PhotographerDetailActivity : AppCompatActivity() {
         photographer.uid?.let {
             getData(it)
         }
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getData(photographerID: String) {
-        viewModel.getPhotographerPortofolio(photographerID)
-        observePortofolio(viewModel, this)
-        viewModel.getPhotographerPackage(photographerID)
-        observePackage(viewModel, this)
-
-
+        viewModel?.getPhotographerPortofolio(photographerID)
+        viewModel?.let { observePortofolio(it, this) }
+        viewModel?.getPhotographerPackage(photographerID)
+        viewModel?.let { observePackage(it, this) }
     }
 
-    private fun observePortofolio(actionDelegate: ClientHomeViewModel, lifecycleOwner: LifecycleOwner) {
+    private fun observePortofolio(
+        actionDelegate: ClientHomeViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
         actionDelegate.responseListPortofolio.observe(lifecycleOwner, {
 //            listPortofolio.addAll(it)
             tabAdapter.updateListPortofolio(it)
@@ -74,11 +82,21 @@ class PhotographerDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun observePackage(actionDelegate: ClientHomeViewModel, lifecycleOwner: LifecycleOwner) {
+    private fun observePackage(
+        actionDelegate: ClientHomeViewModel,
+        lifecycleOwner: LifecycleOwner
+    ) {
         actionDelegate.responseListPackage.observe(lifecycleOwner, {
 //            listPackage.addAll(it)
             tabAdapter.updateListPackage(it)
             Log.d("Package Activity", it.toString())
         })
+    }
+
+    fun goOrderFromPackage(data: Package) {
+        val intent = Intent(this, PhotographerDetailPackageActivity::class.java)
+        intent.putExtra("photographer", photographer)
+        intent.putExtra("package", data)
+        startActivity(intent)
     }
 }

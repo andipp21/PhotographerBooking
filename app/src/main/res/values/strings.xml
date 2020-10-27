@@ -24,7 +24,7 @@
     <string name="find_or_be_a_personal_photographer">Find or be a Personal Photographer</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
-    <string name="email">EMAIL</string>
+    <string name="email">Email</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="photo_profil">photo profil</string>
     <string name="city">CITY</string>
@@ -51,7 +51,6 @@
     <string name="add_benefit">Add Benefit</string>
     <string name="input_package_title">Input Package Title</string>
     <string name="select_photoshoot_type">Select Photoshoot Type</string>
-    <string name="select_photoshoot_time">Select Photoshoot Time</string>
     <string name="daily">Daily</string>
     <string name="hourly">Hourly</string>
     <string name="input_photoshoot_price">Input Photoshoot Price</string>
@@ -77,4 +76,19 @@
     <string name="filter">Filter</string>
     <string name="logout">Logout</string>
     <string name="you_can_contact_me_on">You can contact me on</string>
+    <string name="phone">Phone</string>
+    <string name="button_close">Button Close</string>
+    <string name="show_detail">Show Detail</string>
+    <string name="package_benefit">Package Benefit</string>
+    <string name="photoshoot_price">Photoshoot Price</string>
+    <string name="order_this_package">Order this Package</string>
+    <string name="photoshoot_time">Photoshoot Time</string>
+    <string name="location">Location</string>
+    <string name="photographer">Photographer</string>
+    <string name="select_photoshoot_date">Select Photoshoot Date</string>
+    <string name="photoshoot_package">Photoshoot Package</string>
+    <string name="photoshoot_type">Photoshoot Type</string>
+    <string name="select_photoshoot_time">Select Photoshoot Time</string>
+    <string name="about_photographer">About Photographer</string>
+    <string name="button_back">Button Back</string>
 </resources>

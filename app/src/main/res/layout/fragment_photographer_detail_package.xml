@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/margin_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPhotographerDetailPackage"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_package_photographer"
+        tools:listitem="@layout/item_package_photographer_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -40,7 +40,7 @@ class PhotographerDetailAboutFragment(val user: User) : Fragment() {
 
         aboutPhotographer.text = user.about
 
-        ivEmail.setOnClickListener {
+        tvEmail.setOnClickListener {
 
         }
 

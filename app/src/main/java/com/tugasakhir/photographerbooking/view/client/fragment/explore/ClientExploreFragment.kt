@@ -2,11 +2,10 @@ package com.tugasakhir.photographerbooking.view.client.fragment.explore
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
@@ -15,10 +14,7 @@ import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
 import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.explore.ClientExploreAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
-import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_client_explore.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,10 +31,15 @@ class ClientExploreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val viewModel: ClientHomeViewModel
-        get() = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
+    private var viewModel: ClientHomeViewModel? = null
 
     private lateinit var adapter: ClientExploreAdapter
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,32 +61,29 @@ class ClientExploreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as ClientActivity).supportActionBar?.title = "Explorer"
 
+        viewModel = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
+
         adapter = ClientExploreAdapter()
         rvExploreClient.adapter = adapter
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+        viewModel?.fetchPhotographer()
 
-        GlobalScope.launch {
-            viewModel.fetchPhotographer()
-        }
-
-        observeViewModel(viewModel, viewLifecycleOwner)
+        viewModel?.let { observeViewModel(it, viewLifecycleOwner) }
     }
 
-    fun observeViewModel(actionDelegate: ClientHomeViewModel, lifecycleOwner: LifecycleOwner){
+    private fun observeViewModel(actionDelegate: ClientHomeViewModel, lifecycleOwner: LifecycleOwner){
         actionDelegate.responseLivePhotographer.observe(lifecycleOwner, {
-            activity?.runOnUiThread {
-                adapter.updateLists(it)
-                adapter.setOnItemClickCallback(object : ClientExploreAdapter.OnItemClickCallback {
-                    override fun onItemClicked(data: User) {
-                        val intent= Intent(activity, PhotographerDetailActivity::class.java)
-                        intent.putExtra("photographer", data)
-                        startActivity(intent)
-                    }
-                })
-            }
+            adapter.updateLists(it)
+            adapter.setOnItemClickCallback(object : ClientExploreAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: User) {
+                    val intent= Intent(activity, PhotographerDetailActivity::class.java)
+                    intent.putExtra("photographer", data)
+                    startActivity(intent)
+                }
+            })
         })
     }
 

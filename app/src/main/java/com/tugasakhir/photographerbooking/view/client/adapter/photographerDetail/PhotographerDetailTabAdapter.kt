@@ -32,12 +32,12 @@ class PhotographerDetailTabAdapter(
 
     override fun getPageTitle(position: Int): CharSequence? = tabName[position]
 
-    fun updateListPortofolio(newList: List<Portofolio>){
+    fun updateListPortofolio(newList: List<Portofolio>) {
         listPortofolio.clear()
         listPortofolio.addAll(newList)
     }
 
-    fun updateListPackage(newList: List<Package>){
+    fun updateListPackage(newList: List<Package>) {
         listPackage.clear()
         listPackage.addAll(newList)
     }

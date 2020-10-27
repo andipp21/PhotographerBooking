@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail.dialog.PhotographerDetailShowPortofolioFragment
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
 import kotlinx.android.synthetic.main.fragment_photographer_detail_portofolio.*
 
@@ -16,8 +17,10 @@ import kotlinx.android.synthetic.main.fragment_photographer_detail_portofolio.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class PhotographerDetailPortofolioFragment(private val listPortofolio: MutableList<Portofolio>) : Fragment() {
-    // TODO: Rename and change types of parameters
+class PhotographerDetailPortofolioFragment(
+    private val listPortofolio: MutableList<Portofolio>
+) : Fragment() {
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -31,17 +34,16 @@ class PhotographerDetailPortofolioFragment(private val listPortofolio: MutableLi
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photographer_detail_portofolio, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-//
+        return inflater.inflate(
+            R.layout.fragment_photographer_detail_portofolio,
+            container,
+            false
+        )
     }
 
     override fun onResume() {
@@ -57,27 +59,11 @@ class PhotographerDetailPortofolioFragment(private val listPortofolio: MutableLi
         adapter.setOnItemClickCallback(object :
             PhotographerPortofolioAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Portofolio) {
-
+                PhotographerDetailShowPortofolioFragment(data).show(
+                    childFragmentManager,
+                    "Show Photo Detail"
+                )
             }
         })
     }
-
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment PhotographerDetailPortofolioFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic fun newInstance(param1: String, param2: String) =
-//                PhotographerDetailPortofolioFragment().apply {
-//                    arguments = Bundle().apply {
-//                        putString(ARG_PARAM1, param1)
-//                        putString(ARG_PARAM2, param2)
-//                    }
-//                }
-//    }
 }

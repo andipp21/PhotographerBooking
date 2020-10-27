@@ -40,7 +40,7 @@ class ClientActivity : AppCompatActivity() {
             .commit()
 
         binding.botNavClient.setOnNavigationItemSelectedListener {
-            return@setOnNavigationItemSelectedListener when(it.itemId){
+            return@setOnNavigationItemSelectedListener when (it.itemId) {
                 R.id.clientExplore -> {
                     goFragment(ClientExploreFragment())
                     true
