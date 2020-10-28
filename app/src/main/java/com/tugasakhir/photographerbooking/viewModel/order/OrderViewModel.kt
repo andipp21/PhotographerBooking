@@ -1,16 +1,15 @@
-package com.tugasakhir.photographerbooking.viewModel.auth.register
+package com.tugasakhir.photographerbooking.viewModel.order
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tugasakhir.photographerbooking.model.pojo.User
-import com.tugasakhir.photographerbooking.model.services.auth.Auth
+import com.tugasakhir.photographerbooking.model.pojo.Order
+import com.tugasakhir.photographerbooking.model.services.order.OrderServices
 import toothpick.Toothpick
 import javax.inject.Inject
 
-class RegisterViewModel : ViewModel() {
+class OrderViewModel: ViewModel() {
     @Inject
-    lateinit var auth: Auth
+    lateinit var orderServices: OrderServices
 
     private val _responseLiveData = MutableLiveData<String>()
     val responseLiveData = _responseLiveData
@@ -20,10 +19,10 @@ class RegisterViewModel : ViewModel() {
         Toothpick.inject(this, scope)
     }
 
-    fun registerUser(user: User){
-        auth.register(user) {
-            Log.d("Firebase", it)
+    fun createOrder(order: Order){
+        orderServices.createOrder(order){
             _responseLiveData.postValue(it)
         }
     }
+
 }

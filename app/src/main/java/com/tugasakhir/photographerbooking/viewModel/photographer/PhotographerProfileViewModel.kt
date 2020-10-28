@@ -4,9 +4,9 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.Portofolio
 import com.tugasakhir.photographerbooking.model.services.photographer.profile.PhotographerProfile
 import toothpick.Toothpick
 import javax.inject.Inject

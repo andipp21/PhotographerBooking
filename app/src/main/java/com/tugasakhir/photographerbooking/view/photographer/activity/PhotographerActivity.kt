@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerBinding
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.MainActivity
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerHomeFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment

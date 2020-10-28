@@ -6,9 +6,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.Portofolio
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.HashMap

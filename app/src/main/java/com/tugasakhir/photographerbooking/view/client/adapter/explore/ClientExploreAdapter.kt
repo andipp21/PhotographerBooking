@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.model.pojo.User
 import kotlinx.android.synthetic.main.item_client_explore.view.*
-import kotlinx.android.synthetic.main.item_portofolio_photographer.view.*
 
 class ClientExploreAdapter(val listPhotographer: MutableList<User> = mutableListOf()) :
     RecyclerView.Adapter<ClientExploreAdapter.ViewHolder>() {

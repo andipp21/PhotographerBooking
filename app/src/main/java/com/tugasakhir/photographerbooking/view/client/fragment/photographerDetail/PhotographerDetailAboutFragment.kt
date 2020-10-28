@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.User
 import kotlinx.android.synthetic.main.fragment_photographer_detail_about.*
 
 // TODO: Rename parameter arguments, choose names that match

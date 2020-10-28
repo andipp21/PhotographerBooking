@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.model.pojo.Portofolio
 import com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail.dialog.PhotographerDetailShowPortofolioFragment
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
 import kotlinx.android.synthetic.main.fragment_photographer_detail_portofolio.*

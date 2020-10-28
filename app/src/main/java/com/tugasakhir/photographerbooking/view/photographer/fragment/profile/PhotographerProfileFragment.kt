@@ -1,6 +1,5 @@
 package com.tugasakhir.photographerbooking.view.photographer.fragment.profile
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -9,8 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.view.MainActivity
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.PhotographerProfileTabAdapter
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.dialog.PhotographerProfilPictureFragment

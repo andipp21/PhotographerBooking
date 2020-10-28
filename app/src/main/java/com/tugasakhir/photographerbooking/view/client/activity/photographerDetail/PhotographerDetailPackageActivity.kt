@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerDetailPackageBinding
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
+import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.view.client.activity.order.orderFromPackage.ClientOrderFromPackageActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.`package`.PhotographerDetailPackageBenefitAdapter
 import java.text.DecimalFormat

@@ -1,6 +1,5 @@
 package com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailActivity
-import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailPackageActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.`package`.PhotographerDetailPackageAdapter
 import kotlinx.android.synthetic.main.fragment_photographer_detail_package.*
 

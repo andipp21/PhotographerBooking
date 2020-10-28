@@ -9,8 +9,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerDetailBinding
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
+import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.view.client.activity.order.orderPhotographer.OrderPhotographerActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.PhotographerDetailTabAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
 import kotlinx.android.synthetic.main.activity_photographer_detail.view.*
@@ -21,6 +22,7 @@ class PhotographerDetailActivity : AppCompatActivity() {
     lateinit var photographer: User
 
     private lateinit var tabAdapter: PhotographerDetailTabAdapter
+    private var listPackage : MutableList<Package> = mutableListOf()
 
     private var viewModel: ClientHomeViewModel? = null
 
@@ -61,6 +63,14 @@ class PhotographerDetailActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
+        binding.btnOrder.setOnClickListener {
+            val intent = Intent(this, OrderPhotographerActivity::class.java)
+            intent.putExtra("photographer", photographer)
+            intent.putExtra("listPackage", ArrayList<Package>(listPackage))
+
+            startActivity(intent)
+        }
     }
 
     private fun getData(photographerID: String) {
@@ -87,7 +97,8 @@ class PhotographerDetailActivity : AppCompatActivity() {
         lifecycleOwner: LifecycleOwner
     ) {
         actionDelegate.responseListPackage.observe(lifecycleOwner, {
-//            listPackage.addAll(it)
+            listPackage.clear()
+            listPackage.addAll(it)
             tabAdapter.updateListPackage(it)
             Log.d("Package Activity", it.toString())
         })

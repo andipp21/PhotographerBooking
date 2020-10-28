@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.view.photographer.activity.profile.PhotographerAddPackageActivity
 import com.tugasakhir.photographerbooking.view.photographer.activity.profile.PhotographerEditPackageActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerPackageAdapter

@@ -1,38 +1,43 @@
-package com.tugasakhir.photographerbooking.view.client.activity.order.orderFromPackage
+package com.tugasakhir.photographerbooking.view.client.activity.order.orderPhotographer
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.databinding.ActivityClientOrderFromPackageBinding
-import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.databinding.ActivityOrderPhotographerBinding
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.fragment.orderReview.ClientOrderReviewFragment
 import java.util.*
+import kotlin.collections.ArrayList
 
-
-class ClientOrderFromPackageActivity : AppCompatActivity() {
-    lateinit var binding: ActivityClientOrderFromPackageBinding
+class OrderPhotographerActivity : AppCompatActivity() {
+    lateinit var binding: ActivityOrderPhotographerBinding
+    private var listPackageTitle: ArrayList<String> = arrayListOf()
+    lateinit var packageSelected: Package
 
     private var selectedDate = Calendar.getInstance().time
-    private var stateDate = false
-    private var stateTime = false
-
     private var yearSelected: Int = 0
     private var monthSelected: Int = 0
     private var daySelected: Int = 0
     private var hourSelected: Int = 0
     private var minuteSelected: Int = 0
 
-    private lateinit var photographer: User
-    private lateinit var paket: Package
+    private var stateType = false
+    private var statePackage = false
+    private var stateDate = false
+    private var stateTime = false
+
+    lateinit var photographer: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityClientOrderFromPackageBinding.inflate(layoutInflater)
+        binding = ActivityOrderPhotographerBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         val appBar = binding.appBarLayout.toolbar
@@ -42,15 +47,84 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
 
         binding.btnOrder.isClickable = false
 
+        val paket = intent.getParcelableArrayListExtra<Package>("listPackage")
         photographer = intent.getParcelableExtra("photographer")!!
-        paket = intent.getParcelableExtra("package")!!
-
-        Log.d("Photographer", photographer.toString())
 
         binding.photographerName.text = photographer.fullname
         binding.photographerLocation.text = photographer.city
-        binding.photoshootPackage.text = paket.title
-        binding.photoshootType.text = paket.type
+
+        val photoshootTypArray =
+            resources.getStringArray(R.array.photoshoot_package)
+
+        val spinnerPackageAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, listPackageTitle)
+
+        val spinnerTypeAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, photoshootTypArray)
+
+        val typeSpinner = binding.photoshootType
+
+        typeSpinner.adapter = spinnerTypeAdapter
+
+        typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (paket != null) {
+                    for (data in paket) {
+                        listPackageTitle.clear()
+                        listPackageTitle.add("Select Package")
+                        if (data.type == photoshootTypArray[position]) {
+                            listPackageTitle.add(data.title)
+                        }
+                    }
+                }
+
+                stateType = true
+
+                binding.packageTitle.visibility = View.VISIBLE
+                binding.photoshootPackage.visibility = View.VISIBLE
+
+                val packageSpinner = binding.photoshootPackage
+                packageSpinner.adapter = spinnerPackageAdapter
+
+                packageSpinner.onItemSelectedListener =
+                    object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(
+                            parent: AdapterView<*>?,
+                            view: View?,
+                            position: Int,
+                            id: Long
+                        ) {
+                            if (paket != null) {
+                                for (data in paket) {
+                                    if (data.title == listPackageTitle[position]) {
+                                        packageSelected = data
+                                    }
+                                }
+                            }
+
+                            binding.datePicker.visibility = View.VISIBLE
+                            statePackage = true
+
+                            stateButton()
+                        }
+
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                        }
+
+                    }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
 
         binding.datePicker.setOnClickListener {
             val cal: Calendar = Calendar.getInstance()
@@ -90,6 +164,8 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
 
             dialog.show()
         }
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -162,10 +238,8 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
 
                 selectedDate = cal.time
 
-                ClientOrderReviewFragment(paket,photographer,selectedDate).show(supportFragmentManager, "Order Review")
+                ClientOrderReviewFragment(packageSelected,photographer,selectedDate).show(supportFragmentManager, "Order Review")
             }
         }
     }
-
-
 }

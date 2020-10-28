@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerEditPackageBinding
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerBenefitAdapter
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.bottomSheet.PhotographerProfilEditPackageBenefitAddFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel

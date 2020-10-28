@@ -91,4 +91,17 @@
     <string name="select_photoshoot_time">Select Photoshoot Time</string>
     <string name="about_photographer">About Photographer</string>
     <string name="button_back">Button Back</string>
+    <string name="order_review">Order Review</string>
+    <string name="cart">Cart</string>
+    <string name="type">Type</string>
+    <string name="paket">Package</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="payment_detail">Payment Detail</string>
+    <string name="total_fee">Total Fee :</string>
+    <string name="order_success">Order Success</string>
+    <string name="please_wait_photographer_to_confirmation_your_order">Please Wait Photographer to Confirmation Your Order</string>
+    <string name="close">Close</string>
+    <string name="order_this_photographer">Order this Photographer</string>
+    <string name="image_wait_confirmation">Image Wait Confirmation</string>
 </resources>

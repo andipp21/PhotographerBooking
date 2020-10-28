@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
-import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import kotlinx.android.synthetic.main.item_package_photographer.view.*
-import kotlinx.android.synthetic.main.item_portofolio_photographer.view.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

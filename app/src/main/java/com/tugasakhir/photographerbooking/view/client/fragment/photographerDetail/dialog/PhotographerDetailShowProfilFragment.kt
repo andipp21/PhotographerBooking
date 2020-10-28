@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.model.pojo.Portofolio
 import kotlinx.android.synthetic.main.fragment_photographer_profil_portofolio_detail.*
 
 // TODO: Rename parameter arguments, choose names that match

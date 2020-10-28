@@ -1,4 +1,4 @@
-package com.tugasakhir.photographerbooking.model.pojo.auth
+package com.tugasakhir.photographerbooking.model.pojo
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

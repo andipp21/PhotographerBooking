@@ -6,15 +6,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityClientBinding
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.fragment.ClientInboxFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.ClientProfileFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.ClientScheduleFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.explore.ClientExploreFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerHomeFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerOrderFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
 
 class ClientActivity : AppCompatActivity() {
     lateinit var binding: ActivityClientBinding

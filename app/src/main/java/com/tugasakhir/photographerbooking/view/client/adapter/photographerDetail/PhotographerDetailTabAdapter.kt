@@ -1,12 +1,11 @@
 package com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail
 
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Portofolio
+import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.Portofolio
 import com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail.PhotographerDetailAboutFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail.PhotographerDetailPackageFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail.PhotographerDetailPortofolioFragment

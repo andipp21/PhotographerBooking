@@ -90,6 +90,17 @@
 
     </ScrollView>
 
+    <Button
+        android:id="@+id/btnOrder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/button_enabled"
+        android:text="@string/order_this_photographer"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:layout_margin="@dimen/margin_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"

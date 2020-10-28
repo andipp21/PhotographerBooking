@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityMainBinding
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.utils.AuthHelper
 import com.tugasakhir.photographerbooking.view.auth.login.LoginActivity
 import com.tugasakhir.photographerbooking.view.auth.register.RegisterActivity

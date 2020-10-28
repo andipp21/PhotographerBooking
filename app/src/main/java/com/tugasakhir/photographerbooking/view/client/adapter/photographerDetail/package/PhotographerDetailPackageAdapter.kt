@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.model.pojo.photographer.Package
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import kotlinx.android.synthetic.main.item_package_photographer.view.tvPhotoshootRate
 import kotlinx.android.synthetic.main.item_package_photographer.view.tvPhotoshootType
 import kotlinx.android.synthetic.main.item_package_photographer.view.tvTimerType

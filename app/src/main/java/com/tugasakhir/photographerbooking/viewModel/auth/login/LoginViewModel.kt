@@ -2,7 +2,7 @@ package com.tugasakhir.photographerbooking.viewModel.auth.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tugasakhir.photographerbooking.model.pojo.auth.User
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.model.services.auth.Auth
 import toothpick.Toothpick
 import javax.inject.Inject
