@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.client.activity.order.orderPhotographer.OrderPhotographerActivity"></activity>
+        <activity android:name=".view.photographer.activity.order.PhotographerOrderDetailActivity"></activity>
+        <activity android:name=".view.client.activity.order.orderPhotographer.OrderPhotographerActivity" />
         <activity android:name=".view.client.activity.order.OrderProcessingActivity" />
         <activity android:name=".view.client.activity.order.orderFromPackage.ClientOrderFromPackageActivity" />
         <activity android:name=".view.client.activity.photographerDetail.PhotographerDetailPackageActivity" />

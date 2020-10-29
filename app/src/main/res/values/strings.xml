@@ -104,4 +104,12 @@
     <string name="close">Close</string>
     <string name="order_this_photographer">Order this Photographer</string>
     <string name="image_wait_confirmation">Image Wait Confirmation</string>
+    <string name="order_list">Order List</string>
+    <string name="your_client">Your Client</string>
+    <string name="status_order_1">Waiting for Confirmation</string>
+    <string name="status_order_2">Confirmed</string>
+    <string name="status_order_3">Completed</string>
+    <string name="client">Client</string>
+    <string name="you_can_contact_client_on">You can Contact Client on :</string>
+    <string name="confirm_order">Confirm Order</string>
 </resources>

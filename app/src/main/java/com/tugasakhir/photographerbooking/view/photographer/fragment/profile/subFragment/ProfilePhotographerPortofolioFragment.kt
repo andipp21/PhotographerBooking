@@ -57,8 +57,6 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
 
         adapter = PhotographerPortofolioAdapter()
         rvPortofolio.adapter = adapter
-
-        Log.d("portofolio", " on create")
     }
 
     override fun onResume() {
@@ -68,14 +66,6 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
             viewModel.fetchPortofolio()
         }
         observeViewModel(viewModel, viewLifecycleOwner)
-
-        Log.d("portofolio", " on resume")
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        Log.d("portofolio", " on start")
     }
 
     private fun observeViewModel(

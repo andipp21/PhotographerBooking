@@ -8,7 +8,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityClientBinding
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.fragment.ClientInboxFragment
-import com.tugasakhir.photographerbooking.view.client.fragment.ClientProfileFragment
+import com.tugasakhir.photographerbooking.view.client.fragment.profile.ClientProfileFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.ClientScheduleFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.explore.ClientExploreFragment
 
@@ -50,7 +50,7 @@ class ClientActivity : AppCompatActivity() {
                     true
                 }
                 R.id.clientProfile -> {
-                    goFragment(ClientProfileFragment())
+                    goFragment(ClientProfileFragment(user))
                     true
                 }
                 else -> false

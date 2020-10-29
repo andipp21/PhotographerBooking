@@ -15,7 +15,7 @@ import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.MainActivity
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerHomeFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerOrderFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.order.PhotographerOrderFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
 
 class PhotographerActivity : AppCompatActivity() {

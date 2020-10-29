@@ -34,8 +34,7 @@ class ClientOrderReviewFragment(
     private var param1: String? = null
     private var param2: String? = null
 
-    private val viewModel: OrderViewModel
-        get() = ViewModelProvider(this).get(OrderViewModel::class.java)
+    private var viewModel: OrderViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +54,8 @@ class ClientOrderReviewFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
 
         view.btnClose.setOnClickListener {
             dismiss()
@@ -124,10 +125,16 @@ class ClientOrderReviewFragment(
             }
 
             if (data != null) {
-                viewModel.createOrder(data)
-                observerViewModel(viewModel, viewLifecycleOwner)
+                viewModel?.createOrder(data)
+                observerViewModel(viewModel!!, viewLifecycleOwner)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel = null
     }
 
     private fun observerViewModel(viewModel: OrderViewModel, lifecycleOwner: LifecycleOwner) {

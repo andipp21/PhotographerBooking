@@ -1,11 +1,17 @@
-package com.tugasakhir.photographerbooking.view.photographer.fragment
+package com.tugasakhir.photographerbooking.view.photographer.fragment.order
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
+import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
+import com.tugasakhir.photographerbooking.view.photographer.adapter.order.PhotographerOrderAdapter
+import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
+import kotlinx.android.synthetic.main.fragment_photographer_order.view.*
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -19,6 +25,10 @@ private const val ARG_PARAM2 = "param2"
 class PhotographerOrderFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+
+    private var viewModel: OrderViewModel? = null
+
+    private lateinit var adapter: PhotographerOrderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +44,45 @@ class PhotographerOrderFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_photographer_order, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
+
+        (activity as PhotographerActivity).supportActionBar?.title = "Order"
+
+        adapter = PhotographerOrderAdapter()
+        view.rvOrderPhotographer.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel?.fetchOrderPhotographer()
+        viewModel?.fetchClient()
+
+        viewModel?.let { observeViewModel(it, viewLifecycleOwner) }
+    }
+
+    private fun observeViewModel(
+        actionDelegate: OrderViewModel,
+        lifecycleOwner: LifecycleOwner
+    ){
+        actionDelegate.responseListOrder.observe(lifecycleOwner, {
+            adapter.updateListsOrder(it)
+        })
+
+        actionDelegate.responseListUser.observe(lifecycleOwner, {
+            adapter.updateListUser(it)
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModel = null
     }
 
     companion object {
