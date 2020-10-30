@@ -50,6 +50,11 @@ class PhotographerPortofolioAdapter(val listPortofolio: MutableList<Portofolio> 
         notifyDataSetChanged()
     }
 
+    fun clearList(){
+        listPortofolio.clear()
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickCallback {
         fun onItemClicked(data: Portofolio)
     }

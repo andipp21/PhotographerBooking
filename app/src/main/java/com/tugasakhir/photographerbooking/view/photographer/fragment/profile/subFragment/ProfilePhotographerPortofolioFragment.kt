@@ -1,7 +1,6 @@
 package com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +65,12 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
             viewModel.fetchPortofolio()
         }
         observeViewModel(viewModel, viewLifecycleOwner)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        adapter.clearList()
     }
 
     private fun observeViewModel(

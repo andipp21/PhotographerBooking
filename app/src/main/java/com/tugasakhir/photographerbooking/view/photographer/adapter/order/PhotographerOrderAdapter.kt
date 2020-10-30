@@ -74,6 +74,12 @@ class PhotographerOrderAdapter(
         notifyDataSetChanged()
     }
 
+    fun clearList(){
+        listUser.clear()
+        listOrder.clear()
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickCallback {
         fun onItemClicked(order: Order, client: User)
     }

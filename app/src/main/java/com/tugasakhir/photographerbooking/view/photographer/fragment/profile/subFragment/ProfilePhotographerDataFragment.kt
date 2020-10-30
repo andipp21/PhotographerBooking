@@ -168,29 +168,4 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
         btnSaveAboutMe.isClickable = false
     }
 
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment ProfilePhotographerDataFragment.
-//         */
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            ProfilePhotographerDataFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-////
-////        fun getUSer(user: User) =
-////            PhotographerProfileFragment().apply {
-////                arguments = Bundle().apply {
-////                    putParcelable("user", user)
-////                }
-////            }
-//    }
 }

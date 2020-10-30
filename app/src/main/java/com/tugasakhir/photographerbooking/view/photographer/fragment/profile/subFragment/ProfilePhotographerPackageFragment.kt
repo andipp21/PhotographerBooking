@@ -65,6 +65,12 @@ class ProfilePhotographerPackageFragment(val viewModel: PhotographerProfileViewM
         observeViewModel(viewModel, viewLifecycleOwner)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        adapter.clearList()
+    }
+
     private fun observeViewModel(actionDelegate: PhotographerProfileViewModel, lifecycleOwner: LifecycleOwner) {
         actionDelegate.responseListPackage.observe(lifecycleOwner, {
             activity?.runOnUiThread {
@@ -85,6 +91,8 @@ class ProfilePhotographerPackageFragment(val viewModel: PhotographerProfileViewM
             }
         })
     }
+
+
 
     fun observeViewModelDelete(actionDelegate: PhotographerProfileViewModel, lifecycleOwner: LifecycleOwner){
         actionDelegate.responseLiveData.observe(lifecycleOwner, {

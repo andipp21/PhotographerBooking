@@ -73,6 +73,11 @@ class PhotographerPackageAdapter(val listPackage: MutableList<Package> = mutable
         notifyDataSetChanged()
     }
 
+    fun clearList(){
+        listPackage.clear()
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickCallback {
         fun editPackageClicked(data: Package)
         fun deletePacakageClicked(data: Package)

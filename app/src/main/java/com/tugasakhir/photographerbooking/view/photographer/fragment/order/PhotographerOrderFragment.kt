@@ -1,14 +1,17 @@
 package com.tugasakhir.photographerbooking.view.photographer.fragment.order
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
+import com.tugasakhir.photographerbooking.model.pojo.Order
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
+import com.tugasakhir.photographerbooking.view.photographer.activity.order.PhotographerOrderDetailActivity
 import com.tugasakhir.photographerbooking.view.photographer.adapter.order.PhotographerOrderAdapter
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_order.view.*
@@ -17,18 +20,11 @@ import kotlinx.android.synthetic.main.fragment_photographer_order.view.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PhotographerOrderFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PhotographerOrderFragment : Fragment() {
+class PhotographerOrderFragment(val viewModel: OrderViewModel) : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private var viewModel: OrderViewModel? = null
-
-    private lateinit var adapter: PhotographerOrderAdapter
+    private var adapter: PhotographerOrderAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,58 +45,67 @@ class PhotographerOrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
-
         (activity as PhotographerActivity).supportActionBar?.title = "Order"
 
         adapter = PhotographerOrderAdapter()
         view.rvOrderPhotographer.adapter = adapter
+
+        adapter?.setOnItemClickCallback(object : PhotographerOrderAdapter.OnItemClickCallback {
+            override fun onItemClicked(order: Order, client: User) {
+                val intent= Intent(activity, PhotographerOrderDetailActivity::class.java)
+                intent.putExtra("order", order)
+                intent.putExtra("client", client)
+                startActivity(intent)
+            }
+        })
     }
 
     override fun onResume() {
         super.onResume()
 
-        viewModel?.fetchOrderPhotographer()
-        viewModel?.fetchClient()
+        viewModel.fetchOrderPhotographer()
+        viewModel.fetchClient()
 
-        viewModel?.let { observeViewModel(it, viewLifecycleOwner) }
+        observeViewModel(viewModel, viewLifecycleOwner)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        adapter?.clearList()
+
+        adapter = null
     }
 
     private fun observeViewModel(
         actionDelegate: OrderViewModel,
         lifecycleOwner: LifecycleOwner
-    ){
+    ) {
         actionDelegate.responseListOrder.observe(lifecycleOwner, {
-            adapter.updateListsOrder(it)
+            adapter?.updateListsOrder(it)
         })
 
         actionDelegate.responseListUser.observe(lifecycleOwner, {
-            adapter.updateListUser(it)
+            adapter?.updateListUser(it)
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        viewModel = null
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PhotographerOrderFragment.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PhotographerOrderFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+//    companion object {
+//        /**
+//         * Use this factory method to create a new instance of
+//         * this fragment using the provided parameters.
+//         *
+//         * @param param1 Parameter 1.
+//         * @param param2 Parameter 2.
+//         * @return A new instance of fragment PhotographerOrderFragment.
+//         */
+//        @JvmStatic
+//        fun newInstance(param1: String, param2: String) =
+//            PhotographerOrderFragment().apply {
+//                arguments = Bundle().apply {
+//                    putString(ARG_PARAM1, param1)
+//                    putString(ARG_PARAM2, param2)
+//                }
+//            }
+//    }
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.tugasakhir.photographerbooking.model.pojo.Order
+import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.model.pojo.User
 import javax.inject.Inject
 
@@ -11,6 +12,7 @@ class OrderServices  @Inject constructor() {
     private val auth = FirebaseAuth.getInstance()
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
     private val orderCollection = FirebaseFirestore.getInstance().collection("orders")
+    private val packageCollection = FirebaseFirestore.getInstance().collection("pakcage")
 
     fun createOrder(order: Order, response: (String)-> Unit){
         val data = HashMap<String, Any>()
@@ -80,6 +82,26 @@ class OrderServices  @Inject constructor() {
                     )
                 }
                 response.invoke(listData)
+            }
+            .addOnFailureListener {
+                Log.d("Errors: ", it.localizedMessage)
+            }
+    }
+
+    fun getPackagebyID(idPackage: String, response: (Package) -> Unit){
+        packageCollection.document(idPackage).get()
+            .addOnSuccessListener {
+                val dt = Package(
+                    it.id,
+                    it["title"].toString(),
+                    it["type"].toString(),
+                    it["time"].toString(),
+                    it["price"] as Long,
+                    it["benefit"] as List<String>,
+                    it["userID"].toString()
+                )
+
+                response.invoke(dt)
             }
             .addOnFailureListener {
                 Log.d("Errors: ", it.localizedMessage)

@@ -8,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerBinding
@@ -17,16 +18,24 @@ import com.tugasakhir.photographerbooking.view.photographer.fragment.Photographe
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.PhotographerOrderFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
+import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
+import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 
 class PhotographerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPhotographerBinding
     private lateinit var user: User
+
+    private var viewModelPhotographer: PhotographerProfileViewModel? = null
+    private var viewModelOrder: OrderViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotographerBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        viewModelPhotographer = ViewModelProvider(this).get(PhotographerProfileViewModel::class.java)
+        viewModelOrder = ViewModelProvider(this).get(OrderViewModel::class.java)
 
         val appBar = binding.appBarLayout.toolbar
         setSupportActionBar(appBar)
@@ -53,16 +62,23 @@ class PhotographerActivity : AppCompatActivity() {
                     true
                 }
                 R.id.photographerOrder -> {
-                    goFragment(PhotographerOrderFragment())
+                    goFragment(PhotographerOrderFragment(viewModelOrder!!))
                     true
                 }
                 R.id.photographerProfile -> {
-                    goFragment(PhotographerProfileFragment.getUSer(user))
+                    goFragment(PhotographerProfileFragment.getUSer(user, viewModelPhotographer!!))
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        viewModelPhotographer = null
+        viewModelOrder = null
     }
 
      private fun goFragment(fm: Fragment) {

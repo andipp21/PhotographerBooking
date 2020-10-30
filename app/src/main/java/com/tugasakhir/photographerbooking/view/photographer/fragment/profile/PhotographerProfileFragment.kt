@@ -1,10 +1,11 @@
 package com.tugasakhir.photographerbooking.view.photographer.fragment.profile
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
@@ -20,19 +21,11 @@ import kotlinx.android.synthetic.main.fragment_photographer_profile.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PhotographerProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class PhotographerProfileFragment : Fragment() {
+class PhotographerProfileFragment(val viewModel: PhotographerProfileViewModel) : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
     private var user: User? = null
-
-    private val viewModel: PhotographerProfileViewModel
-        get() = ViewModelProvider(this).get(PhotographerProfileViewModel::class.java)
 
     private lateinit var auth: FirebaseAuth
 
@@ -88,25 +81,9 @@ class PhotographerProfileFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PhotographerProfileFragment.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PhotographerProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
 
-        fun getUSer(user: User) =
-            PhotographerProfileFragment().apply {
+        fun getUSer(user: User, viewModel: PhotographerProfileViewModel) =
+            PhotographerProfileFragment(viewModel).apply {
                 arguments = Bundle().apply {
                     putParcelable("user", user)
                 }
