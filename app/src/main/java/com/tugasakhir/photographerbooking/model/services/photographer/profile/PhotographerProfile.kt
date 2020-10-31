@@ -118,24 +118,23 @@ class PhotographerProfile @Inject constructor() {
     }
 
     fun fetchPortofolio(response: (List<Portofolio>) -> Unit) {
-        portofolioCollection.get()
-            .addOnSuccessListener {
-                val listData: MutableList<Portofolio> = mutableListOf()
-                for (doc in it) {
-                    if (doc["user_id"] == auth.uid) {
-                        listData.add(
-                            Portofolio(
-                                doc.id,
-                                doc["portofolio_image"].toString(),
-                                doc["user_id"].toString()
+        portofolioCollection
+            .addSnapshotListener { value, _ ->
+                if (value != null){
+                    val listData: MutableList<Portofolio> = mutableListOf()
+                    for (doc in value) {
+                        if (doc["user_id"] == auth.uid) {
+                            listData.add(
+                                Portofolio(
+                                    doc.id,
+                                    doc["portofolio_image"].toString(),
+                                    doc["user_id"].toString()
+                                )
                             )
-                        )
+                        }
                     }
+                    response.invoke(listData)
                 }
-                response.invoke(listData)
-            }
-            .addOnFailureListener {
-                Log.d("Errors: ", it.localizedMessage)
             }
     }
 
@@ -207,28 +206,27 @@ class PhotographerProfile @Inject constructor() {
     }
 
     fun fetchPackage(response: (List<Package>) -> Unit) {
-        packageCollection.get()
-            .addOnSuccessListener {
-                val listData: MutableList<Package> = mutableListOf()
-                for (doc in it) {
-                    if (doc["user_id"] == auth.uid) {
-                        listData.add(
-                            Package(
-                                doc.id,
-                                doc["title"].toString(),
-                                doc["type"].toString(),
-                                doc["time"].toString(),
-                                doc["price"] as Long,
-                                doc["benefit"] as List<String>,
-                                doc["userID"].toString()
+        packageCollection
+            .addSnapshotListener { value, _ ->
+                if (value != null){
+                    val listData: MutableList<Package> = mutableListOf()
+                    for (doc in value) {
+                        if (doc["user_id"] == auth.uid) {
+                            listData.add(
+                                Package(
+                                    doc.id,
+                                    doc["title"].toString(),
+                                    doc["type"].toString(),
+                                    doc["time"].toString(),
+                                    doc["price"] as Long,
+                                    doc["benefit"] as List<String>,
+                                    doc["userID"].toString()
+                                )
                             )
-                        )
+                        }
                     }
+                    response.invoke(listData)
                 }
-                response.invoke(listData)
-            }
-            .addOnFailureListener {
-                Log.d("Errors: ", "${it}")
             }
     }
 

@@ -225,6 +225,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
+        android:id="@+id/confirmOrder"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="@dimen/margin_content"
         android:background="@drawable/button_enabled"

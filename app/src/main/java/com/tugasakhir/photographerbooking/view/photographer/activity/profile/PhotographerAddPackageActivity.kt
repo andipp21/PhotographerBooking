@@ -49,7 +49,8 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         val appBar = binding.appBarLayout.toolbar
         setSupportActionBar(appBar)
-        supportActionBar?.title = "Add New Photography Package"
+        supportActionBar?.title = "Add New Package"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         buttonState()
 
@@ -82,7 +83,7 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (s?.length!! > 0){
+                if (s?.length!! > 0) {
                     title = s.toString()
                     stateTitle = true
                 } else {
@@ -143,20 +144,23 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         binding.rbPhotoshootTime.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.rb_daily ->{
-                        time = "Daily"
-                        stateTime = true
-                        buttonState()
-                    }
-                R.id.rb_hourly ->{
-                        time = "Hourly"
-                        stateTime = true
-                        buttonState()
-                    }
+                R.id.rb_daily -> {
+                    time = "Daily"
+                    stateTime = true
+                    buttonState()
+                }
+                R.id.rb_hourly -> {
+                    time = "Hourly"
+                    stateTime = true
+                    buttonState()
+                }
             }
         }
+    }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
     fun addBenefit(data: String) {
@@ -209,21 +213,21 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
         return formattedString
     }
 
-    fun buttonState(){
+    fun buttonState() {
         Log.d("button", "price : $statePrice, time : $stateTime, type : $stateType")
 
-        if (statePrice && stateTime && stateType && stateTitle){
+        if (statePrice && stateTime && stateType && stateTitle) {
             enableButton()
         } else {
             disableButton()
         }
     }
 
-    private fun disableButton(){
+    private fun disableButton() {
         binding.btnAddPackage.setBackgroundResource(R.drawable.button_disabled)
     }
 
-    private fun enableButton(){
+    private fun enableButton() {
         binding.btnAddPackage.setBackgroundResource(R.drawable.button_enabled)
 
         binding.btnAddPackage.setOnClickListener {
@@ -252,7 +256,7 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
         viewModel.responseLiveData.observe(this, {
             Log.d("Add Package", it)
             runOnUiThread {
-                if (it == "Successfully Add Package"){
+                if (it == "Successfully Add Package") {
                     finish()
                 }
             }

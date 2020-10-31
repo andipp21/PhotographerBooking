@@ -92,8 +92,6 @@ class ProfilePhotographerPackageFragment(val viewModel: PhotographerProfileViewM
         })
     }
 
-
-
     fun observeViewModelDelete(actionDelegate: PhotographerProfileViewModel, lifecycleOwner: LifecycleOwner){
         actionDelegate.responseLiveData.observe(lifecycleOwner, {
             Toast.makeText(activity, it, Toast.LENGTH_LONG).show()

@@ -48,9 +48,27 @@ class OrderViewModel: ViewModel() {
         }
     }
 
+    fun fetchPhotographer(){
+        orderServices.fetchClient {
+            _responseListUser.postValue(it)
+        }
+    }
+
     fun getPackage(id: String){
         orderServices.getPackagebyID(id){
             _responsePackage.postValue(it)
+        }
+    }
+
+    fun confirmationOrder(id:String){
+        orderServices.confirmOrder(id){
+            _responseLiveData.postValue(it)
+        }
+    }
+
+    fun confirmationOrderDone(id:String){
+        orderServices.confirmOrderDone(id){
+            _responseLiveData.postValue(it)
         }
     }
 

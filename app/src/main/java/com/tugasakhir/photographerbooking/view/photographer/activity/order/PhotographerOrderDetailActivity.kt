@@ -2,6 +2,7 @@ package com.tugasakhir.photographerbooking.view.photographer.activity.order
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -47,10 +48,24 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
 
         if (order.isConfirmed && order.isDone) {
             binding.orderStatus.setText(R.string.status_order_3)
+            binding.orderStatus.setBackgroundResource(R.drawable.button_enabled)
+            binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
+            binding.confirmOrder.visibility = View.GONE
         } else if (order.isConfirmed && !order.isDone) {
             binding.orderStatus.setText(R.string.status_order_2)
+            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
+            binding.confirmOrder.text = "Photoshoot Done"
+            binding.confirmOrder.setOnClickListener {
+                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
+                observeViewModel(viewModel!!, this)
+            }
         } else {
             binding.orderStatus.setText(R.string.status_order_1)
+            binding.confirmOrder.setText(R.string.confirm_order)
+            binding.confirmOrder.setOnClickListener {
+                order.uid?.let { it1 -> viewModel!!.confirmationOrder(it1) }
+                observeViewModel(viewModel!!, this)
+            }
         }
 
         if (viewModel != null) {
@@ -67,11 +82,7 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         val hour = cal.get(Calendar.HOUR_OF_DAY)
         val minute = cal.get(Calendar.MINUTE)
 
-        val bulan: String = if (month + 1 < 10) {
-            "0${month + 1}"
-        } else {
-            "${month + 1}"
-        }
+        val bulan = bulanString(month)
 
         val hari: String = if (day < 10) {
             "0$day"
@@ -91,9 +102,27 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
             "$minute"
         }
 
-        binding.dateContent.text = "$hari / $bulan / $year"
+        binding.dateContent.text = "$hari $bulan $year"
         binding.timeContent.text = "$jam : $menit"
 
+    }
+
+    private fun bulanString(bulan: Int): String {
+        return when (bulan + 1) {
+            1 -> "Jan"
+            2 -> "Feb"
+            3 -> "Mar"
+            4 -> "Apr"
+            5 -> "May"
+            6 -> "Jun"
+            7 -> "Jul"
+            8 -> "Aug"
+            9 -> "Sep"
+            10 -> "Oct"
+            11 -> "Nov"
+            12 -> "Dec"
+            else -> ""
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -112,6 +141,12 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
             binding.typeContent.text = it.type
             binding.packageContent.text = it.title
             binding.totalFee.text =  convertMoney(it.price)
+        })
+
+        actionDelegate.responseLiveData.observe(lifecycleOwner, {
+            if (it == "Order Confirmated" || it == "Order Done"){
+                finish()
+            }
         })
     }
 

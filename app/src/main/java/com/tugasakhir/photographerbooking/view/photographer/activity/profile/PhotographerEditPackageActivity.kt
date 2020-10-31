@@ -44,6 +44,11 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
         adapter = PhotographerBenefitAdapter(this)
         setContentView(binding.root)
 
+        val appBar = binding.appBarLayout.toolbar
+        setSupportActionBar(appBar)
+        supportActionBar?.title = "Edit Photography Package"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         data = intent.getParcelableExtra("packageData")!!
 
         formTitle = data.title
@@ -169,6 +174,11 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
     fun addBenefit(data: String) {
