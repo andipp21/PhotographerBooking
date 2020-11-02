@@ -3,6 +3,7 @@ package com.tugasakhir.photographerbooking.model.services.order
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.Package
@@ -40,7 +41,7 @@ class OrderServices  @Inject constructor() {
 
     fun fetchOrderPhotographer(response: (List<Order>) -> Unit){
         orderCollection.whereEqualTo("photographer_id", auth.uid)
-            .orderBy("order_time")
+            .orderBy("order_time", Query.Direction.DESCENDING)
             .addSnapshotListener { value, _ ->
                 val listData: MutableList<Order> = mutableListOf()
                 if (value != null) {
@@ -58,6 +59,35 @@ class OrderServices  @Inject constructor() {
                             )
                         )
                     }
+
+                    Log.d("list photographer", listData.toString())
+                    response.invoke(listData)
+                }
+            }
+    }
+
+    fun fetchOrderClient(response: (List<Order>) -> Unit){
+        orderCollection.whereEqualTo("client_id", auth.uid)
+            .orderBy("order_time", Query.Direction.DESCENDING)
+            .addSnapshotListener { value, _ ->
+                val listData: MutableList<Order> = mutableListOf()
+                if (value != null) {
+                    for (doc in value){
+                        listData.add(
+                            Order(
+                                uid = doc.id,
+                                clientID = doc.data.getValue("client_id").toString(),
+                                photographerID = doc.data.getValue("photographer_id").toString(),
+                                packageID = doc.data.getValue("package_id").toString(),
+                                photoshootTime = doc.getTimestamp("photoshoot_time")?.toDate()!!,
+                                orderTime = doc.getTimestamp("order_time")?.toDate()!!,
+                                isConfirmed = doc.data.getValue("is_confirmed") as Boolean,
+                                isDone = doc.data.getValue("is_done") as Boolean
+                            )
+                        )
+                    }
+
+                    Log.d("list photographer", listData.toString())
                     response.invoke(listData)
                 }
             }

@@ -1,4 +1,4 @@
-package com.tugasakhir.photographerbooking.view.client.fragment.orderReview
+package com.tugasakhir.photographerbooking.view.client.fragment.order.orderReview
 
 import android.content.Intent
 import android.os.Bundle

@@ -6,9 +6,9 @@
         android:title="@string/explore" />
 
     <item
-        android:id="@+id/clientSchedule"
-        android:icon="@drawable/ic_time"
-        android:title="@string/schedule" />
+        android:id="@+id/clientOrder"
+        android:icon="@drawable/ic_order"
+        android:title="@string/order" />
 
     <item
         android:id="@+id/clientInbox"

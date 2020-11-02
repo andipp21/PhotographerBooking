@@ -11,7 +11,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityOrderPhotographerBinding
 import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.model.pojo.User
-import com.tugasakhir.photographerbooking.view.client.fragment.orderReview.ClientOrderReviewFragment
+import com.tugasakhir.photographerbooking.view.client.fragment.order.orderReview.ClientOrderReviewFragment
 import java.util.*
 import kotlin.collections.ArrayList
 

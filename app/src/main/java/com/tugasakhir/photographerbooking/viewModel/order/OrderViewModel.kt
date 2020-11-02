@@ -42,6 +42,12 @@ class OrderViewModel: ViewModel() {
         }
     }
 
+    fun fetchOrderClient(){
+        orderServices.fetchOrderClient {
+            _responseListOrder.postValue(it)
+        }
+    }
+
     fun fetchClient(){
         orderServices.fetchClient {
             _responseListUser.postValue(it)

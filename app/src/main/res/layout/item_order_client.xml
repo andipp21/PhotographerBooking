@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/photographerPhoto"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:contentDescription="@string/photo_profil"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/yourPhotographer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:paddingHorizontal="16dp"
+            android:text="@string/your_photographer"
+            app:layout_constraintBottom_toTopOf="@id/yourPhotographerName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/photographerPhoto"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/yourPhotographerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/yourPhotographer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/photographerPhoto"
+            app:layout_constraintBottom_toTopOf="@id/orderStatus"/>
+
+        <TextView
+            android:id="@+id/orderStatus"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/bg_border_green"
+            android:layout_marginVertical="4dp"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="@string/status_order_1"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintTop_toBottomOf="@id/yourPhotographerName"
+            app:layout_constraintBottom_toTopOf="@id/orderTime"
+            app:layout_constraintStart_toStartOf="@id/yourPhotographerName" />
+
+        <TextView
+            android:id="@+id/orderTime"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/photographerPhoto"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
