@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
-        android:text="@string/you_can_contact_me_on"
+        android:text="@string/you_can_contact_photographer_on"
         app:layout_constraintTop_toBottomOf="@id/lineDivider" />
 
     <TextView

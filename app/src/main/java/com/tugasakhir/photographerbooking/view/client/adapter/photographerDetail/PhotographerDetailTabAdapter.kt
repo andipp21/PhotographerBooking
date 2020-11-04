@@ -18,7 +18,7 @@ class PhotographerDetailTabAdapter(
     val listPackage: MutableList<Package> = mutableListOf()
 ) :
     FragmentStatePagerAdapter(fm, behavior) {
-    private val tabName: Array<String> = arrayOf("About", "Portofolio", "Package")
+    private val tabName: Array<String> = arrayOf("About", "Portfolio", "Package")
 
     override fun getCount(): Int = 3
 

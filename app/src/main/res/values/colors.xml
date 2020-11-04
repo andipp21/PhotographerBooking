@@ -10,4 +10,7 @@
     <color name="colorBlack">#717171</color>
 
     <color name="colorRed">#EE0D0D</color>
+
+    <color name="transparentWhite">#bfffffff</color>
+    <color name="transparentDarkGreen">#bf2BD6A9</color>
 </resources>

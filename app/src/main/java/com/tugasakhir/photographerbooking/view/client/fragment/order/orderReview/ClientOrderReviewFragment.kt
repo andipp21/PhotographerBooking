@@ -80,11 +80,7 @@ class ClientOrderReviewFragment(
         val hour = cal.get(Calendar.HOUR_OF_DAY)
         val minute = cal.get(Calendar.MINUTE)
 
-        val bulan: String = if (month + 1 < 10) {
-            "0${month + 1}"
-        } else {
-            "${month + 1}"
-        }
+        val bulan = bulanString(month)
 
         val hari: String = if (day < 10) {
             "0$day"
@@ -112,6 +108,7 @@ class ClientOrderReviewFragment(
                 photographer.uid?.let { it2 ->
                     paket.uid?.let { it3 ->
                         Order(
+                            uid = "Order-${Calendar.getInstance().time.time}",
                             clientID = it1,
                             photographerID = it2,
                             packageID = it3,
@@ -128,6 +125,24 @@ class ClientOrderReviewFragment(
                 viewModel?.createOrder(data)
                 observerViewModel(viewModel!!, viewLifecycleOwner)
             }
+        }
+    }
+
+    private fun bulanString(bulan: Int): String {
+        return when (bulan + 1) {
+            1 -> "Jan"
+            2 -> "Feb"
+            3 -> "Mar"
+            4 -> "Apr"
+            5 -> "May"
+            6 -> "Jun"
+            7 -> "Jul"
+            8 -> "Aug"
+            9 -> "Sep"
+            10 -> "Oct"
+            11 -> "Nov"
+            12 -> "Dec"
+            else -> ""
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
@@ -25,6 +26,8 @@ class PhotographerOrderFragment(val viewModel: OrderViewModel) : Fragment() {
     private var param2: String? = null
 
     private var adapter: PhotographerOrderAdapter? = null
+
+    lateinit var usrID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,8 @@ class PhotographerOrderFragment(val viewModel: OrderViewModel) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        usrID = FirebaseAuth.getInstance().uid.toString()
+
         (activity as PhotographerActivity).supportActionBar?.title = "Order"
 
         adapter = PhotographerOrderAdapter()
@@ -63,7 +68,7 @@ class PhotographerOrderFragment(val viewModel: OrderViewModel) : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModel.fetchOrderPhotographer()
+        viewModel.fetchOrderPhotographer(usrID)
         viewModel.fetchClient()
 
         observeViewModel(viewModel, viewLifecycleOwner)

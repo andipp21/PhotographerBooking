@@ -11,9 +11,10 @@ import com.tugasakhir.photographerbooking.model.services.photographer.profile.Ph
 import toothpick.Toothpick
 import javax.inject.Inject
 
-class PhotographerProfileViewModel : ViewModel(){
+class PhotographerProfileViewModel : ViewModel() {
     @Inject
     lateinit var photographerProfile: PhotographerProfile
+
 
     private val _responseLiveData = MutableLiveData<String>()
     val responseLiveData = _responseLiveData
@@ -24,73 +25,74 @@ class PhotographerProfileViewModel : ViewModel(){
     private val _responseListPackage = MutableLiveData<List<Package>>()
     val responseListPackage = _responseListPackage
 
+    //
     init {
         val scope = Toothpick.openScope(this)
         Toothpick.inject(this, scope)
     }
 
-    fun updateUserData(user: User){
-        photographerProfile.updateUserData(user){
+    fun updateUserData(user: User) {
+        photographerProfile.updateUserData(user) {
             _responseLiveData.postValue(it)
 
-            Log.d("Update user",it)
+            Log.d("Update user", it)
         }
     }
 
-    fun storeImage(path: Uri){
-        photographerProfile.changeProfilePicture(path){
+    fun storeImage(path: Uri) {
+        photographerProfile.changeProfilePicture(path) {
             _responseLiveData.postValue(it)
 
             Log.d("View Model Image", it)
         }
     }
 
-    fun addPortofolio(path: Uri){
-        photographerProfile.addPortofolio(path){
+    fun addPortofolio(path: Uri) {
+        photographerProfile.addPortofolio(path) {
             _responseLiveData.postValue(it)
 
             Log.d("Add Portofolio", it)
         }
     }
 
-    fun fetchPortofolio(){
+    fun fetchPortofolio() {
         photographerProfile.fetchPortofolio {
             _responseListPortofolio.postValue(it)
         }
     }
 
-    fun updatePortofolio(idPortofolio: String, path:Uri){
-        photographerProfile.changePortofolio(idPortofolio,path){
+    fun updatePortofolio(idPortofolio: String, path: Uri) {
+        photographerProfile.changePortofolio(idPortofolio, path) {
             _responseLiveData.postValue(it)
         }
     }
 
-    fun deletePortofolio(idPortofolio: String){
-        photographerProfile.deletePortofolio(idPortofolio){
+    fun deletePortofolio(idPortofolio: String) {
+        photographerProfile.deletePortofolio(idPortofolio) {
             _responseLiveData.postValue(it)
         }
     }
 
-    fun addPackage(photoshootPackage : Package){
-        photographerProfile.addPackage(photoshootPackage){
+    fun addPackage(photoshootPackage: Package) {
+        photographerProfile.addPackage(photoshootPackage) {
             _responseLiveData.postValue(it)
         }
     }
 
-    fun fetchPackage(){
+    fun fetchPackage() {
         photographerProfile.fetchPackage {
             _responseListPackage.postValue(it)
         }
     }
 
-    fun deletePackage(photoshootPackage: Package){
-        photographerProfile.deletePackage(photoshootPackage){
+    fun deletePackage(photoshootPackage: Package) {
+        photographerProfile.deletePackage(photoshootPackage) {
             _responseLiveData.postValue(it)
         }
     }
 
-    fun updatePackage(photoshootPackage: Package){
-        photographerProfile.editPackage(photoshootPackage){
+    fun updatePackage(photoshootPackage: Package) {
+        photographerProfile.editPackage(photoshootPackage) {
             _responseLiveData.postValue(it)
         }
     }

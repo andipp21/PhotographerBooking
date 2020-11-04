@@ -19,15 +19,15 @@ class ClientHome @Inject constructor() {
                     for (doc in value) {
                         listData.add(
                             User(
-                                doc.id,
-                                doc.data.getValue("fullname").toString(),
-                                doc.data.getValue("email").toString(),
-                                doc.data.getValue("password").toString(),
-                                doc.data.getValue("role").toString(),
-                                doc.data.getValue("city").toString(),
-                                doc.data.getValue("phone_number").toString(),
-                                doc.data.getValue("profile_picture").toString(),
-                                doc.data.getValue("about").toString()
+                                uid = doc.id,
+                                fullname = doc.data.getValue("fullname").toString(),
+                                email = doc.data.getValue("email").toString(),
+                                password = doc.data.getValue("password").toString(),
+                                role = doc.data.getValue("role").toString(),
+                                city = doc.data.getValue("city").toString(),
+                                phoneNumber = doc.data.getValue("phone_number").toString(),
+                                profilePicture = doc.data.getValue("profile_picture").toString(),
+                                about = doc.data.getValue("about").toString()
                             )
                         )
                     }

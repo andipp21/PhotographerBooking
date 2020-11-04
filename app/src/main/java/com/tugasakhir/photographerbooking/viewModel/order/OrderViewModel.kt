@@ -36,14 +36,14 @@ class OrderViewModel: ViewModel() {
         }
     }
 
-    fun fetchOrderPhotographer(){
-        orderServices.fetchOrderPhotographer {
+    fun fetchOrderPhotographer(usrID: String){
+        orderServices.fetchOrderPhotographer(usrID) {
             _responseListOrder.postValue(it)
         }
     }
 
-    fun fetchOrderClient(){
-        orderServices.fetchOrderClient {
+    fun fetchOrderClient(usrID: String){
+        orderServices.fetchOrderClient(usrID) {
             _responseListOrder.postValue(it)
         }
     }
@@ -55,7 +55,7 @@ class OrderViewModel: ViewModel() {
     }
 
     fun fetchPhotographer(){
-        orderServices.fetchClient {
+        orderServices.fetchPhotographer {
             _responseListUser.postValue(it)
         }
     }

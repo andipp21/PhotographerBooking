@@ -10,13 +10,13 @@ import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.model.pojo.User
 import javax.inject.Inject
 
-class OrderServices  @Inject constructor() {
-    private val auth = FirebaseAuth.getInstance()
+class OrderServices @Inject constructor() {
+    //    private val auth = FirebaseAuth.getInstance()
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
     private val orderCollection = FirebaseFirestore.getInstance().collection("orders")
     private val packageCollection = FirebaseFirestore.getInstance().collection("pakcage")
 
-    fun createOrder(order: Order, response: (String)-> Unit){
+    fun createOrder(order: Order, response: (String) -> Unit) {
         val data = HashMap<String, Any>()
 
         data["client_id"] = order.clientID
@@ -39,13 +39,13 @@ class OrderServices  @Inject constructor() {
             }
     }
 
-    fun fetchOrderPhotographer(response: (List<Order>) -> Unit){
-        orderCollection.whereEqualTo("photographer_id", auth.uid)
+    fun fetchOrderPhotographer(usrID: String, response: (List<Order>) -> Unit) {
+        orderCollection.whereEqualTo("photographer_id", usrID)
             .orderBy("order_time", Query.Direction.DESCENDING)
             .addSnapshotListener { value, _ ->
                 val listData: MutableList<Order> = mutableListOf()
                 if (value != null) {
-                    for (doc in value){
+                    for (doc in value) {
                         listData.add(
                             Order(
                                 uid = doc.id,
@@ -66,13 +66,13 @@ class OrderServices  @Inject constructor() {
             }
     }
 
-    fun fetchOrderClient(response: (List<Order>) -> Unit){
-        orderCollection.whereEqualTo("client_id", auth.uid)
+    fun fetchOrderClient(usrID: String, response: (List<Order>) -> Unit) {
+        orderCollection.whereEqualTo("client_id", usrID)
             .orderBy("order_time", Query.Direction.DESCENDING)
             .addSnapshotListener { value, _ ->
                 val listData: MutableList<Order> = mutableListOf()
                 if (value != null) {
-                    for (doc in value){
+                    for (doc in value) {
                         listData.add(
                             Order(
                                 uid = doc.id,
@@ -93,34 +93,10 @@ class OrderServices  @Inject constructor() {
             }
     }
 
-    fun fetchClient(response: (List<User>) -> Unit){
+    fun fetchClient(response: (List<User>) -> Unit) {
         userCollection.whereEqualTo("role", "client")
             .addSnapshotListener { value, _ ->
-                if (value != null){
-                    val listData: MutableList<User> = mutableListOf()
-                    for (doc in value) {
-                        listData.add(
-                            User(
-                                doc.id,
-                                doc.data.getValue("fullname").toString(),
-                                doc.data.getValue("email").toString(),
-                                doc.data.getValue("password").toString(),
-                                doc.data.getValue("role").toString(),
-                                doc.data.getValue("city").toString(),
-                                doc.data.getValue("phone_number").toString(),
-                                doc.data.getValue("profile_picture").toString(),
-                                doc.data.getValue("about").toString()
-                            )
-                        )
-                    }
-                    response.invoke(listData)
-                }
-            }
-    }
-    fun fetchPhotographer(response: (List<User>) -> Unit){
-        userCollection.whereEqualTo("role", "photographer")
-            .addSnapshotListener { value, _ ->
-                if (value != null){
+                if (value != null) {
                     val listData: MutableList<User> = mutableListOf()
                     for (doc in value) {
                         listData.add(
@@ -142,7 +118,32 @@ class OrderServices  @Inject constructor() {
             }
     }
 
-    fun getPackagebyID(idPackage: String, response: (Package) -> Unit){
+    fun fetchPhotographer(response: (List<User>) -> Unit) {
+        userCollection.whereEqualTo("role", "photographer")
+            .addSnapshotListener { value, _ ->
+                if (value != null) {
+                    val listData: MutableList<User> = mutableListOf()
+                    for (doc in value) {
+                        listData.add(
+                            User(
+                                doc.id,
+                                doc.data.getValue("fullname").toString(),
+                                doc.data.getValue("email").toString(),
+                                doc.data.getValue("password").toString(),
+                                doc.data.getValue("role").toString(),
+                                doc.data.getValue("city").toString(),
+                                doc.data.getValue("phone_number").toString(),
+                                doc.data.getValue("profile_picture").toString(),
+                                doc.data.getValue("about").toString()
+                            )
+                        )
+                    }
+                    response.invoke(listData)
+                }
+            }
+    }
+
+    fun getPackagebyID(idPackage: String, response: (Package) -> Unit) {
         packageCollection.document(idPackage).get()
             .addOnSuccessListener {
                 val dt = Package(
@@ -162,7 +163,7 @@ class OrderServices  @Inject constructor() {
             }
     }
 
-    fun confirmOrder(idOrder: String, response: (String) -> Unit){
+    fun confirmOrder(idOrder: String, response: (String) -> Unit) {
         val dt = hashMapOf("is_confirmed" to true)
         orderCollection.document(idOrder).set(dt, SetOptions.merge())
             .addOnSuccessListener {
@@ -174,7 +175,8 @@ class OrderServices  @Inject constructor() {
                 response.invoke("Error Order Confirmation: ${error.localizedMessage}")
             }
     }
-    fun confirmOrderDone(idOrder: String, response: (String) -> Unit){
+
+    fun confirmOrderDone(idOrder: String, response: (String) -> Unit) {
         val dt = hashMapOf("is_done" to true)
         orderCollection.document(idOrder).set(dt, SetOptions.merge())
             .addOnSuccessListener {

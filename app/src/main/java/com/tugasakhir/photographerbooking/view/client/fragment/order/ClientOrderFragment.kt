@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
@@ -34,6 +35,8 @@ class ClientOrderFragment : Fragment() {
 
     private var viewModelOrder: OrderViewModel? = null
 
+    lateinit var usrID:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -53,7 +56,11 @@ class ClientOrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as ClientActivity).supportActionBar?.title = "Profile"
+        (activity as ClientActivity).supportActionBar?.title = "Order"
+
+        usrID = FirebaseAuth.getInstance().uid.toString()
+
+        Log.d("user id", usrID)
 
         viewModelOrder = ViewModelProvider(this).get(OrderViewModel::class.java)
 
@@ -79,7 +86,7 @@ class ClientOrderFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        viewModelOrder?.fetchOrderClient()
+        viewModelOrder?.fetchOrderClient(usrID)
         viewModelOrder?.fetchPhotographer()
 
         viewModelOrder?.let { observeViewModel(it, viewLifecycleOwner) }
@@ -99,14 +106,13 @@ class ClientOrderFragment : Fragment() {
         actionDelegate: OrderViewModel,
         lifecycleOwner: LifecycleOwner
     ) {
-        actionDelegate.responseListOrder.observe(lifecycleOwner, {
-            Log.d("hasil", it.toString())
-            adapter?.updateListsOrder(it)
-        })
-
         actionDelegate.responseListUser.observe(lifecycleOwner, {
             Log.d("hasil2", it.toString())
             adapter?.updateListUser(it)
+        })
+        actionDelegate.responseListOrder.observe(lifecycleOwner, {
+            Log.d("hasil", it.toString())
+            adapter?.updateListsOrder(it)
         })
     }
 //    companion object {
@@ -118,7 +124,6 @@ class ClientOrderFragment : Fragment() {
 //         * @param param2 Parameter 2.
 //         * @return A new instance of fragment ClientOrderFragment.
 //         */
-//        // TODO: Rename and change types and number of parameters
 //        @JvmStatic
 //        fun newInstance(param1: String, param2: String) =
 //            ClientOrderFragment().apply {

@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_content"
         android:background="@drawable/button_enabled"
-        android:text="@string/add_portofolio"
+        android:text="@string/add_portfolio"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent" />

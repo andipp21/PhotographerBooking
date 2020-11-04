@@ -9,9 +9,14 @@ import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.sub
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.ProfilePhotographerPortofolioFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 
-class PhotographerProfileTabAdapter(fragmentManager: FragmentManager, behavior: Int, val viewModel: PhotographerProfileViewModel, val user: User) :
+class PhotographerProfileTabAdapter(
+    fragmentManager: FragmentManager,
+    behavior: Int,
+    val viewModel: PhotographerProfileViewModel,
+    val user: User
+) :
     FragmentStatePagerAdapter(fragmentManager, behavior) {
-    private val tabName: Array<String> = arrayOf("About Me", "Portofolio", "Package")
+    private val tabName: Array<String> = arrayOf("About Me", "Portfolio", "Package")
 
     override fun getItem(position: Int): Fragment = when (position) {
         0 -> ProfilePhotographerDataFragment(viewModel, user)

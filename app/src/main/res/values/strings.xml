@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShotBook</string>
+    <string name="app_name">PhotographerBooking</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lets_start">Lets start!</string>
     <string name="image_view_client">Image View Client</string>
@@ -35,10 +35,10 @@
     <string name="order">Order</string>
     <string name="inbox">Inbox</string>
     <string name="profile">Profile</string>
-    <string name="portofolio_image">Portofolio Image</string>
+    <string name="portfolio_image">Portfolio Image</string>
     <string name="edit_button">edit button</string>
     <string name="about_me">About Me</string>
-    <string name="add_portofolio">Add Portofolio</string>
+    <string name="add_portfolio">Add Portfolio</string>
     <string name="add_package">Add Package</string>
     <string name="fullname">FULLNAME</string>
     <string name="select_image">Select Image</string>
@@ -46,7 +46,7 @@
     <string name="change_profile_picture">Change Profile Picture</string>
     <string name="delete_image">Delete Image</string>
     <string name="change_image">Change Image</string>
-    <string name="portofolio_detail">Portofolio Detail</string>
+    <string name="portfolio_detail">Portfolio Detail</string>
     <string name="delete_button">Delete Button</string>
     <string name="add_benefit">Add Benefit</string>
     <string name="input_package_title">Input Package Title</string>
@@ -75,7 +75,7 @@
     <string name="photographer_profile_picture">Photographer Profile Picture</string>
     <string name="filter">Filter</string>
     <string name="logout">Logout</string>
-    <string name="you_can_contact_me_on">You can contact me on</string>
+    <string name="you_can_contact_photographer_on">You can contact photographer on</string>
     <string name="phone">Phone</string>
     <string name="button_close">Button Close</string>
     <string name="show_detail">Show Detail</string>
