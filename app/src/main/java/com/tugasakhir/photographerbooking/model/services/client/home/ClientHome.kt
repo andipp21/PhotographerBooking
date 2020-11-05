@@ -26,8 +26,12 @@ class ClientHome @Inject constructor() {
                                 role = doc.data.getValue("role").toString(),
                                 city = doc.data.getValue("city").toString(),
                                 phoneNumber = doc.data.getValue("phone_number").toString(),
-                                profilePicture = doc.data.getValue("profile_picture").toString(),
-                                about = doc.data.getValue("about").toString()
+                                profilePicture = doc.data.get("profile_picture").toString(),
+                                about = doc.data.getValue("about").toString(),
+                                numberOvo = doc.data.getValue("ovo_number").toString(),
+                                numberDana = doc.data.getValue("dana_number").toString(),
+                                numberLinkAja = doc.data.getValue("link_aja_number").toString(),
+                                numberGopay = doc.data.getValue("gopay_number").toString()
                             )
                         )
                     }

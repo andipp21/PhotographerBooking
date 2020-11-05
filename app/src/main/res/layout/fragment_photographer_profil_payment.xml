@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_content"
+    tools:context=".view.photographer.fragment.profile.subFragment.PhotographerProfilPaymentFragment">
+
+    <ScrollView
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnAddPayment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivPaymentMethodDana"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"/>
+
+                <EditText
+                    android:id="@+id/numberPaymentMethodDana"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPaymentMethodDana"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="input your dana account"
+                    android:hint="@string/input_your_dana_account"
+                    android:inputType="number" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivPaymentMethodGopay"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"/>
+
+                <EditText
+                    android:id="@+id/numberPaymentMethodGopay"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPaymentMethodGopay"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="input your gopay account"
+                    android:hint="@string/input_your_gopay_account"
+                    android:inputType="number"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivPaymentMethodLinkAja"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:padding="16dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"/>
+
+                <EditText
+                    android:id="@+id/numberPaymentMethodLinkAja"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPaymentMethodLinkAja"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="input your link aja account"
+                    android:hint="@string/input_your_link_aja_account"
+                    android:inputType="number"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivPaymentMethodOvo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:padding="16dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"/>
+
+                <EditText
+                    android:id="@+id/numberPaymentMethodOvo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPaymentMethodOvo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="input your ovo account"
+                    android:hint="@string/input_your_ovo_account"
+                    android:inputType="number"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnAddPayment"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorWhite"
+        android:text="@string/add_payment_method"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

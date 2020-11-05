@@ -1,7 +1,6 @@
 package com.tugasakhir.photographerbooking.model.pojo
 
 import android.os.Parcelable
-import com.google.firebase.Timestamp
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -14,5 +13,7 @@ data class Order(
     var photoshootTime: Date,
     var orderTime: Date,
     var isConfirmed: Boolean,
-    var isDone: Boolean
+    var isDone: Boolean,
+    var isPayed: Boolean,
+    var payImage: String
 ): Parcelable

@@ -1,20 +1,21 @@
 package com.tugasakhir.photographerbooking.model.services.order
 
+import android.net.Uri
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.model.pojo.User
 import javax.inject.Inject
 
 class OrderServices @Inject constructor() {
-    //    private val auth = FirebaseAuth.getInstance()
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
     private val orderCollection = FirebaseFirestore.getInstance().collection("orders")
     private val packageCollection = FirebaseFirestore.getInstance().collection("pakcage")
+    private val storageRef = FirebaseStorage.getInstance().reference
 
     fun createOrder(order: Order, response: (String) -> Unit) {
         val data = HashMap<String, Any>()
@@ -26,6 +27,8 @@ class OrderServices @Inject constructor() {
         data["order_time"] = order.orderTime
         data["is_confirmed"] = order.isConfirmed
         data["is_done"] = order.isDone
+        data["is_payed"] = order.isPayed
+        data["pay_image"] = order.payImage
 
         orderCollection.document()
             .set(data)
@@ -39,9 +42,44 @@ class OrderServices @Inject constructor() {
             }
     }
 
+    fun makePayment(path: Uri, orderID: String, response: (String) -> Unit) {
+        val ref = storageRef.child("order/$orderID")
+
+        ref.putFile(path).continueWithTask { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            ref.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                Log.d("Upload Storage Success", "Download url : $downloadUri")
+                if (downloadUri != null) {
+                    val dt = HashMap<String, Any>()
+
+                    dt["pay_image"] = downloadUri.toString()
+                    dt["is_payed"] = true
+
+                    orderCollection.document(orderID)
+                        .set(dt, SetOptions.merge())
+                        .addOnSuccessListener {
+                            Log.d("Order Payment", "Successfully Pay Order")
+                            response.invoke("Successfully Pay Order")
+                        }
+                        .addOnFailureListener { error ->
+                            Log.e("Order Payment", error.localizedMessage!!)
+                            response.invoke("Error Payment: ${error.localizedMessage}")
+                        }
+                }
+            }
+        }
+    }
+
     fun fetchOrderPhotographer(usrID: String, response: (List<Order>) -> Unit) {
         orderCollection.whereEqualTo("photographer_id", usrID)
-            .orderBy("order_time", Query.Direction.DESCENDING)
+//            .orderBy("order_time", Query.Direction.DESCENDING)
             .addSnapshotListener { value, _ ->
                 val listData: MutableList<Order> = mutableListOf()
                 if (value != null) {
@@ -55,7 +93,9 @@ class OrderServices @Inject constructor() {
                                 photoshootTime = doc.getTimestamp("photoshoot_time")?.toDate()!!,
                                 orderTime = doc.getTimestamp("order_time")?.toDate()!!,
                                 isConfirmed = doc.data.getValue("is_confirmed") as Boolean,
-                                isDone = doc.data.getValue("is_done") as Boolean
+                                isDone = doc.data.getValue("is_done") as Boolean,
+                                isPayed = doc.data.getValue("is_payed") as Boolean,
+                                payImage = doc.data.getValue("pay_image").toString()
                             )
                         )
                     }
@@ -68,7 +108,7 @@ class OrderServices @Inject constructor() {
 
     fun fetchOrderClient(usrID: String, response: (List<Order>) -> Unit) {
         orderCollection.whereEqualTo("client_id", usrID)
-            .orderBy("order_time", Query.Direction.DESCENDING)
+//            .orderBy("order_time", Query.Direction.DESCENDING)
             .addSnapshotListener { value, _ ->
                 val listData: MutableList<Order> = mutableListOf()
                 if (value != null) {
@@ -82,7 +122,9 @@ class OrderServices @Inject constructor() {
                                 photoshootTime = doc.getTimestamp("photoshoot_time")?.toDate()!!,
                                 orderTime = doc.getTimestamp("order_time")?.toDate()!!,
                                 isConfirmed = doc.data.getValue("is_confirmed") as Boolean,
-                                isDone = doc.data.getValue("is_done") as Boolean
+                                isDone = doc.data.getValue("is_done") as Boolean,
+                                payImage = doc.data.getValue("pay_image").toString(),
+                                isPayed = doc.data.getValue("is_payed") as Boolean
                             )
                         )
                     }
@@ -101,15 +143,19 @@ class OrderServices @Inject constructor() {
                     for (doc in value) {
                         listData.add(
                             User(
-                                doc.id,
-                                doc.data.getValue("fullname").toString(),
-                                doc.data.getValue("email").toString(),
-                                doc.data.getValue("password").toString(),
-                                doc.data.getValue("role").toString(),
-                                doc.data.getValue("city").toString(),
-                                doc.data.getValue("phone_number").toString(),
-                                doc.data.getValue("profile_picture").toString(),
-                                doc.data.getValue("about").toString()
+                                uid = doc.id,
+                                fullname = doc.data.getValue("fullname").toString(),
+                                email = doc.data.getValue("email").toString(),
+                                password = doc.data.getValue("password").toString(),
+                                role = doc.data.getValue("role").toString(),
+                                city = doc.data.getValue("city").toString(),
+                                phoneNumber = doc.data.getValue("phone_number").toString(),
+                                profilePicture = doc.data.get("profile_picture").toString(),
+                                about = doc.data.getValue("about").toString(),
+                                numberOvo = doc.data.getValue("ovo_number").toString(),
+                                numberDana = doc.data.getValue("dana_number").toString(),
+                                numberLinkAja = doc.data.getValue("link_aja_number").toString(),
+                                numberGopay = doc.data.getValue("gopay_number").toString()
                             )
                         )
                     }
@@ -126,15 +172,19 @@ class OrderServices @Inject constructor() {
                     for (doc in value) {
                         listData.add(
                             User(
-                                doc.id,
-                                doc.data.getValue("fullname").toString(),
-                                doc.data.getValue("email").toString(),
-                                doc.data.getValue("password").toString(),
-                                doc.data.getValue("role").toString(),
-                                doc.data.getValue("city").toString(),
-                                doc.data.getValue("phone_number").toString(),
-                                doc.data.getValue("profile_picture").toString(),
-                                doc.data.getValue("about").toString()
+                                uid = doc.id,
+                                fullname = doc.data.getValue("fullname").toString(),
+                                email = doc.data.getValue("email").toString(),
+                                password = doc.data.getValue("password").toString(),
+                                role = doc.data.getValue("role").toString(),
+                                city = doc.data.getValue("city").toString(),
+                                phoneNumber = doc.data.getValue("phone_number").toString(),
+                                profilePicture = doc.data.getValue("profile_picture").toString(),
+                                about = doc.data.getValue("about").toString(),
+                                numberOvo = doc.data.getValue("ovo_number").toString(),
+                                numberDana = doc.data.getValue("dana_number").toString(),
+                                numberLinkAja = doc.data.getValue("link_aja_number").toString(),
+                                numberGopay = doc.data.getValue("gopay_number").toString()
                             )
                         )
                     }

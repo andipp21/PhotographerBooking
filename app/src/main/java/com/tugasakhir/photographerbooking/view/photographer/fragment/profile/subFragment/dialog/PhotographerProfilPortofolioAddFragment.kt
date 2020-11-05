@@ -59,7 +59,6 @@ class PhotographerProfilPortofolioAddFragment(val viewModel: PhotographerProfile
         intent.action = Intent.ACTION_PICK
 //        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1)
         startActivityForResult(intent, 212)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

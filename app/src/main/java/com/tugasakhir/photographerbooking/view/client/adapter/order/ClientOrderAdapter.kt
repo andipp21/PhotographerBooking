@@ -65,14 +65,17 @@ class ClientOrderAdapter(
 
                 holder.itemView.yourPhotographerName.text = dt.fullname
 
-                if (item.isConfirmed && item.isDone){
+                if (item.isConfirmed && item.isPayed && item.isDone){
                     holder.itemView.orderStatus.setText(R.string.status_order_3)
                     holder.itemView.orderStatus.setBackgroundResource(R.drawable.button_enabled)
                     holder.itemView.orderStatus.setTextColor(Color.WHITE)
-                } else if (item.isConfirmed && !item.isDone){
+                } else if (item.isConfirmed && item.isPayed && !item.isDone){
+                    holder.itemView.orderStatus.setText(R.string.status_order_4)
+                    holder.itemView.orderStatus.setTextColor(Color.parseColor("#2BD6A9"))
+                } else if (item.isConfirmed && !item.isPayed && !item.isDone){
                     holder.itemView.orderStatus.setText(R.string.status_order_2)
                     holder.itemView.orderStatus.setTextColor(Color.parseColor("#2BD6A9"))
-                } else if (!item.isConfirmed && !item.isDone){
+                } else if (!item.isConfirmed && !item.isPayed && !item.isDone){
                     holder.itemView.orderStatus.setText(R.string.status_order_1)
                     holder.itemView.orderStatus.setTextColor(Color.DKGRAY)
                 }
@@ -135,7 +138,7 @@ class ClientOrderAdapter(
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(order: Order, client: User)
+        fun onItemClicked(order: Order, photographer: User)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {

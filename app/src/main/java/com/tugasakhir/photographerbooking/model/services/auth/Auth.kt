@@ -23,6 +23,10 @@ class Auth @Inject constructor() {
                 data["phone_number"] = user.phoneNumber
                 data["profil_picture"] = user.profilePicture
                 data["about"] = user.about
+                data["gopay_number"] = user.numberGopay
+                data["dana_number"] = user.numberDana
+                data["link_aja_number"] = user.numberLinkAja
+                data["ovo_number"] = user.numberOvo
 
                 val profileChangeRequest =
                     UserProfileChangeRequest.Builder().setDisplayName(user.fullname).build()
@@ -59,25 +63,31 @@ class Auth @Inject constructor() {
 
     fun getUser(response: (User) -> Unit) {
         auth.uid?.let { it ->
-            userCollection.document(it).get()
-                .addOnSuccessListener { doc ->
+            userCollection.document(it)
+                .addSnapshotListener { value, _ ->
+                    var nOvo = value?.data?.get("ovo_number").toString()
+                    var nDana = value?.data?.get("dana_number").toString()
+                    var nGopay = value?.data?.get("gopay_number").toString()
+                    var nLinkAja = value?.data?.get("link_aja_number").toString()
+
                     val user = User(
-                        doc.id,
-                        doc.data?.getValue("fullname").toString(),
-                        doc.data?.getValue("email").toString(),
-                        doc.data?.getValue("password").toString(),
-                        doc.data?.getValue("role").toString(),
-                        doc.data?.getValue("city").toString(),
-                        doc.data?.getValue("phone_number").toString(),
-                        doc.data?.getValue("profile_picture").toString(),
-                        doc.data?.getValue("about").toString()
+                        uid = value?.id,
+                        fullname = value?.data?.getValue("fullname").toString(),
+                        email = value?.data?.getValue("email").toString(),
+                        password = value?.data?.getValue("password").toString(),
+                        role = value?.data?.getValue("role").toString(),
+                        city = value?.data?.getValue("city").toString(),
+                        phoneNumber = value?.data?.getValue("phone_number").toString(),
+                        profilePicture = value?.data?.getValue("profile_picture").toString(),
+                        about = value?.data?.getValue("about").toString(),
+                        numberOvo = nOvo,
+                        numberDana = nDana,
+                        numberLinkAja = nLinkAja,
+                        numberGopay = nGopay
                     )
                     Log.d("user", user.toString())
 
                     response.invoke(user)
-                }
-                .addOnFailureListener {
-                    Log.d("Errors: ", it.localizedMessage)
                 }
         }
     }

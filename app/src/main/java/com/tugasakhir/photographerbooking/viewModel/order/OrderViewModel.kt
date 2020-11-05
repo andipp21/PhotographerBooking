@@ -1,5 +1,6 @@
 package com.tugasakhir.photographerbooking.viewModel.order
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tugasakhir.photographerbooking.model.pojo.Order
@@ -74,6 +75,12 @@ class OrderViewModel: ViewModel() {
 
     fun confirmationOrderDone(id:String){
         orderServices.confirmOrderDone(id){
+            _responseLiveData.postValue(it)
+        }
+    }
+
+    fun payOrder(path: Uri, idOrder: String){
+        orderServices.makePayment(path, idOrder){
             _responseLiveData.postValue(it)
         }
     }

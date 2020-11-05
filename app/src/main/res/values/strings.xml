@@ -10,7 +10,6 @@
     <string name="personal_detail">Your personal detail</string>
     <string name="first_name">FIRST NAME</string>
     <string name="last_name">LAST NAME</string>
-    <string name="your_email_address">Your email address</string>
     <string name="email_address">EMAIL ADDRESS</string>
     <string name="protect_your_account_with_password">Protect your account with Password</string>
     <string name="password">PASSWORD</string>
@@ -46,7 +45,6 @@
     <string name="change_profile_picture">Change Profile Picture</string>
     <string name="delete_image">Delete Image</string>
     <string name="change_image">Change Image</string>
-    <string name="portfolio_detail">Portfolio Detail</string>
     <string name="delete_button">Delete Button</string>
     <string name="add_benefit">Add Benefit</string>
     <string name="input_package_title">Input Package Title</string>
@@ -64,16 +62,12 @@
         <item>Event Photoshoot</item>
         <item>Endorsement Photoshoot</item>
     </string-array>
-    <string name="title_activity_photographer_edit_package">PhotographerEditPackageActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="schedule">Schedule</string>
     <string name="explore">Explore</string>
     <string name="photographer_profile_picture">Photographer Profile Picture</string>
-    <string name="filter">Filter</string>
     <string name="logout">Logout</string>
     <string name="you_can_contact_photographer_on">You can contact photographer on</string>
     <string name="phone">Phone</string>
@@ -97,20 +91,28 @@
     <string name="paket">Package</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
-    <string name="payment_detail">Payment Detail</string>
     <string name="total_fee">Total Fee :</string>
     <string name="order_success">Order Success</string>
     <string name="please_wait_photographer_to_confirmation_your_order">Please Wait Photographer to Confirmation Your Order</string>
     <string name="close">Close</string>
     <string name="order_this_photographer">Order this Photographer</string>
     <string name="image_wait_confirmation">Image Wait Confirmation</string>
-    <string name="order_list">Order List</string>
     <string name="your_client">Your Client</string>
     <string name="status_order_1">Waiting for Confirmation</string>
-    <string name="status_order_2">Confirmed</string>
-    <string name="status_order_3">Completed</string>
+    <string name="status_order_2">Photoshoot Confirmed</string>
+    <string name="status_order_3">Photoshoot Completed</string>
+    <string name="status_order_4">Photoshoot Paid</string>
     <string name="client">Client</string>
     <string name="you_can_contact_client_on">You can Contact Client on :</string>
     <string name="confirm_order">Confirm Order</string>
     <string name="your_photographer">Your Photographer</string>
+    <string name="add_payment_method">Add Payment Method</string>
+    <string name="input_your_dana_account">input your dana account</string>
+    <string name="input_your_gopay_account">input your gopay account</string>
+    <string name="input_your_link_aja_account">input your link aja account</string>
+    <string name="input_your_ovo_account">input your ovo account</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="select_payment_method">Select Payment Method</string>
+    <string name="upload_payment_proof">Upload Payment Proof</string>
+    <string name="pay_order">Pay Order</string>
 </resources>

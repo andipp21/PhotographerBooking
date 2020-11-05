@@ -1,7 +1,6 @@
 package com.tugasakhir.photographerbooking.view.client.fragment.order
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,10 +15,10 @@ import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
 import com.tugasakhir.photographerbooking.view.client.activity.order.OrderProcessingActivity
+import com.tugasakhir.photographerbooking.view.client.activity.order.orderConfirmed.OrderConfirmedActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.order.ClientOrderAdapter
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_client_order.view.*
-import kotlinx.android.synthetic.main.item_order_photographer.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,11 +68,14 @@ class ClientOrderFragment : Fragment() {
         view.rvOrderClient.adapter = adapter
 
         adapter?.setOnItemClickCallback(object : ClientOrderAdapter.OnItemClickCallback {
-            override fun onItemClicked(order: Order, client: User) {
+            override fun onItemClicked(order: Order, photographer: User) {
                 if (order.isConfirmed && order.isDone){
 
                 } else if (order.isConfirmed && !order.isDone){
-
+                    val intent = Intent(activity, OrderConfirmedActivity::class.java)
+                    intent.putExtra("order", order)
+                    intent.putExtra("photographer", photographer)
+                    startActivity(intent)
                 } else if (!order.isConfirmed && !order.isDone){
                     val intent = Intent(activity, OrderProcessingActivity::class.java)
                     startActivity(intent)

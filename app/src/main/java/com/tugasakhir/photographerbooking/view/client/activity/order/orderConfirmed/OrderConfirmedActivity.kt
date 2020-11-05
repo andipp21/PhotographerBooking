@@ -1,5 +1,6 @@
-package com.tugasakhir.photographerbooking.view.photographer.activity.order
+package com.tugasakhir.photographerbooking.view.client.activity.order.orderConfirmed
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,31 +8,31 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.R
-import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerOrderDetailBinding
+import com.tugasakhir.photographerbooking.databinding.ActivityOrderConfirmedBinding
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.view.client.activity.order.payOrder.PayOrderActivity
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 
-class PhotographerOrderDetailActivity : AppCompatActivity() {
-
-    lateinit var binding: ActivityPhotographerOrderDetailBinding
+class OrderConfirmedActivity : AppCompatActivity() {
+    lateinit var binding: ActivityOrderConfirmedBinding
     lateinit var order: Order
-    lateinit var client: User
+    lateinit var photographer: User
+    lateinit var totalAmount: String
 
     var viewModel: OrderViewModel? = null
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPhotographerOrderDetailBinding.inflate(layoutInflater)
+        binding = ActivityOrderConfirmedBinding.inflate(layoutInflater)
 
         viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
 
         order = intent.getParcelableExtra("order")!!
-        client = intent.getParcelableExtra("client")!!
-
+        photographer = intent.getParcelableExtra("photographer")!!
         setContentView(binding.root)
 
         val appBar = binding.appBarLayout.toolbar
@@ -40,39 +41,32 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         Glide.with(this)
-            .load(client.profilePicture)
+            .load(photographer.profilePicture)
             .circleCrop()
-            .into(binding.clientProfilePicture)
+            .into(binding.photographerProfilePicture)
 
-        binding.clientName.text = client.fullname
+        binding.photographerName.text = photographer.fullname
 
         if (order.isConfirmed && order.isPayed && order.isDone) {
             binding.orderStatus.setText(R.string.status_order_3)
             binding.orderStatus.setBackgroundResource(R.drawable.button_enabled)
             binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
-            binding.confirmOrder.visibility = View.GONE
+            binding.paymentBTN.visibility = View.GONE
         } else if (order.isConfirmed && order.isPayed && !order.isDone){
-            binding.orderStatus.setText(R.string.status_order_2)
+            binding.orderStatus.setText(R.string.status_order_4)
             binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
-            binding.confirmOrder.text = "Photoshoot Done"
-            binding.confirmOrder.setOnClickListener {
-                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
-                observeViewModel(viewModel!!, this)
-            }
+            binding.paymentBTN.visibility = View.GONE
         } else if (order.isConfirmed && !order.isPayed && !order.isDone) {
             binding.orderStatus.setText(R.string.status_order_2)
             binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
-            binding.confirmOrder.text = "Photoshoot Done"
-//            binding.confirmOrder.setOnClickListener {
+            binding.paymentBTN.setOnClickListener {
+                val intent = Intent(this, PayOrderActivity::class.java)
+                intent.putExtra("photographer", photographer)
+                intent.putExtra("idOrder", order.uid)
+                intent.putExtra("totalAmount", totalAmount)
+                startActivity(intent)
 //                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
 //                observeViewModel(viewModel!!, this)
-//            }
-        } else {
-            binding.orderStatus.setText(R.string.status_order_1)
-            binding.confirmOrder.setText(R.string.confirm_order)
-            binding.confirmOrder.setOnClickListener {
-                order.uid?.let { it1 -> viewModel!!.confirmationOrder(it1) }
-                observeViewModel(viewModel!!, this)
             }
         }
 
@@ -148,14 +142,15 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         actionDelegate.responsePackage.observe(lifecycleOwner, {
             binding.typeContent.text = it.type
             binding.packageContent.text = it.title
-            binding.totalFee.text =  convertMoney(it.price)
+            totalAmount = convertMoney(it.price)
+            binding.totalFee.text = totalAmount
         })
-
-        actionDelegate.responseLiveData.observe(lifecycleOwner, {
-            if (it == "Order Confirmated" || it == "Order Done"){
-                finish()
-            }
-        })
+//
+//        actionDelegate.responseLiveData.observe(lifecycleOwner, {
+//            if (it == "Order Confirmated" || it == "Order Done"){
+//                finish()
+//            }
+//        })
     }
 
     private fun convertMoney(input: Long): String {

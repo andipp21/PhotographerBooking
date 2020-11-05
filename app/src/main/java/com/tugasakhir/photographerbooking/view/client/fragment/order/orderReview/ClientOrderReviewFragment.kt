@@ -115,7 +115,9 @@ class ClientOrderReviewFragment(
                             photoshootTime = time,
                             orderTime = Calendar.getInstance().time,
                             isConfirmed = false,
-                            isDone = false
+                            isDone = false,
+                            isPayed = false,
+                            payImage = ""
                         )
                     }
                 }

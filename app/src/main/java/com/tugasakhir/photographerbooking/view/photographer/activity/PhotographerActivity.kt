@@ -18,6 +18,7 @@ import com.tugasakhir.photographerbooking.view.photographer.fragment.Photographe
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.PhotographerOrderFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
+import com.tugasakhir.photographerbooking.viewModel.auth.login.LoginViewModel
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 
@@ -27,6 +28,7 @@ class PhotographerActivity : AppCompatActivity() {
 
     private var viewModelPhotographer: PhotographerProfileViewModel? = null
     private var viewModelOrder: OrderViewModel? = null
+    private var viewModelAuth: LoginViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +36,10 @@ class PhotographerActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        viewModelPhotographer = ViewModelProvider(this).get(PhotographerProfileViewModel::class.java)
+        viewModelPhotographer =
+            ViewModelProvider(this).get(PhotographerProfileViewModel::class.java)
         viewModelOrder = ViewModelProvider(this).get(OrderViewModel::class.java)
+        viewModelAuth = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         val appBar = binding.appBarLayout.toolbar
         setSupportActionBar(appBar)
@@ -52,7 +56,7 @@ class PhotographerActivity : AppCompatActivity() {
             .commit()
 
         binding.botNavPhotographer.setOnNavigationItemSelectedListener {
-            return@setOnNavigationItemSelectedListener when(it.itemId){
+            return@setOnNavigationItemSelectedListener when (it.itemId) {
                 R.id.photographerHome -> {
                     goFragment(PhotographerHomeFragment())
                     true
@@ -74,6 +78,19 @@ class PhotographerActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModelAuth?.getUser()
+        viewModelAuth?.let { observeUser(it) }
+    }
+
+    fun observeUser(viewModel: LoginViewModel) {
+        viewModel.responseLiveUser.observe(this, {
+            user = it
+        })
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -81,7 +98,7 @@ class PhotographerActivity : AppCompatActivity() {
         viewModelOrder = null
     }
 
-     private fun goFragment(fm: Fragment) {
+    private fun goFragment(fm: Fragment) {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.flPhotographerMain, fm)
@@ -97,7 +114,7 @@ class PhotographerActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
+        return when (item.itemId) {
             R.id.btnLogout -> {
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, MainActivity::class.java))

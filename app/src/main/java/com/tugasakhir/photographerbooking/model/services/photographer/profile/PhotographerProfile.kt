@@ -29,8 +29,12 @@ class PhotographerProfile @Inject constructor() {
         data["role"] = user.role
         data["city"] = user.city
         data["phone_number"] = user.phoneNumber
-        data["profil_picture"] = user.profilePicture
+        data["profile_picture"] = user.profilePicture
         data["about"] = user.about
+        data["gopay_number"] = user.numberGopay
+        data["dana_number"] = user.numberDana
+        data["link_aja_number"] = user.numberLinkAja
+        data["ovo_number"] = user.numberOvo
 
         auth.uid?.let { it ->
             userCollection
@@ -120,7 +124,7 @@ class PhotographerProfile @Inject constructor() {
     fun fetchPortofolio(response: (List<Portofolio>) -> Unit) {
         portofolioCollection
             .addSnapshotListener { value, _ ->
-                if (value != null){
+                if (value != null) {
                     val listData: MutableList<Portofolio> = mutableListOf()
                     for (doc in value) {
                         if (doc["user_id"] == auth.uid) {
@@ -208,7 +212,7 @@ class PhotographerProfile @Inject constructor() {
     fun fetchPackage(response: (List<Package>) -> Unit) {
         packageCollection
             .addSnapshotListener { value, _ ->
-                if (value != null){
+                if (value != null) {
                     val listData: MutableList<Package> = mutableListOf()
                     for (doc in value) {
                         if (doc["user_id"] == auth.uid) {

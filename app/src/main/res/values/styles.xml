@@ -32,10 +32,4 @@
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="floatingButtonStyle" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">64dp</item>
-        <item name="android:background">@color/colorPrimary</item>
-    </style>
-
 </resources>

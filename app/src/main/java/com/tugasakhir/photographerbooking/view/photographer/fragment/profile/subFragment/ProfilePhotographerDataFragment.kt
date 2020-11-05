@@ -135,15 +135,15 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
                     city = etCity.text.toString(),
                     phoneNumber = etPhoneNumber.text.toString(),
                     about = etAboutMePhotographer.text.toString(),
-                    profilePicture = user.profilePicture
+                    profilePicture = user.profilePicture,
+                    numberGopay = user.numberGopay,
+                    numberOvo = user.numberOvo,
+                    numberLinkAja = user.numberLinkAja,
+                    numberDana = user.numberDana
                 )
-
                 viewModel.updateUserData(data)
-
             }
-
             observerViewModel(viewModel)
-
 
             Log.d("Btn On CLick", "Save About Me")
         }
