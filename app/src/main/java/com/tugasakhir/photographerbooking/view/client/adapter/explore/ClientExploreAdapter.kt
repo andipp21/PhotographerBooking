@@ -9,8 +9,10 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.User
 import kotlinx.android.synthetic.main.item_client_explore.view.*
 
-class ClientExploreAdapter(val listPhotographer: MutableList<User> = mutableListOf()) :
+class ClientExploreAdapter :
     RecyclerView.Adapter<ClientExploreAdapter.ViewHolder>() {
+
+    private val listPhotographer: MutableList<User> = mutableListOf()
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -56,4 +58,5 @@ class ClientExploreAdapter(val listPhotographer: MutableList<User> = mutableList
         listPhotographer.addAll(newList)
         notifyDataSetChanged()
     }
+
 }

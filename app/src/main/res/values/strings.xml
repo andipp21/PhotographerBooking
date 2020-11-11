@@ -99,9 +99,10 @@
     <string name="image_wait_confirmation">Image Wait Confirmation</string>
     <string name="your_client">Your Client</string>
     <string name="status_order_1">Waiting for Confirmation</string>
-    <string name="status_order_2">Photoshoot Confirmed</string>
+    <string name="status_order_2">Photoshoot Confirmed, Waiting Client Payment</string>
     <string name="status_order_3">Photoshoot Completed</string>
-    <string name="status_order_4">Photoshoot Paid</string>
+    <string name="status_order_4">Photoshoot Already Paid</string>
+    <string name="show_payment_image">Show Payment Image</string>
     <string name="client">Client</string>
     <string name="you_can_contact_client_on">You can Contact Client on :</string>
     <string name="confirm_order">Confirm Order</string>
@@ -115,4 +116,7 @@
     <string name="select_payment_method">Select Payment Method</string>
     <string name="upload_payment_proof">Upload Payment Proof</string>
     <string name="pay_order">Pay Order</string>
+    <string name="payment_image">Payment Image</string>
+    <string name="order_image">Order Image</string>
+    <string name="set_schedule">Set Schedule</string>
 </resources>

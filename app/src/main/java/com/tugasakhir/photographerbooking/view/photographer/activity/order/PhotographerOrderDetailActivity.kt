@@ -1,7 +1,9 @@
 package com.tugasakhir.photographerbooking.view.photographer.activity.order
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +12,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerOrderDetailBinding
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.view.photographer.fragment.order.subFragment.ShowOrderPaymentFragment
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -38,48 +41,6 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         setSupportActionBar(appBar)
         supportActionBar?.title = "Order Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        Glide.with(this)
-            .load(client.profilePicture)
-            .circleCrop()
-            .into(binding.clientProfilePicture)
-
-        binding.clientName.text = client.fullname
-
-        if (order.isConfirmed && order.isPayed && order.isDone) {
-            binding.orderStatus.setText(R.string.status_order_3)
-            binding.orderStatus.setBackgroundResource(R.drawable.button_enabled)
-            binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
-            binding.confirmOrder.visibility = View.GONE
-        } else if (order.isConfirmed && order.isPayed && !order.isDone){
-            binding.orderStatus.setText(R.string.status_order_2)
-            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
-            binding.confirmOrder.text = "Photoshoot Done"
-            binding.confirmOrder.setOnClickListener {
-                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
-                observeViewModel(viewModel!!, this)
-            }
-        } else if (order.isConfirmed && !order.isPayed && !order.isDone) {
-            binding.orderStatus.setText(R.string.status_order_2)
-            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
-            binding.confirmOrder.text = "Photoshoot Done"
-//            binding.confirmOrder.setOnClickListener {
-//                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
-//                observeViewModel(viewModel!!, this)
-//            }
-        } else {
-            binding.orderStatus.setText(R.string.status_order_1)
-            binding.confirmOrder.setText(R.string.confirm_order)
-            binding.confirmOrder.setOnClickListener {
-                order.uid?.let { it1 -> viewModel!!.confirmationOrder(it1) }
-                observeViewModel(viewModel!!, this)
-            }
-        }
-
-        if (viewModel != null) {
-            viewModel!!.getPackage(order.packageID)
-            observeViewModel(viewModel!!, this)
-        }
 
         val cal = Calendar.getInstance()
         cal.time = order.photoshootTime
@@ -113,6 +74,56 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         binding.dateContent.text = "$hari $bulan $year"
         binding.timeContent.text = "$jam : $menit"
 
+        Glide.with(this)
+            .load(client.profilePicture)
+            .circleCrop()
+            .into(binding.clientProfilePicture)
+
+        binding.clientName.text = client.fullname
+
+        if (order.isConfirmed && order.isPayed && order.isDone) {
+            binding.orderStatus.setText(R.string.status_order_3)
+            binding.confirmOrder.visibility = View.GONE
+        } else if (order.isConfirmed && order.isPayed && !order.isDone) {
+            binding.checkPaid.visibility = View.VISIBLE
+            binding.checkPaid.setOnClickListener {
+                ShowOrderPaymentFragment.getImage(order.payImage)
+                    .show(supportFragmentManager, "Show Payment Image")
+            }
+
+            binding.setSchedule.visibility = View.VISIBLE
+            binding.setSchedule.setOnClickListener {
+                val insertCalendarIntent = Intent(Intent.ACTION_INSERT)
+                    .setData(CalendarContract.Events.CONTENT_URI)
+                    .putExtra(CalendarContract.Events.TITLE, "Photoshoot with ${client.fullname}")
+                    .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
+                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.timeInMillis)
+
+                startActivity(insertCalendarIntent)
+            }
+
+            binding.orderStatus.setText(R.string.status_order_4)
+            binding.confirmOrder.text = "Photoshoot Done"
+            binding.confirmOrder.setOnClickListener {
+                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
+                observeViewModel(viewModel!!, this)
+            }
+        } else if (order.isConfirmed && !order.isPayed && !order.isDone) {
+            binding.orderStatus.setText(R.string.status_order_2)
+            binding.confirmOrder.visibility = View.GONE
+        } else {
+            binding.orderStatus.setText(R.string.status_order_1)
+            binding.confirmOrder.setText(R.string.confirm_order)
+            binding.confirmOrder.setOnClickListener {
+                order.uid?.let { it1 -> viewModel!!.confirmationOrder(it1) }
+                observeViewModel(viewModel!!, this)
+            }
+        }
+
+        if (viewModel != null) {
+            viewModel!!.getPackage(order.packageID)
+            observeViewModel(viewModel!!, this)
+        }
     }
 
     private fun bulanString(bulan: Int): String {
@@ -148,11 +159,11 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         actionDelegate.responsePackage.observe(lifecycleOwner, {
             binding.typeContent.text = it.type
             binding.packageContent.text = it.title
-            binding.totalFee.text =  convertMoney(it.price)
+            binding.totalFee.text = convertMoney(it.price)
         })
 
         actionDelegate.responseLiveData.observe(lifecycleOwner, {
-            if (it == "Order Confirmated" || it == "Order Done"){
+            if (it == "Order Confirmated" || it == "Order Done") {
                 finish()
             }
         })

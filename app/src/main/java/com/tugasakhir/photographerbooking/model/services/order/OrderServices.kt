@@ -3,7 +3,6 @@ package com.tugasakhir.photographerbooking.model.services.order
 import android.net.Uri
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.tugasakhir.photographerbooking.model.pojo.Order
@@ -135,6 +134,17 @@ class OrderServices @Inject constructor() {
             }
     }
 
+    fun getPhotographerOrderAmount(photographerID: String, response: (Int) -> Unit){
+        orderCollection.whereEqualTo("photographer_id", photographerID)
+            .addSnapshotListener { value, _ ->
+                val jumlah = value?.documents?.size
+
+                if (jumlah != null) {
+                    response.invoke(jumlah)
+                }
+            }
+    }
+
     fun fetchClient(response: (List<User>) -> Unit) {
         userCollection.whereEqualTo("role", "client")
             .addSnapshotListener { value, _ ->
@@ -150,7 +160,7 @@ class OrderServices @Inject constructor() {
                                 role = doc.data.getValue("role").toString(),
                                 city = doc.data.getValue("city").toString(),
                                 phoneNumber = doc.data.getValue("phone_number").toString(),
-                                profilePicture = doc.data.get("profile_picture").toString(),
+                                profilePicture = doc.data["profile_picture"].toString(),
                                 about = doc.data.getValue("about").toString(),
                                 numberOvo = doc.data.getValue("ovo_number").toString(),
                                 numberDana = doc.data.getValue("dana_number").toString(),

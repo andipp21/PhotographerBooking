@@ -26,6 +26,9 @@ class OrderViewModel: ViewModel() {
     private val _responsePackage = MutableLiveData<Package>()
     val responsePackage = _responsePackage
 
+    private val _responseAmount = MutableLiveData<Int>()
+    val responseAmount = _responseAmount
+
     init {
         val scope = Toothpick.openScope(this)
         Toothpick.inject(this, scope)
@@ -82,6 +85,12 @@ class OrderViewModel: ViewModel() {
     fun payOrder(path: Uri, idOrder: String){
         orderServices.makePayment(path, idOrder){
             _responseLiveData.postValue(it)
+        }
+    }
+
+    fun getOrderAmount(idPhotographer: String){
+        orderServices.getPhotographerOrderAmount(idPhotographer){
+            _responseAmount.postValue(it)
         }
     }
 

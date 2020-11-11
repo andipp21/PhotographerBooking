@@ -12,27 +12,48 @@
         layout="@layout/toolbar" />
 
     <TextView
-        android:layout_marginTop="@dimen/margin_content"
+        android:layout_marginTop="16dp"
         android:id="@+id/orderStatus"
-        android:background="@drawable/bg_border_green"
         android:layout_marginHorizontal="@dimen/margin_content"
         android:textColor="@color/colorPrimary"
         android:text="@string/status_order_1"
-        android:padding="8dp"
+        android:fontFamily="@font/open_sans_semibold"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <View
+        android:id="@+id/lineDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/line_divider_dua"
+        app:layout_constraintTop_toBottomOf="@id/orderStatus" />
+
     <ScrollView
-        app:layout_constraintTop_toBottomOf="@id/orderStatus"
+        app:layout_constraintTop_toBottomOf="@id/lineDivider"
         app:layout_constraintBottom_toTopOf="@id/paymentBTN"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/setSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_enabled"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/set_schedule"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 app:layout_constraintTop_toTopOf="parent"
@@ -233,7 +254,7 @@
                     app:layout_constraintTop_toBottomOf="@id/contactphotographer" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 

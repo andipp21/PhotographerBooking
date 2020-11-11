@@ -3,6 +3,7 @@ package com.tugasakhir.photographerbooking.view.client.activity.order.orderConfi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +13,7 @@ import com.tugasakhir.photographerbooking.databinding.ActivityOrderConfirmedBind
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.activity.order.payOrder.PayOrderActivity
+import com.tugasakhir.photographerbooking.view.photographer.fragment.order.subFragment.ShowOrderPaymentFragment
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -24,7 +26,7 @@ class OrderConfirmedActivity : AppCompatActivity() {
     lateinit var totalAmount: String
 
     var viewModel: OrderViewModel? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOrderConfirmedBinding.inflate(layoutInflater)
@@ -39,41 +41,6 @@ class OrderConfirmedActivity : AppCompatActivity() {
         setSupportActionBar(appBar)
         supportActionBar?.title = "Order Detail"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        Glide.with(this)
-            .load(photographer.profilePicture)
-            .circleCrop()
-            .into(binding.photographerProfilePicture)
-
-        binding.photographerName.text = photographer.fullname
-
-        if (order.isConfirmed && order.isPayed && order.isDone) {
-            binding.orderStatus.setText(R.string.status_order_3)
-            binding.orderStatus.setBackgroundResource(R.drawable.button_enabled)
-            binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
-            binding.paymentBTN.visibility = View.GONE
-        } else if (order.isConfirmed && order.isPayed && !order.isDone){
-            binding.orderStatus.setText(R.string.status_order_4)
-            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
-            binding.paymentBTN.visibility = View.GONE
-        } else if (order.isConfirmed && !order.isPayed && !order.isDone) {
-            binding.orderStatus.setText(R.string.status_order_2)
-            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
-            binding.paymentBTN.setOnClickListener {
-                val intent = Intent(this, PayOrderActivity::class.java)
-                intent.putExtra("photographer", photographer)
-                intent.putExtra("idOrder", order.uid)
-                intent.putExtra("totalAmount", totalAmount)
-                startActivity(intent)
-//                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
-//                observeViewModel(viewModel!!, this)
-            }
-        }
-
-        if (viewModel != null) {
-            viewModel!!.getPackage(order.packageID)
-            observeViewModel(viewModel!!, this)
-        }
 
         val cal = Calendar.getInstance()
         cal.time = order.photoshootTime
@@ -106,6 +73,59 @@ class OrderConfirmedActivity : AppCompatActivity() {
 
         binding.dateContent.text = "$hari $bulan $year"
         binding.timeContent.text = "$jam : $menit"
+
+        Glide.with(this)
+            .load(photographer.profilePicture)
+            .circleCrop()
+            .into(binding.photographerProfilePicture)
+
+        binding.photographerName.text = photographer.fullname
+
+        if (order.isConfirmed && order.isPayed && order.isDone) {
+            binding.orderStatus.setText(R.string.status_order_3)
+            binding.orderStatus.setBackgroundResource(R.drawable.button_enabled)
+            binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
+            binding.paymentBTN.visibility = View.GONE
+        } else if (order.isConfirmed && order.isPayed && !order.isDone) {
+            binding.orderStatus.setText(R.string.status_order_4)
+            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
+            binding.paymentBTN.setText(R.string.show_payment_image)
+            binding.paymentBTN.setOnClickListener {
+                ShowOrderPaymentFragment.getImage(order.payImage)
+                    .show(supportFragmentManager, "Payemnt Image")
+            }
+
+            binding.setSchedule.visibility = View.VISIBLE
+            binding.setSchedule.setOnClickListener {
+                val insertCalendarIntent = Intent(Intent.ACTION_INSERT)
+                    .setData(CalendarContract.Events.CONTENT_URI)
+                    .putExtra(
+                        CalendarContract.Events.TITLE,
+                        "Photoshoot with ${photographer.fullname}"
+                    )
+                    .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
+                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.timeInMillis)
+
+                startActivity(insertCalendarIntent)
+            }
+        } else if (order.isConfirmed && !order.isPayed && !order.isDone) {
+            binding.orderStatus.setText(R.string.status_order_2)
+            binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
+            binding.paymentBTN.setOnClickListener {
+                val intent = Intent(this, PayOrderActivity::class.java)
+                intent.putExtra("photographer", photographer)
+                intent.putExtra("idOrder", order.uid)
+                intent.putExtra("totalAmount", totalAmount)
+                startActivity(intent)
+//                order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
+//                observeViewModel(viewModel!!, this)
+            }
+        }
+
+        if (viewModel != null) {
+            viewModel!!.getPackage(order.packageID)
+            observeViewModel(viewModel!!, this)
+        }
 
     }
 

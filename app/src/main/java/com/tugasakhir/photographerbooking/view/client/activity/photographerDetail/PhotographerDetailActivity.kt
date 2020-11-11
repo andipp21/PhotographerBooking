@@ -14,6 +14,7 @@ import com.tugasakhir.photographerbooking.model.pojo.Package
 import com.tugasakhir.photographerbooking.view.client.activity.order.orderPhotographer.OrderPhotographerActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.PhotographerDetailTabAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
+import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import kotlinx.android.synthetic.main.activity_photographer_detail.view.*
 
 class PhotographerDetailActivity : AppCompatActivity() {
@@ -22,20 +23,23 @@ class PhotographerDetailActivity : AppCompatActivity() {
     lateinit var photographer: User
 
     private lateinit var tabAdapter: PhotographerDetailTabAdapter
-    private var listPackage : MutableList<Package> = mutableListOf()
+    private var listPackage: MutableList<Package> = mutableListOf()
 
     private var viewModel: ClientHomeViewModel? = null
+    private var orderViewModel: OrderViewModel? = null
 
     override fun onDestroy() {
         super.onDestroy()
 
         viewModel = null
+        orderViewModel = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotographerDetailBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
+        orderViewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
         setContentView(binding.root)
 
         photographer = intent.getParcelableExtra("photographer")!!
@@ -46,6 +50,11 @@ class PhotographerDetailActivity : AppCompatActivity() {
 
         binding.namaPhotographer.text = photographer.fullname
         binding.kotaTinggal.text = photographer.city
+
+        if (photographer.uid != null){
+            orderViewModel?.getOrderAmount(photographer.uid!!)
+            orderViewModel?.let { observeOrderAmount(it, this) }
+        }
 
         tabAdapter = PhotographerDetailTabAdapter(
             supportFragmentManager,
@@ -101,6 +110,17 @@ class PhotographerDetailActivity : AppCompatActivity() {
             listPackage.addAll(it)
             tabAdapter.updateListPackage(it)
             Log.d("Package Activity", it.toString())
+        })
+    }
+
+    private fun observeOrderAmount(
+        actionDelegate: OrderViewModel,
+        lifecycleOwner: LifecycleOwner
+    ){
+        actionDelegate.responseAmount.observe(lifecycleOwner, {
+            Log.d("amount", it.toString())
+
+            binding.jumlahOrder.text = "Order Amount : $it"
         })
     }
 

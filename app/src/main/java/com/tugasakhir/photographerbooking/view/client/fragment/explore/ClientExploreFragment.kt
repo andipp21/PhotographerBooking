@@ -14,6 +14,7 @@ import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
 import com.tugasakhir.photographerbooking.view.client.activity.photographerDetail.PhotographerDetailActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.explore.ClientExploreAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
+import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_client_explore.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -64,6 +65,19 @@ class ClientExploreFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
 
         adapter = ClientExploreAdapter()
+
+//        if (orderViewModel != null){
+//            adapter.setViewModel(orderViewModel!!)
+//        }
+
+        adapter.setOnItemClickCallback(object : ClientExploreAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: User) {
+                val intent= Intent(activity, PhotographerDetailActivity::class.java)
+                intent.putExtra("photographer", data)
+                startActivity(intent)
+            }
+        })
+
         rvExploreClient.adapter = adapter
     }
 
@@ -77,13 +91,6 @@ class ClientExploreFragment : Fragment() {
     private fun observeViewModel(actionDelegate: ClientHomeViewModel, lifecycleOwner: LifecycleOwner){
         actionDelegate.responseLivePhotographer.observe(lifecycleOwner, {
             adapter.updateLists(it)
-            adapter.setOnItemClickCallback(object : ClientExploreAdapter.OnItemClickCallback {
-                override fun onItemClicked(data: User) {
-                    val intent= Intent(activity, PhotographerDetailActivity::class.java)
-                    intent.putExtra("photographer", data)
-                    startActivity(intent)
-                }
-            })
         })
     }
 

@@ -8,231 +8,278 @@
     tools:context=".view.photographer.activity.order.PhotographerOrderDetailActivity">
 
     <include
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/appBarLayout"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginTop="@dimen/margin_content"
         android:id="@+id/orderStatus"
-        android:background="@drawable/bg_border_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_content"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/status_order_1"
-        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/open_sans_semibold"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        android:text="@string/status_order_1"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+
+    <View
+        android:id="@+id/lineDivider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@id/orderStatus"
-        android:id="@+id/layoutCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_content"
-        android:background="@drawable/bg_border"
-        android:orientation="vertical"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/cart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/cart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/clientTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/client"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/cart" />
-
-        <ImageView
-            android:id="@+id/clientProfilePicture"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:contentDescription="@string/photographer_profile_picture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clientTitle" />
-
-        <TextView
-            android:id="@+id/clientName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_content"
-            android:fontFamily="@font/open_sans_semibold"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/clientProfilePicture"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/clientProfilePicture"
-            app:layout_constraintTop_toTopOf="@id/clientProfilePicture" />
-
-        <TextView
-            android:id="@+id/typeTitle"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/type"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clientProfilePicture" />
-
-        <TextView
-            android:id="@+id/typeContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/typeTitle"
-            app:layout_constraintTop_toTopOf="@id/typeTitle" />
-
-        <TextView
-            android:id="@+id/packageTitle"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/paket"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/typeTitle" />
-
-        <TextView
-            android:id="@+id/packageContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/typeTitle"
-            app:layout_constraintTop_toTopOf="@id/packageTitle" />
-
-        <TextView
-            android:id="@+id/dateTitle"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/date"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/packageTitle" />
-
-        <TextView
-            android:id="@+id/dateContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/typeTitle"
-            app:layout_constraintTop_toTopOf="@id/dateTitle" />
-
-        <TextView
-            android:id="@+id/timeTitle"
-            android:layout_width="96dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/time"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateTitle" />
-
-        <TextView
-            android:id="@+id/timeContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/typeTitle"
-            app:layout_constraintTop_toTopOf="@id/timeTitle" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        app:layout_constraintTop_toBottomOf="@id/layoutCart"
+        android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:id="@+id/layoutFee"
+        android:background="@drawable/line_divider_dua"
+        app:layout_constraintTop_toBottomOf="@id/orderStatus" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/margin_content">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/confirmOrder"
+        app:layout_constraintTop_toBottomOf="@id/lineDivider">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="@string/total_fee"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/totalFee"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/open_sans_semibold"
-            android:paddingHorizontal="8dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/checkPaid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_enabled"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/show_payment_image"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@id/layoutFee"
-        android:id="@+id/layoutContant"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="@dimen/margin_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/setSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_enabled"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="@string/set_schedule"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/contactClient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/you_can_contact_client_on"
-            android:textColor="@color/black"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutCart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_content"
+                android:background="@drawable/bg_border"
+                android:orientation="vertical"
+                android:padding="8dp"
+                app:layout_constraintTop_toBottomOf="@id/orderStatus">
 
-        <TextView
-            android:id="@+id/tvEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/email"
-            app:drawableTopCompat="@drawable/ic_email"
-            app:layout_constraintEnd_toStartOf="@id/tvPhone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/contactClient" />
+                <TextView
+                    android:id="@+id/cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/cart"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="@string/phone"
-            app:drawableTopCompat="@drawable/ic_phone"
-            app:layout_constraintStart_toEndOf="@id/tvEmail"
-            app:layout_constraintTop_toBottomOf="@id/contactClient" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/clientTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/client"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/cart" />
+
+                <ImageView
+                    android:id="@+id/clientProfilePicture"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:contentDescription="@string/photographer_profile_picture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clientTitle" />
+
+                <TextView
+                    android:id="@+id/clientName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/clientProfilePicture"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clientProfilePicture"
+                    app:layout_constraintTop_toTopOf="@id/clientProfilePicture" />
+
+                <TextView
+                    android:id="@+id/typeTitle"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/type"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/clientProfilePicture" />
+
+                <TextView
+                    android:id="@+id/typeContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/typeTitle"
+                    app:layout_constraintTop_toTopOf="@id/typeTitle" />
+
+                <TextView
+                    android:id="@+id/packageTitle"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/paket"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/typeTitle" />
+
+                <TextView
+                    android:id="@+id/packageContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/typeTitle"
+                    app:layout_constraintTop_toTopOf="@id/packageTitle" />
+
+                <TextView
+                    android:id="@+id/dateTitle"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/date"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/packageTitle" />
+
+                <TextView
+                    android:id="@+id/dateContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/typeTitle"
+                    app:layout_constraintTop_toTopOf="@id/dateTitle" />
+
+                <TextView
+                    android:id="@+id/timeTitle"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/time"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dateTitle" />
+
+                <TextView
+                    android:id="@+id/timeContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/typeTitle"
+                    app:layout_constraintTop_toTopOf="@id/timeTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutFee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/margin_content"
+                app:layout_constraintTop_toBottomOf="@id/layoutCart">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/total_fee"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/totalFee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:paddingHorizontal="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutContant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/layoutFee">
+
+                <TextView
+                    android:id="@+id/contactClient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/you_can_contact_client_on"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/email"
+                    app:drawableTopCompat="@drawable/ic_email"
+                    app:layout_constraintEnd_toStartOf="@id/tvPhone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/contactClient" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/phone"
+                    app:drawableTopCompat="@drawable/ic_phone"
+                    app:layout_constraintStart_toEndOf="@id/tvEmail"
+                    app:layout_constraintTop_toBottomOf="@id/contactClient" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/confirmOrder"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_content"
         android:background="@drawable/button_enabled"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="@string/confirm_order"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        android:fontFamily="@font/open_sans_semibold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

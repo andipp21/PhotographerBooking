@@ -32,14 +32,17 @@ class PhotographerOrderAdapter(
 
                     itemView.yourClientName.text = dt.fullname
 
-                    if (item.isConfirmed && item.isDone){
+                    if (item.isConfirmed && item.isPayed && item.isDone){
                         itemView.orderStatus.setText(R.string.status_order_3)
                         itemView.orderStatus.setBackgroundResource(R.drawable.button_enabled)
                         itemView.orderStatus.setTextColor(Color.WHITE)
-                    } else if (item.isConfirmed && !item.isDone){
-                        itemView.orderStatus.setText(R.string.status_order_2)
+                    } else if (item.isConfirmed && item.isPayed && !item.isDone){
+                        itemView.orderStatus.setText(R.string.status_order_4)
                         itemView.orderStatus.setTextColor(Color.parseColor("#2BD6A9"))
-                    } else if (!item.isConfirmed && !item.isDone){
+                    } else if (item.isConfirmed && !item.isPayed && !item.isDone){
+                        itemView.orderStatus.setText(R.string.status_order_2)
+                        itemView.orderStatus.setTextColor(Color.DKGRAY)
+                    } else if (!item.isConfirmed && !item.isPayed && !item.isDone){
                         itemView.orderStatus.setText(R.string.status_order_1)
                         itemView.orderStatus.setTextColor(Color.DKGRAY)
                     }

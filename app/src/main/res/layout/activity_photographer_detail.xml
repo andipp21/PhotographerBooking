@@ -66,6 +66,16 @@
                         app:drawableStartCompat="@drawable/ic_location"
                         app:drawableTint="@color/colorWhite" />
 
+                    <TextView
+                        android:id="@+id/jumlahOrder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
