@@ -40,6 +40,16 @@ class ClientHomeViewModel : ViewModel() {
         }
     }
 
+    fun fetchPhotographerByCity(city: String): List<User>{
+        if (city == "" || city == "Show All"){
+            return responseLivePhotographer.value!!
+        } else {
+            return responseLivePhotographer.value?.filter {
+                it.city.equals(city)
+            } ?: listOf()
+        }
+    }
+
     fun getPhotographerPortofolio(idPhotographer: String){
         clientHome.fetchPotofolioByPhotographerID(idPhotographer){
             _responseListPortofolio.postValue(it)
@@ -50,5 +60,9 @@ class ClientHomeViewModel : ViewModel() {
         clientHome.fetchPackageByPhotographerID(idPhotographer){
             _responseListPackage.postValue(it)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

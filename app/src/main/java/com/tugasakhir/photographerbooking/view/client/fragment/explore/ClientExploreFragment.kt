@@ -79,6 +79,10 @@ class ClientExploreFragment : Fragment() {
         })
 
         rvExploreClient.adapter = adapter
+
+        filterButton.setOnClickListener {
+            FilterPhotographerFragment(viewModel!!,adapter).show(childFragmentManager, "Filter")
+        }
     }
 
     override fun onStart() {

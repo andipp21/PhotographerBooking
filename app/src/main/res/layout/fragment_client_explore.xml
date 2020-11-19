@@ -8,8 +8,11 @@
     android:padding="@dimen/margin_content"
     tools:context=".view.client.fragment.explore.ClientExploreFragment">
 
-    <SearchView
-        android:id="@+id/search_bar"
+    <Button
+        android:background="@drawable/button_enabled"
+        android:text="@string/filter"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/filterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="@dimen/margin_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/filterButton"
         app:spanCount="2"
         tools:listitem="@layout/item_client_explore" />
 

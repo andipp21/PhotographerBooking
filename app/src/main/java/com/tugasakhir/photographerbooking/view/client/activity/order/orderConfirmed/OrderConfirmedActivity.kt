@@ -1,6 +1,7 @@
 package com.tugasakhir.photographerbooking.view.client.activity.order.orderConfirmed
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -23,7 +24,7 @@ class OrderConfirmedActivity : AppCompatActivity() {
     lateinit var binding: ActivityOrderConfirmedBinding
     lateinit var order: Order
     lateinit var photographer: User
-    lateinit var totalAmount: String
+    private lateinit var totalAmount: String
 
     var viewModel: OrderViewModel? = null
 
@@ -127,6 +128,25 @@ class OrderConfirmedActivity : AppCompatActivity() {
             observeViewModel(viewModel!!, this)
         }
 
+
+        binding.tvEmail.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse("mailto: ${photographer.email}")
+
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
+
+        binding.tvPhone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel: ${photographer.phoneNumber}")
+            }
+
+            if(intent.resolveActivity(packageManager) != null){
+                startActivity(intent)
+            }
+        }
     }
 
     private fun bulanString(bulan: Int): String {

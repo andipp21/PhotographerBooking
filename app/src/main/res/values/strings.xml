@@ -119,4 +119,6 @@
     <string name="payment_image">Payment Image</string>
     <string name="order_image">Order Image</string>
     <string name="set_schedule">Set Schedule</string>
+    <string name="filter">Filter</string>
+    <string name="select_city">Select City</string>
 </resources>

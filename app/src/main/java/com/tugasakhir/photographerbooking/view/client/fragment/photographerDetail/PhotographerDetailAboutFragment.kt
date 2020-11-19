@@ -1,10 +1,12 @@
 package com.tugasakhir.photographerbooking.view.client.fragment.photographerDetail
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.User
 import kotlinx.android.synthetic.main.fragment_photographer_detail_about.*
@@ -40,12 +42,25 @@ class PhotographerDetailAboutFragment(val user: User) : Fragment() {
 
         aboutPhotographer.text = user.about
 
-        tvEmail.setOnClickListener {
+        val pm = context!!.packageManager
 
+        tvEmail.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse("mailto: ${user.email}")
+
+            if (intent.resolveActivity(pm) != null) {
+                startActivity(intent)
+            }
         }
 
         ivPhone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel: ${user.phoneNumber}")
+            }
 
+            if(intent.resolveActivity(pm) != null){
+                startActivity(intent)
+            }
         }
     }
 

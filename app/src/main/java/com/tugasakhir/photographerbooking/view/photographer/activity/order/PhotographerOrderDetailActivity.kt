@@ -1,6 +1,7 @@
 package com.tugasakhir.photographerbooking.view.photographer.activity.order
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -123,6 +124,25 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
         if (viewModel != null) {
             viewModel!!.getPackage(order.packageID)
             observeViewModel(viewModel!!, this)
+        }
+
+        binding.tvEmail.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO)
+            intent.data = Uri.parse("mailto: ${client.email}")
+
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
+
+        binding.tvPhone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel: ${client.phoneNumber}")
+            }
+
+            if(intent.resolveActivity(packageManager) != null){
+                startActivity(intent)
+            }
         }
     }
 
