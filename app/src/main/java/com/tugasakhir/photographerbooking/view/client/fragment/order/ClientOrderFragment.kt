@@ -34,7 +34,7 @@ class ClientOrderFragment : Fragment() {
 
     private var viewModelOrder: OrderViewModel? = null
 
-    lateinit var usrID:String
+    lateinit var usrID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,15 +69,13 @@ class ClientOrderFragment : Fragment() {
 
         adapter?.setOnItemClickCallback(object : ClientOrderAdapter.OnItemClickCallback {
             override fun onItemClicked(order: Order, photographer: User) {
-                if (order.isConfirmed && order.isDone){
-
-                } else if (order.isConfirmed && !order.isDone){
+                if (!order.isConfirmed && !order.isPayed && !order.isDone) {
+                    val intent = Intent(activity, OrderProcessingActivity::class.java)
+                    startActivity(intent)
+                } else {
                     val intent = Intent(activity, OrderConfirmedActivity::class.java)
                     intent.putExtra("order", order)
                     intent.putExtra("photographer", photographer)
-                    startActivity(intent)
-                } else if (!order.isConfirmed && !order.isDone){
-                    val intent = Intent(activity, OrderProcessingActivity::class.java)
                     startActivity(intent)
                 }
             }

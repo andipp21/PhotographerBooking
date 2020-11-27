@@ -121,4 +121,8 @@
     <string name="set_schedule">Set Schedule</string>
     <string name="filter">Filter</string>
     <string name="select_city">Select City</string>
+    <string name="photoshoot_review">Photoshoot Review</string>
+    <string name="score">Score</string>
+    <string name="add_score_1_10">Add score 1-10</string>
+    <string name="your_review">Your Review</string>
 </resources>

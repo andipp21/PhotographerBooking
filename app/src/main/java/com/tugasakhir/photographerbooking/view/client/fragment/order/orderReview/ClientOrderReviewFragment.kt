@@ -117,7 +117,8 @@ class ClientOrderReviewFragment(
                             isConfirmed = false,
                             isDone = false,
                             isPayed = false,
-                            payImage = ""
+                            payImage = "",
+                            isReviewed = false
                         )
                     }
                 }

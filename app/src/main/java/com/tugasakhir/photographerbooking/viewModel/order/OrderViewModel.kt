@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.Review
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.model.services.order.OrderServices
 import toothpick.Toothpick
@@ -28,6 +29,9 @@ class OrderViewModel: ViewModel() {
 
     private val _responseAmount = MutableLiveData<Int>()
     val responseAmount = _responseAmount
+
+    private val _responseReview = MutableLiveData<Review>()
+    val responseReview = _responseReview
 
     init {
         val scope = Toothpick.openScope(this)
@@ -91,6 +95,18 @@ class OrderViewModel: ViewModel() {
     fun getOrderAmount(idPhotographer: String){
         orderServices.getPhotographerOrderAmount(idPhotographer){
             _responseAmount.postValue(it)
+        }
+    }
+
+    fun createReview(idOrder: String, review: Review){
+        orderServices.createReview(idOrder,review){
+            _responseLiveData.postValue(it)
+        }
+    }
+
+    fun getReview(idOrder: String){
+        orderServices.getReview(idOrder){
+            _responseReview.postValue(it)
         }
     }
 

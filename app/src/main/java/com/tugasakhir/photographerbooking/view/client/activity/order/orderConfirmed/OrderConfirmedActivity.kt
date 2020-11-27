@@ -14,6 +14,7 @@ import com.tugasakhir.photographerbooking.databinding.ActivityOrderConfirmedBind
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.activity.order.payOrder.PayOrderActivity
+import com.tugasakhir.photographerbooking.view.client.fragment.review.ReviewFormFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.subFragment.ShowOrderPaymentFragment
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import java.text.DecimalFormat
@@ -86,7 +87,15 @@ class OrderConfirmedActivity : AppCompatActivity() {
             binding.orderStatus.setText(R.string.status_order_3)
             binding.orderStatus.setBackgroundResource(R.drawable.button_enabled)
             binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
-            binding.paymentBTN.visibility = View.GONE
+            if (order.isReviewed) {
+                binding.paymentBTN.visibility = View.GONE
+            } else {
+                binding.paymentBTN.text = "Review Photoshoot"
+                binding.paymentBTN.setOnClickListener {
+                    ReviewFormFragment().show(supportFragmentManager, "Photoshoot Review")
+                }
+            }
+
         } else if (order.isConfirmed && order.isPayed && !order.isDone) {
             binding.orderStatus.setText(R.string.status_order_4)
             binding.orderStatus.setTextColor(getColor(R.color.colorPrimary))
@@ -143,7 +152,7 @@ class OrderConfirmedActivity : AppCompatActivity() {
                 data = Uri.parse("tel: ${photographer.phoneNumber}")
             }
 
-            if(intent.resolveActivity(packageManager) != null){
+            if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }
         }

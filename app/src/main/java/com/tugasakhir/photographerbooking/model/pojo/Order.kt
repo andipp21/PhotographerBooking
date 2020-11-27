@@ -15,5 +15,6 @@ data class Order(
     var isConfirmed: Boolean,
     var isDone: Boolean,
     var isPayed: Boolean,
-    var payImage: String
+    var payImage: String,
+    var isReviewed: Boolean,
 ): Parcelable

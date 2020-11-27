@@ -1,4 +1,3 @@
-
 package com.tugasakhir.photographerbooking.model.services.order
 
 import android.net.Uri
@@ -8,6 +7,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.Review
 import com.tugasakhir.photographerbooking.model.pojo.User
 import javax.inject.Inject
 
@@ -29,6 +29,7 @@ class OrderServices @Inject constructor() {
         data["is_done"] = order.isDone
         data["is_payed"] = order.isPayed
         data["pay_image"] = order.payImage
+        data["is_reviewed"] = order.isReviewed
 
         orderCollection.document()
             .set(data)
@@ -95,7 +96,8 @@ class OrderServices @Inject constructor() {
                                 isConfirmed = doc.data.getValue("is_confirmed") as Boolean,
                                 isDone = doc.data.getValue("is_done") as Boolean,
                                 isPayed = doc.data.getValue("is_payed") as Boolean,
-                                payImage = doc.data.getValue("pay_image").toString()
+                                payImage = doc.data.getValue("pay_image").toString(),
+                                isReviewed = doc.data.getValue("is_reviewed") as Boolean,
                             )
                         )
                     }
@@ -124,7 +126,8 @@ class OrderServices @Inject constructor() {
                                 isConfirmed = doc.data.getValue("is_confirmed") as Boolean,
                                 isDone = doc.data.getValue("is_done") as Boolean,
                                 payImage = doc.data.getValue("pay_image").toString(),
-                                isPayed = doc.data.getValue("is_payed") as Boolean
+                                isPayed = doc.data.getValue("is_payed") as Boolean,
+                                isReviewed = doc.data.getValue("is_reviewed") as Boolean,
                             )
                         )
                     }
@@ -135,7 +138,7 @@ class OrderServices @Inject constructor() {
             }
     }
 
-    fun getPhotographerOrderAmount(photographerID: String, response: (Int) -> Unit){
+    fun getPhotographerOrderAmount(photographerID: String, response: (Int) -> Unit) {
         orderCollection.whereEqualTo("photographer_id", photographerID)
             .addSnapshotListener { value, _ ->
                 val jumlah = value?.documents?.size
@@ -248,5 +251,36 @@ class OrderServices @Inject constructor() {
                 Log.e("Order Confirmation", error.localizedMessage!!)
                 response.invoke("Error Order Confirmation: ${error.localizedMessage}")
             }
+    }
+
+    fun createReview(orderID: String,review: Review, response: (String) -> Unit) {
+        val dt = HashMap<String, Any>()
+
+        dt["review_text"] = review.review
+        dt["review_score"] = review.score
+
+        val data = HashMap<String, Any>()
+
+        data["review"] = dt
+        data["is_reviewed"] = true
+
+        orderCollection.document(orderID)
+            .set(data, SetOptions.merge())
+            .addOnSuccessListener {
+                Log.d("Make Review", "Successfully Make Review")
+                response.invoke("Successfully Make Review")
+            }
+            .addOnFailureListener { error ->
+                Log.e("Make Review", error.localizedMessage!!)
+                response.invoke("Error Make Review: ${error.localizedMessage}")
+            }
+    }
+
+    fun getReview(idOrder: String,response: (Review) -> Unit){
+        orderCollection.document(idOrder).get().addOnSuccessListener {
+            val data = it.get("review") as Review
+
+            response.invoke(data)
+        }
     }
 }
