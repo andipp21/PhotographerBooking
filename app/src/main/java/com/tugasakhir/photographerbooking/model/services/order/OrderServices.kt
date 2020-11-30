@@ -5,11 +5,9 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.tugasakhir.photographerbooking.model.pojo.Order
-import com.tugasakhir.photographerbooking.model.pojo.Package
-import com.tugasakhir.photographerbooking.model.pojo.Review
-import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.model.pojo.*
 import javax.inject.Inject
+
 
 class OrderServices @Inject constructor() {
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
@@ -127,7 +125,7 @@ class OrderServices @Inject constructor() {
                                 isDone = doc.data.getValue("is_done") as Boolean,
                                 payImage = doc.data.getValue("pay_image").toString(),
                                 isPayed = doc.data.getValue("is_payed") as Boolean,
-                                isReviewed = doc.data.getValue("is_reviewed") as Boolean,
+                                isReviewed = doc.data.getValue("is_reviewed") as Boolean
                             )
                         )
                     }
@@ -253,7 +251,7 @@ class OrderServices @Inject constructor() {
             }
     }
 
-    fun createReview(orderID: String,review: Review, response: (String) -> Unit) {
+    fun createReview(orderID: String, review: Review, response: (String) -> Unit) {
         val dt = HashMap<String, Any>()
 
         dt["review_text"] = review.review
@@ -276,11 +274,42 @@ class OrderServices @Inject constructor() {
             }
     }
 
-    fun getReview(idOrder: String,response: (Review) -> Unit){
-        orderCollection.document(idOrder).get().addOnSuccessListener {
-            val data = it.get("review") as Review
+    fun getReview(idOrder: String, response: (Review) -> Unit) {
+        orderCollection.document(idOrder).get()
+            .addOnSuccessListener {
 
-            response.invoke(data)
-        }
+                val hashmap = it["review"] as Map<*, *>
+
+                val data = Review(
+                    review = hashmap["review_text"].toString(),
+                    score = hashmap["review_score"].toString().toInt()
+                )
+
+                response.invoke(data)
+            }
+    }
+
+    fun getAllPhotographerReview(idPhotographer: String, response: (List<Review>) -> Unit) {
+        orderCollection.whereEqualTo("is_reviewed", true).whereEqualTo("photographer_id", idPhotographer)
+            .addSnapshotListener { value, _ ->
+                if (value != null) {
+                    val listData: MutableList<Review> = mutableListOf()
+
+                    for (doc in value) {
+                        val hashmap = doc.data["review"] as Map<*, *>
+
+                        val data = Review(
+                            review = hashmap["review_text"].toString(),
+                            score = hashmap["review_score"].toString().toInt()
+                        )
+
+                        Log.d("data review", data.toString())
+
+                        listData.add(data)
+                    }
+
+                    response.invoke(listData)
+                }
+            }
     }
 }

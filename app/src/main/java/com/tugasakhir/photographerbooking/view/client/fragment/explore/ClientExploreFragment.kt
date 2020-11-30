@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.User
@@ -93,7 +94,7 @@ class ClientExploreFragment : Fragment() {
     }
 
     private fun observeViewModel(actionDelegate: ClientHomeViewModel, lifecycleOwner: LifecycleOwner){
-        actionDelegate.responseLivePhotographer.observe(lifecycleOwner, {
+        actionDelegate.responseLivePhotographer.observe(lifecycleOwner, Observer{
             adapter.updateLists(it)
         })
     }

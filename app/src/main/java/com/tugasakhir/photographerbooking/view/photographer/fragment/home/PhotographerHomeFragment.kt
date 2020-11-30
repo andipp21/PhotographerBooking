@@ -1,4 +1,4 @@
-package com.tugasakhir.photographerbooking.view.photographer.fragment
+package com.tugasakhir.photographerbooking.view.photographer.fragment.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -47,7 +47,8 @@ class PhotographerHomeFragment : Fragment() {
          */
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PhotographerHomeFragment().apply {
+            PhotographerHomeFragment()
+                .apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

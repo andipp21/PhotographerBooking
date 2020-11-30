@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Review (
-    val score: Float,
+    val score: Int,
     val review: String,
 ): Parcelable

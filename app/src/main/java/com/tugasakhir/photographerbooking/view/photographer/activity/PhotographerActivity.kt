@@ -14,7 +14,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerBinding
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.MainActivity
-import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerHomeFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.home.PhotographerHomeFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.PhotographerOrderFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
@@ -51,7 +51,9 @@ class PhotographerActivity : AppCompatActivity() {
         //default Fragment
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.flPhotographerMain, PhotographerHomeFragment())
+            .replace(R.id.flPhotographerMain,
+                PhotographerHomeFragment()
+            )
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 

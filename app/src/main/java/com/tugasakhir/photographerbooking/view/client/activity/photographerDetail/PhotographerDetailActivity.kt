@@ -1,21 +1,17 @@
 package com.tugasakhir.photographerbooking.view.client.activity.photographerDetail
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerDetailBinding
-import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.activity.order.orderPhotographer.OrderPhotographerActivity
 import com.tugasakhir.photographerbooking.view.client.adapter.photographerDetail.PhotographerDetailTabAdapter
 import com.tugasakhir.photographerbooking.viewModel.client.ClientHomeViewModel
@@ -88,21 +84,20 @@ class PhotographerDetailActivity : AppCompatActivity() {
     }
 
     private fun getData(photographerID: String) {
+        orderViewModel?.getAllPhotographerReview(photographerID)
+        orderViewModel?.let {observeReview(it, this)}
+
         viewModel?.getPhotographerPortofolio(photographerID)
-        viewModel?.let { observePortofolio(it, this) }
         viewModel?.getPhotographerPackage(photographerID)
         viewModel?.let { observePackage(it, this) }
     }
 
-    private fun observePortofolio(
-        actionDelegate: ClientHomeViewModel,
+    private fun observeReview(
+        actionDelegate: OrderViewModel,
         lifecycleOwner: LifecycleOwner
-    ) {
-        actionDelegate.responseListPortofolio.observe(lifecycleOwner, {
-//            listPortofolio.addAll(it)
-            tabAdapter.updateListPortofolio(it)
-
-            Log.d("Portofolio Activity", it.toString())
+    ){
+        actionDelegate.responseListReview.observe(lifecycleOwner, Observer {
+            tabAdapter.updateListReview(it)
         })
     }
 
@@ -110,7 +105,11 @@ class PhotographerDetailActivity : AppCompatActivity() {
         actionDelegate: ClientHomeViewModel,
         lifecycleOwner: LifecycleOwner
     ) {
-        actionDelegate.responseListPackage.observe(lifecycleOwner, {
+        actionDelegate.responseListPortofolio.observe(lifecycleOwner, Observer{
+            tabAdapter.updateListPortofolio(it)
+        })
+
+        actionDelegate.responseListPackage.observe(lifecycleOwner, Observer{
             listPackage.clear()
             listPackage.addAll(it)
             tabAdapter.updateListPackage(it)
@@ -122,7 +121,7 @@ class PhotographerDetailActivity : AppCompatActivity() {
         actionDelegate: OrderViewModel,
         lifecycleOwner: LifecycleOwner
     ){
-        actionDelegate.responseAmount.observe(lifecycleOwner, {
+        actionDelegate.responseAmount.observe(lifecycleOwner, Observer{
             Log.d("amount", it.toString())
 
             binding.jumlahOrder.text = "Order Amount : $it"

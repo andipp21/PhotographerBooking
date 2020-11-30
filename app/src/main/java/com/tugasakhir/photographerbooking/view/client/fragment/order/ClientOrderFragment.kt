@@ -69,7 +69,7 @@ class ClientOrderFragment : Fragment() {
 
         adapter?.setOnItemClickCallback(object : ClientOrderAdapter.OnItemClickCallback {
             override fun onItemClicked(order: Order, photographer: User) {
-                if (!order.isConfirmed && !order.isPayed && !order.isDone) {
+                if (!order.isConfirmed) {
                     val intent = Intent(activity, OrderProcessingActivity::class.java)
                     startActivity(intent)
                 } else {

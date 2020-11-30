@@ -56,7 +56,8 @@
             android:id="@+id/etScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/add_score_1_10"
+            android:hint="@string/add_score_1_5"
+            android:maxLength="1"
             android:inputType="number"
             android:layout_marginTop="4dp" />
 

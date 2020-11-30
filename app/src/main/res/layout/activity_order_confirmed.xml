@@ -7,21 +7,22 @@
     tools:context=".view.client.activity.order.orderConfirmed.OrderConfirmedActivity">
 
     <include
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/appBarLayout"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginTop="16dp"
+        android:paddingVertical="4dp"
         android:id="@+id/orderStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_content"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/status_order_1"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/open_sans_semibold"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:text="@string/status_order_1"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
     <View
         android:id="@+id/lineDivider"
@@ -32,15 +33,15 @@
         app:layout_constraintTop_toBottomOf="@id/orderStatus" />
 
     <ScrollView
-        app:layout_constraintTop_toBottomOf="@id/lineDivider"
-        app:layout_constraintBottom_toTopOf="@id/paymentBTN"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/paymentBTN"
+        app:layout_constraintTop_toBottomOf="@id/lineDivider">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/setSchedule"
@@ -56,14 +57,14 @@
                 android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/layoutCart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_content"
                 android:background="@drawable/bg_border"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="8dp"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/cart"
@@ -186,13 +187,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                app:layout_constraintTop_toBottomOf="@id/layoutCart"
-                android:layout_marginTop="16dp"
                 android:id="@+id/layoutFee"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/margin_content">
+                android:paddingHorizontal="@dimen/margin_content"
+                app:layout_constraintTop_toBottomOf="@id/layoutCart">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -216,12 +216,12 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                app:layout_constraintTop_toBottomOf="@id/layoutFee"
                 android:id="@+id/layoutContant"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="@dimen/margin_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/layoutFee">
 
                 <TextView
                     android:id="@+id/contactphotographer"
@@ -254,20 +254,75 @@
                     app:layout_constraintTop_toBottomOf="@id/contactphotographer" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/layoutReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="@string/your_review"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/score_" />
+
+                    <TextView
+                        android:id="@+id/reviewScore"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/review" />
+
+                    <TextView
+                        android:id="@+id/reviewText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
 
     <Button
         android:id="@+id/paymentBTN"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_content"
         android:background="@drawable/button_enabled"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="@string/make_payment"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        android:fontFamily="@font/open_sans_semibold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

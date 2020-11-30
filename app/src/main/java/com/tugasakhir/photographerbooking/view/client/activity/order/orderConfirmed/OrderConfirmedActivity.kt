@@ -89,10 +89,15 @@ class OrderConfirmedActivity : AppCompatActivity() {
             binding.orderStatus.setTextColor(getColor(R.color.colorWhite))
             if (order.isReviewed) {
                 binding.paymentBTN.visibility = View.GONE
+                binding.layoutReview.visibility = View.VISIBLE
+
+                order.uid?.let { viewModel!!.getReview(it) }
+                observerReview(viewModel!!, this)
+
             } else {
                 binding.paymentBTN.text = "Review Photoshoot"
                 binding.paymentBTN.setOnClickListener {
-                    ReviewFormFragment().show(supportFragmentManager, "Photoshoot Review")
+                    order.uid?.let { it1 -> ReviewFormFragment(viewModel!!, it1).show(supportFragmentManager, "Photoshoot Review") }
                 }
             }
 
@@ -188,7 +193,7 @@ class OrderConfirmedActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel(actionDelegate: OrderViewModel, lifecycleOwner: LifecycleOwner) {
-        actionDelegate.responsePackage.observe(lifecycleOwner, {
+        actionDelegate.responsePackage.observe(lifecycleOwner, androidx.lifecycle.Observer{
             binding.typeContent.text = it.type
             binding.packageContent.text = it.title
             totalAmount = convertMoney(it.price)
@@ -200,6 +205,13 @@ class OrderConfirmedActivity : AppCompatActivity() {
 //                finish()
 //            }
 //        })
+    }
+
+    private fun observerReview(actionDelegate: OrderViewModel, lifecycleOwner: LifecycleOwner){
+        actionDelegate.responseReview.observe(lifecycleOwner, androidx.lifecycle.Observer{
+            binding.reviewScore.text = "${it.score}/5"
+            binding.reviewText.text = it.review
+        })
     }
 
     private fun convertMoney(input: Long): String {

@@ -9,17 +9,17 @@
 
     <TextView
         android:id="@+id/about"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/about_photographer"
         android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_marginTop="4dp"
         android:id="@+id/aboutPhotographer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/about" />
 
     <View
@@ -35,8 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@color/black"
         android:text="@string/you_can_contact_photographer_on"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/lineDivider" />
 
     <TextView
@@ -67,6 +67,24 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/line_divider_dua"
         app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+
+    <TextView
+        android:id="@+id/photographerReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/client_review"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/lineDivider2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/photographerReview"
+        tools:listitem="@layout/item_review" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
