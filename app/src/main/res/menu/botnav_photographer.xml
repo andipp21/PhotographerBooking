@@ -11,9 +11,9 @@
         android:title="@string/order" />
 
     <item
-        android:id="@+id/photographerInbox"
+        android:id="@+id/photographerReview"
         android:icon="@drawable/ic_inbox"
-        android:title="@string/inbox"
+        android:title="@string/review_"
         />
 
     <item

@@ -33,6 +33,9 @@ class OrderViewModel: ViewModel() {
     private val _responseListReview = MutableLiveData<List<Review>>()
     val responseListReview = _responseListReview
 
+    private val _responseOrderAmount = MutableLiveData<OrderAmount>()
+    val responseOrderAmount = _responseOrderAmount
+
     init {
         val scope = Toothpick.openScope(this)
         Toothpick.inject(this, scope)
@@ -113,6 +116,12 @@ class OrderViewModel: ViewModel() {
     fun getAllPhotographerReview(idPhotographer: String){
         orderServices.getAllPhotographerReview(idPhotographer){
             _responseListReview.postValue(it)
+        }
+    }
+
+    fun getAllAmount(idPhotographer: String){
+        orderServices.getPhotographerOrderAmountExt(idPhotographer){
+            _responseOrderAmount.postValue(it)
         }
     }
 }

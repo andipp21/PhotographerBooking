@@ -127,6 +127,7 @@
     <string name="your_review">Your Review</string>
     <string name="score_">Score :</string>
     <string name="review">Review :</string>
+    <string name="review_">Review</string>
     <string name="photographer_review">Photographer Review</string>
     <string name="client_review">Client Review</string>
 </resources>

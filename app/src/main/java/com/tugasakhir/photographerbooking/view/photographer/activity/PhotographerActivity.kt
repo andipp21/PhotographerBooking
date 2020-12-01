@@ -1,13 +1,14 @@
 package com.tugasakhir.photographerbooking.view.photographer.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
@@ -15,9 +16,9 @@ import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerBindin
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.MainActivity
 import com.tugasakhir.photographerbooking.view.photographer.fragment.home.PhotographerHomeFragment
-import com.tugasakhir.photographerbooking.view.photographer.fragment.PhotographerInboxFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.PhotographerOrderFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
+import com.tugasakhir.photographerbooking.view.photographer.fragment.review.PhotographerReviewFragment
 import com.tugasakhir.photographerbooking.viewModel.auth.login.LoginViewModel
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
@@ -52,7 +53,7 @@ class PhotographerActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.flPhotographerMain,
-                PhotographerHomeFragment()
+                PhotographerHomeFragment(viewModelOrder!!)
             )
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
@@ -60,11 +61,11 @@ class PhotographerActivity : AppCompatActivity() {
         binding.botNavPhotographer.setOnNavigationItemSelectedListener {
             return@setOnNavigationItemSelectedListener when (it.itemId) {
                 R.id.photographerHome -> {
-                    goFragment(PhotographerHomeFragment())
+                    goFragment(PhotographerHomeFragment(viewModelOrder!!))
                     true
                 }
-                R.id.photographerInbox -> {
-                    goFragment(PhotographerInboxFragment())
+                R.id.photographerReview-> {
+                    goFragment(PhotographerReviewFragment(viewModelOrder!!))
                     true
                 }
                 R.id.photographerOrder -> {
@@ -87,8 +88,8 @@ class PhotographerActivity : AppCompatActivity() {
         viewModelAuth?.let { observeUser(it) }
     }
 
-    fun observeUser(viewModel: LoginViewModel) {
-        viewModel.responseLiveUser.observe(this, {
+    private fun observeUser(viewModel: LoginViewModel) {
+        viewModel.responseLiveUser.observe(this, Observer{
             user = it
         })
     }

@@ -6,7 +6,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.tugasakhir.photographerbooking.model.pojo.*
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashMap
 
 
 class OrderServices @Inject constructor() {
@@ -144,6 +146,104 @@ class OrderServices @Inject constructor() {
                 if (jumlah != null) {
                     response.invoke(jumlah)
                 }
+            }
+    }
+
+    fun getPhotographerOrderAmountExt(photographerID: String, response: (OrderAmount) -> Unit) {
+        orderCollection.whereEqualTo("photographer_id", photographerID)
+            .addSnapshotListener { value, _ ->
+                val total = value?.documents?.size!!
+
+                var orderYear = 0
+                var orderMonth = 0
+                var orderDay = 0
+                var waitConfirmation = 0
+                var confirmed = 0
+                var payed = 0
+                var done = 0
+                var reviewed = 0
+
+                var photoshootYear = 0
+                var photoshootMonth = 0
+                var photoshootDay = 0
+
+                val calOrder = Calendar.getInstance()
+                val calPhotoshoot = Calendar.getInstance()
+
+                val cal = Calendar.getInstance()
+                val year: Int = cal.get(Calendar.YEAR)
+                val month: Int = cal.get(Calendar.MONTH)
+                val day: Int = cal.get(Calendar.DAY_OF_MONTH)
+
+                for (doc in value) {
+                    calOrder.time = doc.getTimestamp("order_time")?.toDate()!!
+                    val yearOrder = calOrder.get(Calendar.YEAR)
+                    val monthOrder = calOrder.get(Calendar.MONTH)
+                    val dayOrder = calOrder.get(Calendar.DAY_OF_MONTH)
+
+                    calPhotoshoot.time = doc.getTimestamp("photoshoot_time")?.toDate()!!
+                    val yearPhotoshoot = calPhotoshoot.get(Calendar.YEAR)
+                    val monthPhotoshoot = calPhotoshoot.get(Calendar.MONTH)
+                    val dayPhotoshoot = calPhotoshoot.get(Calendar.DAY_OF_MONTH)
+
+                    val isConfirmed = doc.data.getValue("is_confirmed") as Boolean
+                    val isDone = doc.data.getValue("is_done") as Boolean
+                    val isPayed = doc.data.getValue("is_payed") as Boolean
+                    val isReviewed = doc.data.getValue("is_reviewed") as Boolean
+
+
+                    if (yearOrder == year) {
+                        orderYear++
+                    }
+                    if (monthOrder == month) {
+                        orderMonth++
+                    }
+                    if (dayOrder == day) {
+                        orderDay++
+                    }
+
+                    if (isConfirmed && isPayed && isDone) {
+                        done++
+                    } else if (isConfirmed && isPayed && !isDone) {
+                        payed++
+
+                        if (yearPhotoshoot == year) {
+                            photoshootYear++
+                        }
+                        if (monthPhotoshoot == month) {
+                            photoshootMonth++
+                        }
+                        if (dayPhotoshoot == day) {
+                            photoshootDay++
+                        }
+                    } else if (isConfirmed && !isPayed && !isDone) {
+                        confirmed++
+                    } else if (!isConfirmed && !isPayed && !isDone) {
+                        waitConfirmation++
+                    }
+
+                    if (isReviewed) {
+                        reviewed++
+                    }
+
+                }
+
+                val data = OrderAmount(
+                    totalOrder = total,
+                    orderThisYear = orderYear,
+                    orderThisMonth = orderMonth,
+                    orderThisDay = orderDay,
+                    orderWaitConfirmation = waitConfirmation,
+                    orderConfirmed = confirmed,
+                    orderPayed = payed,
+                    orderDone = done,
+                    orderReviewed = reviewed,
+                    photoshootThisYear = photoshootYear,
+                    photoshootThisMonth = photoshootMonth,
+                    photoshootThisDay = photoshootDay
+                )
+
+                response.invoke(data)
             }
     }
 
@@ -290,7 +390,8 @@ class OrderServices @Inject constructor() {
     }
 
     fun getAllPhotographerReview(idPhotographer: String, response: (List<Review>) -> Unit) {
-        orderCollection.whereEqualTo("is_reviewed", true).whereEqualTo("photographer_id", idPhotographer)
+        orderCollection.whereEqualTo("is_reviewed", true)
+            .whereEqualTo("photographer_id", idPhotographer)
             .addSnapshotListener { value, _ ->
                 if (value != null) {
                     val listData: MutableList<Review> = mutableListOf()

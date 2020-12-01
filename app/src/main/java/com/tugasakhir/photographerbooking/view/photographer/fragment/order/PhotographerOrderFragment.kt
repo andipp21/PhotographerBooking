@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.Order
@@ -86,11 +87,11 @@ class PhotographerOrderFragment(val viewModel: OrderViewModel) : Fragment() {
         actionDelegate: OrderViewModel,
         lifecycleOwner: LifecycleOwner
     ) {
-        actionDelegate.responseListOrder.observe(lifecycleOwner, {
+        actionDelegate.responseListOrder.observe(lifecycleOwner, Observer{
             adapter?.updateListsOrder(it)
         })
 
-        actionDelegate.responseListUser.observe(lifecycleOwner, {
+        actionDelegate.responseListUser.observe(lifecycleOwner, Observer{
             adapter?.updateListUser(it)
         })
     }
