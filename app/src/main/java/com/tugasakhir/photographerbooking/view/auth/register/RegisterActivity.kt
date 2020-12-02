@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.tugasakhir.photographerbooking.R
@@ -79,7 +80,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun observerViewModel(viewModel: RegisterViewModel){
-        viewModel.responseLiveData.observe(this, {
+        viewModel.responseLiveData.observe(this, Observer{
             binding.progressSignup.visibility = View.GONE
 
             Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG)

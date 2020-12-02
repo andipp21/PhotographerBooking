@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityMainBinding
 import com.tugasakhir.photographerbooking.model.pojo.User
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (AuthHelper.checkAuth()) {
-            val currentUser: FirebaseUser? = FirebaseAuth.getInstance().getCurrentUser()
+            val currentUser = FirebaseAuth.getInstance().currentUser
             Log.d("Current User",currentUser.toString())
 
             viewModel.getUser()
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observerUser(viewModel: LoginViewModel){
-        viewModel.responseLiveUser.observe(this, {
+        viewModel.responseLiveUser.observe(this, Observer{
             //binding.progressSignup.visibility = View.GONE
 
             Snackbar.make(binding.root, "Got it", Snackbar.LENGTH_LONG)
