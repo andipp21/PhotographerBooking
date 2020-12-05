@@ -1,16 +1,18 @@
 package com.tugasakhir.photographerbooking.view.client.activity
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityClientBinding
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.fragment.ClientInboxFragment
+import com.tugasakhir.photographerbooking.view.client.fragment.profile.ClientProfileFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.explore.ClientExploreFragment
 import com.tugasakhir.photographerbooking.view.client.fragment.order.ClientOrderFragment
-import com.tugasakhir.photographerbooking.view.client.fragment.profile.ClientProfileFragment
+import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 
 class ClientActivity : AppCompatActivity() {
     lateinit var binding: ActivityClientBinding
