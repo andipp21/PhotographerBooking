@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class ClientHome @Inject constructor() {
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
-    private val portofolioCollection = FirebaseFirestore.getInstance().collection("portofolio")
-    private val packageCollection = FirebaseFirestore.getInstance().collection("pakcage")
+    private val portofolioCollection = FirebaseFirestore.getInstance().collection("portfolio")
+    private val packageCollection = FirebaseFirestore.getInstance().collection("package")
 
     fun fetchPhotographer(response: (List<User>) -> Unit) {
         userCollection.whereEqualTo("role", "photographer")
@@ -73,7 +73,6 @@ class ClientHome @Inject constructor() {
                                 doc.id,
                                 doc.data.getValue("title").toString(),
                                 doc.data.getValue("type").toString(),
-                                doc.data.getValue("time").toString(),
                                 doc.data.getValue("price").toString().toLong(),
                                 doc.data.getValue("benefit") as List<String>,
                                 doc.data.getValue("user_id").toString()

@@ -9,7 +9,6 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.Package
 import kotlinx.android.synthetic.main.item_package_photographer.view.tvPhotoshootRate
 import kotlinx.android.synthetic.main.item_package_photographer.view.tvPhotoshootType
-import kotlinx.android.synthetic.main.item_package_photographer.view.tvTimerType
 import kotlinx.android.synthetic.main.item_package_photographer.view.tvTitlePackage
 import kotlinx.android.synthetic.main.item_package_photographer_detail.view.*
 import java.text.DecimalFormat
@@ -26,7 +25,6 @@ class PhotographerDetailPackageAdapter(private val listPackage: MutableList<Pack
 
             itemView.tvTitlePackage.text = item.title
             itemView.tvPhotoshootType.text = item.type
-            itemView.tvTimerType.text = item.time
             itemView.tvPhotoshootRate.text = convertMoney(item.price)
 
             itemView.btnShowDetail.setOnClickListener {

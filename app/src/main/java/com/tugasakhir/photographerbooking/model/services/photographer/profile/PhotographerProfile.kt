@@ -17,8 +17,8 @@ class PhotographerProfile @Inject constructor() {
     private val auth = FirebaseAuth.getInstance()
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
     private val storageRef = FirebaseStorage.getInstance().reference
-    private val portofolioCollection = FirebaseFirestore.getInstance().collection("portofolio")
-    private val packageCollection = FirebaseFirestore.getInstance().collection("pakcage")
+    private val portofolioCollection = FirebaseFirestore.getInstance().collection("portfolio")
+    private val packageCollection = FirebaseFirestore.getInstance().collection("package")
 
     fun updateUserData(user: User, response: (String) -> Unit) {
 
@@ -193,7 +193,6 @@ class PhotographerProfile @Inject constructor() {
         val dt = HashMap<String, Any>()
         dt["title"] = data.title
         dt["type"] = data.type
-        dt["time"] = data.time
         dt["price"] = data.price
         dt["benefit"] = data.benefit
         dt["user_id"] = data.userID
@@ -221,7 +220,6 @@ class PhotographerProfile @Inject constructor() {
                                     doc.id,
                                     doc["title"].toString(),
                                     doc["type"].toString(),
-                                    doc["time"].toString(),
                                     doc["price"] as Long,
                                     doc["benefit"] as List<String>,
                                     doc["userID"].toString()
@@ -238,7 +236,6 @@ class PhotographerProfile @Inject constructor() {
         val dt = HashMap<String, Any>()
         dt["title"] = data.title
         dt["type"] = data.type
-        dt["time"] = data.time
         dt["price"] = data.price
         dt["benefit"] = data.benefit
         dt["user_id"] = data.userID

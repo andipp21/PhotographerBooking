@@ -62,40 +62,40 @@
                 android:layout_marginHorizontal="@dimen/margin_content"
                 android:layout_marginTop="8dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_content"
-                android:paddingHorizontal="@dimen/margin_content"
-                android:text="@string/select_photoshoot_time"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/margin_content"-->
+<!--                android:paddingHorizontal="@dimen/margin_content"-->
+<!--                android:text="@string/select_photoshoot_time"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold" />-->
 
-            <RadioGroup
-                android:id="@+id/rb_photoshoot_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/colorWhite"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/margin_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+<!--            <RadioGroup-->
+<!--                android:id="@+id/rb_photoshoot_time"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:background="@color/colorWhite"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingHorizontal="@dimen/margin_content"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent">-->
 
-                <RadioButton
-                    android:id="@+id/rb_daily"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/daily" />
+<!--                <RadioButton-->
+<!--                    android:id="@+id/rb_daily"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/daily" />-->
 
-                <RadioButton
-                    android:id="@+id/rb_hourly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_content"
-                    android:text="@string/hourly" />
-            </RadioGroup>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/rb_hourly"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="@dimen/margin_content"-->
+<!--                    android:text="@string/hourly" />-->
+<!--            </RadioGroup>-->
 
             <TextView
                 android:layout_width="match_parent"

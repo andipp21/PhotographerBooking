@@ -31,8 +31,8 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
     private var statePrice: Boolean = false
     private var type: String = ""
     private var stateType: Boolean = false
-    private var time: String = ""
-    private var stateTime: Boolean = false
+//    private var time: String = ""
+//    private var stateTime: Boolean = false
     private var title: String = ""
     private var stateTitle: Boolean = false
 
@@ -142,20 +142,20 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         }
 
-        binding.rbPhotoshootTime.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rb_daily -> {
-                    time = "Daily"
-                    stateTime = true
-                    buttonState()
-                }
-                R.id.rb_hourly -> {
-                    time = "Hourly"
-                    stateTime = true
-                    buttonState()
-                }
-            }
-        }
+//        binding.rbPhotoshootTime.setOnCheckedChangeListener { _, checkedId ->
+//            when (checkedId) {
+//                R.id.rb_daily -> {
+//                    time = "Daily"
+//                    stateTime = true
+//                    buttonState()
+//                }
+//                R.id.rb_hourly -> {
+//                    time = "Hourly"
+//                    stateTime = true
+//                    buttonState()
+//                }
+//            }
+//        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -214,9 +214,9 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
     }
 
     fun buttonState() {
-        Log.d("button", "price : $statePrice, time : $stateTime, type : $stateType")
+//        Log.d("button", "price : $statePrice, time : $stateTime, type : $stateType")
 
-        if (statePrice && stateTime && stateType && stateTitle) {
+        if (statePrice && stateType && stateTitle) {
             enableButton()
         } else {
             disableButton()
@@ -236,7 +236,6 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
                     Package(
                         title = title,
                         type = type,
-                        time = time,
                         price = price,
                         benefit = benefit,
                         userID = it1
@@ -253,7 +252,7 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel) {
-        viewModel.responseLiveData.observe(this, {
+        viewModel.responseLiveData.observe(this, androidx.lifecycle.Observer{
             Log.d("Add Package", it)
             runOnUiThread {
                 if (it == "Successfully Add Package") {

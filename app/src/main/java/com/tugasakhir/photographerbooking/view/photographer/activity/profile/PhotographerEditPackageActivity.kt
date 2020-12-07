@@ -52,7 +52,6 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
         data = intent.getParcelableExtra("packageData")!!
 
         formTitle = data.title
-        formTime = data.time
         formType = data.type
         formPrice = data.price
         formBenefit.addAll(data.benefit)
@@ -110,27 +109,27 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
             }
         }
 
-        //time
-        if (formTime == "Daily") {
-            rb_daily.isChecked = true
-            rb_hourly.isChecked = false
-        } else if (formTime == "Hourly") {
-            rb_hourly.isChecked = true
-            rb_daily.isChecked = false
-        }
-
-        binding.rbPhotoshootTime.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rb_daily -> {
-                    formTime = "Daily"
-                    enableButton()
-                }
-                R.id.rb_hourly -> {
-                    formTime = "Hourly"
-                    enableButton()
-                }
-            }
-        }
+//        //time
+//        if (formTime == "Daily") {
+//            rb_daily.isChecked = true
+//            rb_hourly.isChecked = false
+//        } else if (formTime == "Hourly") {
+//            rb_hourly.isChecked = true
+//            rb_daily.isChecked = false
+//        }
+//
+//        binding.rbPhotoshootTime.setOnCheckedChangeListener { _, checkedId ->
+//            when (checkedId) {
+//                R.id.rb_daily -> {
+//                    formTime = "Daily"
+//                    enableButton()
+//                }
+//                R.id.rb_hourly -> {
+//                    formTime = "Hourly"
+//                    enableButton()
+//                }
+//            }
+//        }
 
         //price
         binding.photoshootPrice.setText(convertMoney(formPrice.toString()))
@@ -242,7 +241,6 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
             GlobalScope.launch {
                 data.apply {
                     title = formTitle
-                    time = formTime
                     type = formType
                     benefit = formBenefit
                     price = formPrice
@@ -256,7 +254,7 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel) {
-        viewModel.responseLiveData.observe(this, {
+        viewModel.responseLiveData.observe(this, androidx.lifecycle.Observer{
             Log.d("Update Package", it)
             runOnUiThread {
                 if (it == "Successfully Update Package") {

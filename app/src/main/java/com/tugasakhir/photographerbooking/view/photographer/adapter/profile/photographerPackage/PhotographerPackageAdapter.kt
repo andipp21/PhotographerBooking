@@ -21,7 +21,6 @@ class PhotographerPackageAdapter(val listPackage: MutableList<Package> = mutable
 
             itemView.tvTitlePackage.text = item.title
             itemView.tvPhotoshootType.text = item.type
-            itemView.tvTimerType.text = item.time
             itemView.tvPhotoshootRate.text = convertMoney(item.price)
 
             itemView.btnEditPackage.setOnClickListener {

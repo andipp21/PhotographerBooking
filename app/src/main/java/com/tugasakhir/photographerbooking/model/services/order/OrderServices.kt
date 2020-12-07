@@ -14,7 +14,7 @@ import kotlin.collections.HashMap
 class OrderServices @Inject constructor() {
     private val userCollection = FirebaseFirestore.getInstance().collection("users")
     private val orderCollection = FirebaseFirestore.getInstance().collection("orders")
-    private val packageCollection = FirebaseFirestore.getInstance().collection("pakcage")
+    private val packageCollection = FirebaseFirestore.getInstance().collection("package")
     private val storageRef = FirebaseStorage.getInstance().reference
 
     fun createOrder(order: Order, response: (String) -> Unit) {
@@ -309,13 +309,12 @@ class OrderServices @Inject constructor() {
         packageCollection.document(idPackage).get()
             .addOnSuccessListener {
                 val dt = Package(
-                    it.id,
-                    it["title"].toString(),
-                    it["type"].toString(),
-                    it["time"].toString(),
-                    it["price"] as Long,
-                    it["benefit"] as List<String>,
-                    it["userID"].toString()
+                    uid = it.id,
+                    title = it["title"].toString(),
+                    type =  it["type"].toString(),
+                    price = it["price"].toString().toLong(),
+                    benefit = it["benefit"] as List<String>,
+                    userID = it["user_id"].toString()
                 )
 
                 response.invoke(dt)

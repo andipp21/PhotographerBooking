@@ -16,7 +16,7 @@ import java.util.*
 class PhotographerDetailPackageActivity : AppCompatActivity() {
     lateinit var binding: ActivityPhotographerDetailPackageBinding
 
-    lateinit var adapterBenefit: PhotographerDetailPackageBenefitAdapter
+    private lateinit var adapterBenefit: PhotographerDetailPackageBenefitAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,6 @@ class PhotographerDetailPackageActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.photoshootType.text = data?.type
-        binding.photoshootTime.text = data?.time
         binding.photoshootPrice.text = data?.price?.let { convertMoney(it) }
 
         binding.rvPackageBenefit.adapter = adapterBenefit
@@ -55,7 +54,7 @@ class PhotographerDetailPackageActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    fun convertMoney(input: Long): String {
+    private fun convertMoney(input: Long): String {
         val formatter =
             NumberFormat.getCurrencyInstance(Locale("in", "ID")) as DecimalFormat
 
