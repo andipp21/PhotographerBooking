@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardUseCompatPadding="true"
     app:cardCornerRadius="8dp"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,34 +42,35 @@
             android:paddingHorizontal="16dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/yourClient"
+            app:layout_constraintBottom_toTopOf="@id/orderStatus"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/clientPhoto"
-            app:layout_constraintBottom_toTopOf="@id/orderStatus"/>
+            app:layout_constraintTop_toBottomOf="@id/yourClient" />
 
         <TextView
             android:id="@+id/orderStatus"
-            android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:background="@drawable/bg_border_green"
             android:layout_marginVertical="4dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/bg_border_green"
+            android:gravity="center"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
             android:text="@string/status_order_1"
             android:textColor="@color/colorWhite"
-            app:layout_constraintTop_toBottomOf="@id/yourClientName"
             app:layout_constraintBottom_toTopOf="@id/orderTime"
-            app:layout_constraintStart_toStartOf="@id/yourClientName" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/yourClientName"
+            app:layout_constraintTop_toBottomOf="@id/yourClientName" />
 
         <TextView
             android:id="@+id/orderTime"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/clientPhoto"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/clientPhoto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

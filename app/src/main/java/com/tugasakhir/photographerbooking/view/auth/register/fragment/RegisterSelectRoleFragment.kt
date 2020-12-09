@@ -43,11 +43,15 @@ class RegisterSelectRoleFragment : Fragment() {
         btnContinue.visibility = View.GONE
 
         btnClient.setOnClickListener {
+            btnClient.setBackgroundResource(R.color.transparentGrey)
+            btnPhotographer.setBackgroundResource(R.color.transparentWhite)
             btnContinue.visibility = View.VISIBLE
             (activity as RegisterActivity).role = "client"
         }
 
         btnPhotographer.setOnClickListener {
+            btnPhotographer.setBackgroundResource(R.color.transparentGrey)
+            btnClient.setBackgroundResource(R.color.transparentWhite)
             btnContinue.visibility = View.VISIBLE
             (activity as RegisterActivity).role = "photographer"
         }

@@ -50,9 +50,9 @@
         <TextView
             android:id="@+id/orderStatus"
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/bg_border_green"
             android:layout_marginVertical="4dp"
             android:paddingHorizontal="8dp"
@@ -61,6 +61,7 @@
             android:textColor="@color/colorWhite"
             app:layout_constraintTop_toBottomOf="@id/yourPhotographerName"
             app:layout_constraintBottom_toTopOf="@id/orderTime"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/yourPhotographerName" />
 
         <TextView

@@ -13,4 +13,5 @@
 
     <color name="transparentWhite">#bfffffff</color>
     <color name="transparentDarkGreen">#bf2BD6A9</color>
+    <color name="transparentGrey">#32A1A1A1</color>
 </resources>
