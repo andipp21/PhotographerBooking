@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_profil_picture.*
@@ -40,7 +41,7 @@ class PhotographerProfilPortofolioAddFragment(val viewModel: PhotographerProfile
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photographer_profil_picture, container, false)
+        return inflater.inflate(R.layout.fragment_photographer_add_portofolio, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +82,7 @@ class PhotographerProfilPortofolioAddFragment(val viewModel: PhotographerProfile
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel){
-        viewModel.responseLiveData.observe(viewLifecycleOwner, {
+        viewModel.responseLiveData.observe(viewLifecycleOwner, Observer{
             Log.d("Add Portofolio",it)
 
             if (it == "Successfully Add Portofolio"){

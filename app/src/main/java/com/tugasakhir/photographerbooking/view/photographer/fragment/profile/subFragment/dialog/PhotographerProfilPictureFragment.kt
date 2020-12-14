@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_profil_picture.*
@@ -22,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [PhotographerProfilPictureFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PhotographerProfilPictureFragment(val viewModel: PhotographerProfileViewModel) : DialogFragment() {
+class PhotographerProfilPictureFragment(val viewModel: PhotographerProfileViewModel, val profilePiture: String) : DialogFragment() {
 
     private var param1: String? = null
     private var param2: String? = null
@@ -45,6 +48,12 @@ class PhotographerProfilPictureFragment(val viewModel: PhotographerProfileViewMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Glide.with(this)
+            .load(profilePiture)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .onlyRetrieveFromCache(true)
+            .into(previewImage)
 
         buttonSaveDisable()
 
@@ -82,7 +91,7 @@ class PhotographerProfilPictureFragment(val viewModel: PhotographerProfileViewMo
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel){
-        viewModel.responseLiveData.observe(viewLifecycleOwner, {
+        viewModel.responseLiveData.observe(viewLifecycleOwner, Observer{
             Log.d("Data Update",it)
 
             if (it == "Successfully Upload Image"){

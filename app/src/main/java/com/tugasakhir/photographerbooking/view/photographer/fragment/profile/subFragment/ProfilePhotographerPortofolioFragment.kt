@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.Portofolio
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.portofolio.PhotographerPortofolioAdapter
@@ -77,7 +78,7 @@ class ProfilePhotographerPortofolioFragment(val viewModel: PhotographerProfileVi
         actionDelegate: PhotographerProfileViewModel,
         lifecycleOwner: LifecycleOwner
     ) {
-        actionDelegate.responseListPortofolio.observe(lifecycleOwner, {
+        actionDelegate.responseListPortofolio.observe(lifecycleOwner, Observer{
             activity?.runOnUiThread {
                 adapter.updateLists(it)
                 adapter.setOnItemClickCallback(object :

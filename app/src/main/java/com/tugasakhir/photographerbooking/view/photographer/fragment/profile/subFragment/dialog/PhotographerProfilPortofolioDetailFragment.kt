@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.tugasakhir.photographerbooking.R
@@ -85,7 +86,7 @@ class PhotographerProfilPortofolioDetailFragment(
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel) {
-        viewModel.responseLiveData.observe(viewLifecycleOwner, {
+        viewModel.responseLiveData.observe(viewLifecycleOwner, Observer{
             Log.d("Portofolio Update", it)
 
             if (it == "Successfully Update Portofolio" || it == "Successfully Delete Portofolio") {

@@ -63,10 +63,12 @@ class PhotographerProfileFragment(val viewModel: PhotographerProfileViewModel) :
         kotaTinggal.text = user?.city
 
         ivPhotographerPhotoProfil.setOnClickListener {
-            PhotographerProfilPictureFragment(viewModel).show(
-                childFragmentManager,
-                "Upload Profile Picture"
-            )
+            user?.profilePicture?.let { it1 ->
+                PhotographerProfilPictureFragment(viewModel, it1).show(
+                    childFragmentManager,
+                    "Upload Profile Picture"
+                )
+            }
         }
 
         viewPagerProfile.adapter = user?.let {
