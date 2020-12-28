@@ -102,6 +102,7 @@
     <string name="status_order_2">Photoshoot Confirmed, Waiting Client Payment</string>
     <string name="status_order_3">Photoshoot Completed</string>
     <string name="status_order_4">Photoshoot Already Paid</string>
+    <string name="status_order_5">Photoshoot Done and Already Reviewed</string>
     <string name="show_payment_image">Show Payment Image</string>
     <string name="client">Client</string>
     <string name="you_can_contact_client_on">You can Contact Client on :</string>

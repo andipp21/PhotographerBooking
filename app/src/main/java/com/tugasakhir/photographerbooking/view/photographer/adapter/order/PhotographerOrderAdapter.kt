@@ -36,6 +36,11 @@ class PhotographerOrderAdapter(
                         itemView.orderStatus.setText(R.string.status_order_3)
                         itemView.orderStatus.setBackgroundResource(R.drawable.button_enabled)
                         itemView.orderStatus.setTextColor(Color.WHITE)
+
+                        if (item.isReviewed) {
+                            itemView.orderStatus.setText(R.string.status_order_5)
+                        }
+
                     } else if (item.isConfirmed && item.isPayed && !item.isDone){
                         itemView.orderStatus.setText(R.string.status_order_4)
                         itemView.orderStatus.setTextColor(Color.parseColor("#2BD6A9"))

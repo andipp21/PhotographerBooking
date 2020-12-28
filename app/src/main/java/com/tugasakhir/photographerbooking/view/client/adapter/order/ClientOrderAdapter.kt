@@ -69,6 +69,10 @@ class ClientOrderAdapter(
                     holder.itemView.orderStatus.setText(R.string.status_order_3)
                     holder.itemView.orderStatus.setBackgroundResource(R.drawable.button_enabled)
                     holder.itemView.orderStatus.setTextColor(Color.WHITE)
+
+                    if(item.isReviewed){
+                        holder.itemView.orderStatus.setText(R.string.status_order_5)
+                    }
                 } else if (item.isConfirmed && item.isPayed && !item.isDone){
                     holder.itemView.orderStatus.setText(R.string.status_order_4)
                     holder.itemView.orderStatus.setTextColor(Color.parseColor("#2BD6A9"))

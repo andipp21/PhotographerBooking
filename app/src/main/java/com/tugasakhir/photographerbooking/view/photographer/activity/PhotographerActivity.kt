@@ -99,6 +99,7 @@ class PhotographerActivity : AppCompatActivity() {
 
         viewModelPhotographer = null
         viewModelOrder = null
+        viewModelAuth = null
     }
 
     private fun goFragment(fm: Fragment) {

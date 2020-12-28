@@ -91,6 +91,8 @@ class OrderConfirmedActivity : AppCompatActivity() {
                 binding.paymentBTN.visibility = View.GONE
                 binding.layoutReview.visibility = View.VISIBLE
 
+                binding.orderStatus.setText(R.string.status_order_5)
+
                 order.uid?.let { viewModel!!.getReview(it) }
                 observerReview(viewModel!!, this)
 

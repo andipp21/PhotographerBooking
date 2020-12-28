@@ -13,6 +13,7 @@ import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerOrderDetailBinding
 import com.tugasakhir.photographerbooking.model.pojo.Order
 import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.view.client.fragment.review.ReviewFormFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.subFragment.ShowOrderPaymentFragment
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import java.text.DecimalFormat
@@ -82,9 +83,18 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
 
         binding.clientName.text = client.fullname
 
+
+
         if (order.isConfirmed && order.isPayed && order.isDone) {
-            binding.orderStatus.setText(R.string.status_order_3)
             binding.confirmOrder.visibility = View.GONE
+            binding.orderStatus.setText(R.string.status_order_3)
+
+            if (order.isReviewed) {
+                binding.orderStatus.setText(R.string.status_order_5)
+                binding.layoutReview.visibility = View.VISIBLE
+                order.uid?.let { viewModel!!.getReview(it) }
+                observerReview(viewModel!!, this)
+            }
         } else if (order.isConfirmed && order.isPayed && !order.isDone) {
             binding.checkPaid.visibility = View.VISIBLE
             binding.checkPaid.setOnClickListener {
@@ -140,7 +150,7 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
                 data = Uri.parse("tel: ${client.phoneNumber}")
             }
 
-            if(intent.resolveActivity(packageManager) != null){
+            if (intent.resolveActivity(packageManager) != null) {
                 startActivity(intent)
             }
         }
@@ -186,6 +196,13 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
             if (it == "Order Confirmated" || it == "Order Done") {
                 finish()
             }
+        })
+    }
+
+    private fun observerReview(actionDelegate: OrderViewModel, lifecycleOwner: LifecycleOwner) {
+        actionDelegate.responseReview.observe(lifecycleOwner, {
+            binding.reviewScore.text = "${it.score}/5"
+            binding.reviewText.text = it.review
         })
     }
 

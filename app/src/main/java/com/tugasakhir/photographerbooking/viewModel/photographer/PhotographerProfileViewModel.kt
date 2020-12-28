@@ -15,15 +15,14 @@ class PhotographerProfileViewModel : ViewModel() {
     @Inject
     lateinit var photographerProfile: PhotographerProfile
 
-
     private val _responseLiveData = MutableLiveData<String>()
-    val responseLiveData = _responseLiveData
+    var responseLiveData = _responseLiveData
 
     private val _responseListPortofolio = MutableLiveData<List<Portofolio>>()
-    val responseListPortofolio = _responseListPortofolio
+    var responseListPortofolio = _responseListPortofolio
 
     private val _responseListPackage = MutableLiveData<List<Package>>()
-    val responseListPackage = _responseListPackage
+    var responseListPackage = _responseListPackage
 
     //
     init {
