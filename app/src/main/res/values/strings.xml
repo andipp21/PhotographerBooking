@@ -131,4 +131,5 @@
     <string name="review_">Review</string>
     <string name="photographer_review">Photographer Review</string>
     <string name="client_review">Client Review</string>
+    <string name="edit_package">Edit Package</string>
 </resources>
