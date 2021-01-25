@@ -51,7 +51,7 @@ class PhotographerOrderFragment(val viewModel: OrderViewModel) : Fragment() {
 
         usrID = FirebaseAuth.getInstance().uid.toString()
 
-        (activity as PhotographerActivity).supportActionBar?.title = "Order"
+        (activity as PhotographerActivity).supportActionBar?.title = "Daftar Pesanan"
 
         adapter = PhotographerOrderAdapter()
         view.rvOrderPhotographer.adapter = adapter

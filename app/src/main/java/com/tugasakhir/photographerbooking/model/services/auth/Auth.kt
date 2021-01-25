@@ -21,7 +21,7 @@ class Auth @Inject constructor() {
                 data["role"] = user.role
                 data["city"] = user.city
                 data["phone_number"] = user.phoneNumber
-                data["profil_picture"] = user.profilePicture
+                data["profile_picture"] = user.profilePicture
                 data["about"] = user.about
                 data["gopay_number"] = user.numberGopay
                 data["dana_number"] = user.numberDana

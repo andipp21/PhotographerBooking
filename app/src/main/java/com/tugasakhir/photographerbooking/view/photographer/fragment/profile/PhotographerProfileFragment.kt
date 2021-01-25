@@ -50,7 +50,7 @@ class PhotographerProfileFragment(val viewModel: PhotographerProfileViewModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as PhotographerActivity).supportActionBar?.title = "Profile"
+        (activity as PhotographerActivity).supportActionBar?.title = "Profil"
 
         auth = FirebaseAuth.getInstance()
 

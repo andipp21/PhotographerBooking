@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
+import com.tugasakhir.photographerbooking.view.photographer.activity.PhotographerActivity
 import com.tugasakhir.photographerbooking.viewModel.order.OrderViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_home.*
 
@@ -48,13 +49,15 @@ class PhotographerHomeFragment(val viewModel: OrderViewModel) : Fragment() {
 
         usrID = FirebaseAuth.getInstance().uid.toString()
 
+        (activity as PhotographerActivity).supportActionBar?.title = "Beranda"
+
         viewModel.getAllAmount(usrID)
         observer(viewModel, viewLifecycleOwner)
     }
 
     fun observer(actionDelegate: OrderViewModel, lifecycleOwner: LifecycleOwner){
         actionDelegate.responseOrderAmount.observe(lifecycleOwner, Observer {
-            totalOrder.text = "${it.totalOrder} Total Orders"
+            totalOrder.text = it.totalOrder.toString()
             orderThisYearAmount.text = "${it.orderThisYear}"
             orderThisMonthAmount.text = "${it.orderThisMonth}"
             orderThisDayAmount.text = "${it.orderThisDay}"

@@ -64,10 +64,6 @@ class PhotographerActivity : AppCompatActivity() {
                     goFragment(PhotographerHomeFragment(viewModelOrder!!))
                     true
                 }
-                R.id.photographerReview-> {
-                    goFragment(PhotographerReviewFragment(viewModelOrder!!))
-                    true
-                }
                 R.id.photographerOrder -> {
                     goFragment(PhotographerOrderFragment(viewModelOrder!!))
                     true
