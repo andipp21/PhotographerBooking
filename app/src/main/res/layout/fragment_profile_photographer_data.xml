@@ -1,115 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/margin_content"
+    android:layout_height="wrap_content"
     tools:context=".view.photographer.fragment.profile.subFragment.ProfilePhotographerDataFragment">
 
-    <ScrollView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnSaveAboutMe"
-        android:layout_marginBottom="@dimen/margin_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_content">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etFullnameLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="@string/fullname"
+            app:errorEnabled="true">
 
-            <TextView
-                android:text="@string/fullname"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etFullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/fullname"
-                android:hint="@string/fullname"
-                android:inputType="text" />
+                android:inputType="textPersonName" />
 
-            <TextView
-                android:layout_marginTop="16dp"
-                android:text="@string/email_address"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etEmailLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_address"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
-                android:inputType="textEmailAddress"
-                android:layout_width="match_parent"
-                android:hint="@string/email_address"
-                android:layout_height="wrap_content"
-                android:autofillHints="@string/email_address" />
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:text="@string/city"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/etCity"
-                android:hint="@string/city"
-                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/city" />
+                android:inputType="textPersonName" />
 
-            <TextView
-                android:layout_marginTop="16dp"
-                android:text="@string/phone_number"
-                android:textColor="@color/black"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/city">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/selectCity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:inputType="none" />
 
-            <EditText
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etPhoneNumberLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/phone_number"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPhoneNumber"
-                android:inputType="phone"
-                android:hint="@string/phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/phone_number" />
+                android:autofillHints=""
+                android:inputType="phone" />
 
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tell_us_about"
-                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etAboutMePhotographerLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/tell_us_about">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etAboutMePhotographer"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:hint="@string/about_me"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_border"
+                android:autofillHints=""
                 android:gravity="top"
-                android:inputType="textMultiLine"
-                android:padding="8dp"
-                android:autofillHints="@string/tell_us_about" />
+                android:inputType="textMultiLine" />
 
-        </LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </ScrollView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveAboutMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_content"
+            android:background="@drawable/button_enabled"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/btnSaveAboutMe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_content"
-        android:background="@drawable/button_disabled"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

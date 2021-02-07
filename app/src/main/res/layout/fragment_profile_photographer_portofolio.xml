@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/margin_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/margin_content"
     tools:context=".view.photographer.fragment.profile.subFragment.ProfilePhotographerPortofolioFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPortofolio"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
-        tools:listitem="@layout/item_portofolio_photographer"
-        android:layout_marginBottom="@dimen/margin_content"
-        app:layout_constraintBottom_toTopOf="@id/btnAddPortofolio"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddPortofolio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +16,19 @@
         android:background="@drawable/button_enabled"
         android:text="@string/add_portfolio"
         android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textColor="@color/colorWhite" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPortofolio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="@dimen/margin_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/btnAddPortofolio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:spanCount="3"
+        tools:listitem="@layout/item_portofolio_photographer" />
+
+
+</LinearLayout>

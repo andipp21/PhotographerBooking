@@ -4,40 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
+    android:background="@color/colorWhite"
     android:padding="@dimen/margin_content"
-    android:background="@color/colorWhite">
+    tools:context=".view.MainActivity">
 
-    <TextView
-        android:text="@string/find_or_be_a_personal_photographer"
-        app:layout_constraintTop_toTopOf="parent"
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:text="@string/find_or_be_a_personal_photographer"
+        android:textColor="@color/black"
         android:textSize="32sp"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/button_white"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textColor="@color/black"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:background="@drawable/button_white"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegister"
-        app:layout_constraintBottom_toTopOf="@id/btnLogin"
-        android:textColor="@color/colorWhite"
         android:background="@drawable/button_enabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/register"
         android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
         android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintBottom_toTopOf="@id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

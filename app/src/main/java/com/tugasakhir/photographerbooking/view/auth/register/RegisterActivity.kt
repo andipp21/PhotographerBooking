@@ -1,6 +1,7 @@
 package com.tugasakhir.photographerbooking.view.auth.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction

@@ -7,9 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.utils.FormValidationHelper
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile_photographer_data.*
 import kotlinx.coroutines.GlobalScope
@@ -23,6 +26,10 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
     Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+
+    var stateName = true
+    var stateEmail = true
+    var statePhone = true
 
 //    private var user: User? = null
 
@@ -49,11 +56,27 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
 
         disableButton()
 
+        val items = resources.getStringArray(R.array.provinsi_indonesia)
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+        selectCity?.setAdapter(adapter)
+
+        val selectedIndex = adapter.getPosition(user.city)
+
+//        selectCity.listSelection = selectedIndex
+//        selectCity.setSelection(selectedIndex)
+
+
         etFullname.setText(user.fullname)
         etEmail.setText(user.email)
-        etCity.setText(user.city)
+        selectCity.setText(adapter.getItem(selectedIndex), false)
         etPhoneNumber.setText(user.phoneNumber)
         etAboutMePhotographer.setText(user.about)
+
+        selectCity.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, _, _ ->
+                buttonState()
+            }
 
         etFullname.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -65,7 +88,21 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
             }
 
             override fun afterTextChanged(s: Editable?) {
-                enableButton()
+                if (s?.length != 0) {
+                    if (FormValidationHelper.isPersonName(s.toString())) {
+                        stateName = true
+                        etFullnameLayout.error = null
+                    } else {
+                        stateName = false
+                        etFullnameLayout.error = "Nama tidak valid"
+                    }
+                } else {
+                    stateName = false
+                    etFullnameLayout.error = "Nama harus diisi"
+                }
+
+                buttonState()
+
             }
         })
 
@@ -79,23 +116,37 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
             }
 
             override fun afterTextChanged(s: Editable?) {
-                enableButton()
+                if (s?.length != 0) {
+                    if (FormValidationHelper.isValidEmail(s.toString())) {
+                        stateEmail = true
+                        etEmailLayout.error = null
+                    } else {
+                        stateEmail = false
+                        etEmailLayout.error = "Alamat email tidak valid"
+                    }
+                } else {
+                    stateEmail = false
+                    etEmailLayout.error = "Alamat email harus diisi"
+                }
+
+                buttonState()
+
             }
         })
 
-        etCity.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                enableButton()
-            }
-        })
+//        etCity.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                enableButton()
+//            }
+//        })
 
         etPhoneNumber.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -107,7 +158,29 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
             }
 
             override fun afterTextChanged(s: Editable?) {
-                enableButton()
+                if (s?.length != 0) {
+                    if (s.toString().first() == '0') {
+                        if (FormValidationHelper.rangeLength(s.toString(), 10, 13)) {
+                            statePhone = true
+                            etPhoneNumberLayout.error = null
+                        } else {
+                            statePhone = false
+                            etPhoneNumberLayout.error =
+                                "Panjang karakter nomor telepon minimal 10 dan maksimal 13 angka"
+                        }
+                    } else {
+                        statePhone = false
+                        etPhoneNumberLayout.error =
+                            "Nomor telepon harus diawali angka 0"
+                    }
+                } else {
+                    statePhone = false
+                    etPhoneNumberLayout.error =
+                        "Nomor telepon harus diisi"
+                }
+
+                buttonState()
+
             }
         })
 
@@ -121,7 +194,7 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
             }
 
             override fun afterTextChanged(s: Editable?) {
-                enableButton()
+                buttonState()
             }
         })
 
@@ -132,7 +205,7 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
                     password = user.password,
                     role = user.role,
                     email = etEmail.text.toString(),
-                    city = etCity.text.toString(),
+                    city = selectCity.text.toString(),
                     phoneNumber = etPhoneNumber.text.toString(),
                     about = etAboutMePhotographer.text.toString(),
                     profilePicture = user.profilePicture,
@@ -156,6 +229,14 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
                 disableButton()
             }
         })
+    }
+
+    fun buttonState() {
+        if (stateEmail && stateName && statePhone) {
+            enableButton()
+        } else {
+            disableButton()
+        }
     }
 
     fun enableButton() {

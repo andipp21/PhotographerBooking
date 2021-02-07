@@ -62,6 +62,43 @@
         <item>Pemotretan Acara</item>
         <item>Pemotetan Endorsment</item>
     </string-array>
+
+    <string-array name="provinsi_indonesia">
+        <item>Aceh</item>
+        <item>Sumatera Utara</item>
+        <item>Sumatera Barat</item>
+        <item>Sumatera Selatan</item>
+        <item>Riau</item>
+        <item>Kepulauan Riau</item>
+        <item>Jambi</item>
+        <item>Kepulauan Bangka Belitung</item>
+        <item>Bengkulu</item>
+        <item>Lampung</item>
+        <item>DKI Jakarta</item>
+        <item>Banten</item>
+        <item>Jawa Barat</item>
+        <item>Jawa Tengah</item>
+        <item>DI Yogyakarta</item>
+        <item>Jawa Timur</item>
+        <item>Bali</item>
+        <item>Nusa Tenggara Barat</item>
+        <item>Nusa Tenggara Timur</item>
+        <item>Kalimantan Barat</item>
+        <item>Kalimantan Tengah</item>
+        <item>Kalimantan Selatan</item>
+        <item>Kalimantan Timur</item>
+        <item>Kalimantan Utara</item>
+        <item>Sulawesi Utara</item>
+        <item>Gorontalo</item>
+        <item>Sulawesi Tengah</item>
+        <item>Sulawesi Barat</item>
+        <item>Sulawesi Selatan</item>
+        <item>Sulawesi Tenggara</item>
+        <item>Maluku</item>
+        <item>Maluku Utara</item>
+        <item>Papua</item>
+        <item>Papua Barat</item>
+    </string-array>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
@@ -124,7 +161,7 @@
     <string name="select_city">Pilih Kota</string>
     <string name="photoshoot_review">Review Pemotretan</string>
     <string name="score">Nilai</string>
-    <string name="add_score_1_5">Tambahkan Nilai 1-5</string>
+    <string name="add_score_1_5">Tambahkan Nilai 1–5</string>
     <string name="your_review">Review Anda</string>
     <string name="score_">Nilai :</string>
     <string name="review">Review :</string>
@@ -144,4 +181,5 @@
     <string name="selesai">Selesai</string>
     <string name="direview">Direview</string>
     <string name="jumlah_pemotretan_berdasarkan_waktu">Jumlah Pemotretan Berdasarkan Waktu</string>
+    <string name="provinsi">Provinsi</string>
 </resources>

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.auth.register.fragment.RegisterSelectRoleFragment">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
@@ -27,14 +27,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseCompoundDrawables">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivClient"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:src="@drawable/ic_client"
             android:contentDescription="@string/image_view_client" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -54,14 +54,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseCompoundDrawables">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivPhotographer"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:src="@drawable/ic_photographer"
             android:contentDescription="@string/image_view_photographer" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -71,12 +71,12 @@
 
     </LinearLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:layout_marginBottom="64dp"
+        android:background="@drawable/button_enabled"
+        android:layout_marginBottom="32dp"
         android:text="@string/continue_string"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"

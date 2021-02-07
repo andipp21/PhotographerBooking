@@ -119,8 +119,7 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         val photoshootType = binding.photoshootType
 
-        val spinnerAdapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, photoshootTypArray)
+        val spinnerAdapter =  ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, photoshootTypArray)
         photoshootType.adapter = spinnerAdapter
 
         photoshootType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

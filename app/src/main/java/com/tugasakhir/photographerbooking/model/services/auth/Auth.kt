@@ -57,7 +57,7 @@ class Auth @Inject constructor() {
                 response.invoke("Login Successfully")
             }
             .addOnFailureListener { exception ->
-                response.invoke("Error Login: ${exception.localizedMessage}")
+                response.invoke(exception.message.toString())
             }
     }
 
@@ -65,10 +65,10 @@ class Auth @Inject constructor() {
         auth.uid?.let { it ->
             userCollection.document(it)
                 .addSnapshotListener { value, _ ->
-                    var nOvo = value?.data?.get("ovo_number").toString()
-                    var nDana = value?.data?.get("dana_number").toString()
-                    var nGopay = value?.data?.get("gopay_number").toString()
-                    var nLinkAja = value?.data?.get("link_aja_number").toString()
+                    val nOvo = value?.data?.get("ovo_number").toString()
+                    val nDana = value?.data?.get("dana_number").toString()
+                    val nGopay = value?.data?.get("gopay_number").toString()
+                    val nLinkAja = value?.data?.get("link_aja_number").toString()
 
                     val user = User(
                         uid = value?.id,

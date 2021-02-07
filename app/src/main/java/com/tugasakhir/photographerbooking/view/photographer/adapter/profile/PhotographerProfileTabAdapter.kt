@@ -17,7 +17,7 @@ class PhotographerProfileTabAdapter(
     val user: User
 ) :
     FragmentStatePagerAdapter(fragmentManager, behavior) {
-    private val tabName: Array<String> = arrayOf("About Me", "Portfolio", "Package", "Payment")
+    private val tabName: Array<String> = arrayOf("Tentang", "Portofolio", "Paket", "Pembayaran")
 
     override fun getItem(position: Int): Fragment = when (position) {
         0 -> ProfilePhotographerDataFragment(viewModel, user)
@@ -28,5 +28,5 @@ class PhotographerProfileTabAdapter(
     }
 
     override fun getCount(): Int = 4
-    override fun getPageTitle(position: Int): CharSequence? = tabName[position]
+    override fun getPageTitle(position: Int): CharSequence = tabName[position]
 }

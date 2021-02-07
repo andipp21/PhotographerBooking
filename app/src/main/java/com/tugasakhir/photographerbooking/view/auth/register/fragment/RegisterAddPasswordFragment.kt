@@ -83,12 +83,13 @@ class RegisterAddPasswordFragment : Fragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                etConfirmPassword.removeTextChangedListener(this)
-
                 checkConfirmPassword(p0.toString())
-
-                etConfirmPassword.text?.length?.let { etConfirmPassword.setSelection(it) }
-                etConfirmPassword.addTextChangedListener(this)
+//                etConfirmPassword.removeTextChangedListener(this)
+//
+//                checkConfirmPassword(p0.toString())
+//
+//                etConfirmPassword.text?.length?.let { etConfirmPassword.setSelection(it) }
+//                etConfirmPassword.addTextChangedListener(this)
             }
 
         })
@@ -230,12 +231,12 @@ class RegisterAddPasswordFragment : Fragment() {
     }
 
     fun checkConfirmPassword(et: String) {
-        stateConfirmPassword = if (et == password) {
-            confirmPasswordWarn.visibility = View.GONE
-            true
+        if (et == password){
+            etConfirmPasswordLayout.error = null
+            stateConfirmPassword = true
         } else {
-            confirmPasswordWarn.visibility = View.VISIBLE
-            false
+            etConfirmPasswordLayout.error = getString(R.string.password_tidak_sama)
+            stateConfirmPassword = false
         }
 
         checkStateButton()
@@ -244,10 +245,12 @@ class RegisterAddPasswordFragment : Fragment() {
     private fun checkStateButton() {
         if (statePassword && stateConfirmPassword) {
             btnContinue.isClickable = true
-            btnContinue.setBackgroundResource(R.drawable.button_enabled)
+            btnContinue.isEnabled = true
+//            btnContinue.setBackgroundResource(R.drawable.button_enabled)
         } else {
             btnContinue.isClickable = false
-            btnContinue.setBackgroundResource(R.drawable.button_disabled)
+            btnContinue.isEnabled = false
+//            btnContinue.setBackgroundResource(R.drawable.button_disabled)
         }
     }
 
