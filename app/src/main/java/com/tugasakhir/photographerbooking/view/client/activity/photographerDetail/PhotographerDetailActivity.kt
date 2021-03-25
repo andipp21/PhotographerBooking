@@ -96,7 +96,7 @@ class PhotographerDetailActivity : AppCompatActivity() {
         actionDelegate: OrderViewModel,
         lifecycleOwner: LifecycleOwner
     ){
-        actionDelegate.responseListReview.observe(lifecycleOwner, Observer {
+        actionDelegate.responseListReview.observe(lifecycleOwner, {
             tabAdapter.updateListReview(it)
         })
     }
@@ -105,11 +105,11 @@ class PhotographerDetailActivity : AppCompatActivity() {
         actionDelegate: ClientHomeViewModel,
         lifecycleOwner: LifecycleOwner
     ) {
-        actionDelegate.responseListPortofolio.observe(lifecycleOwner, Observer{
+        actionDelegate.responseListPortofolio.observe(lifecycleOwner, {
             tabAdapter.updateListPortofolio(it)
         })
 
-        actionDelegate.responseListPackage.observe(lifecycleOwner, Observer{
+        actionDelegate.responseListPackage.observe(lifecycleOwner, {
             listPackage.clear()
             listPackage.addAll(it)
             tabAdapter.updateListPackage(it)

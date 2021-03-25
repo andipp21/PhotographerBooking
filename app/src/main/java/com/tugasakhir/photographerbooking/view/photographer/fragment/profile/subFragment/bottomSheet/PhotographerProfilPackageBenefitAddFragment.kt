@@ -63,11 +63,13 @@ class PhotographerProfilPackageBenefitAddFragment : BottomSheetDialogFragment() 
     }
 
     fun disableButton() {
-        btnAddBenefit.setBackgroundResource(R.drawable.button_disabled)
+//        btnAddBenefit.setBackgroundResource(R.drawable.button_disabled)
+        btnAddBenefit.isEnabled = false
     }
 
     fun enableButton() {
-        btnAddBenefit.setBackgroundResource(R.drawable.button_enabled)
+        btnAddBenefit.isEnabled = true
+//        btnAddBenefit.setBackgroundResource(R.drawable.button_enabled)
     }
 
 //    companion object {

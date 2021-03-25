@@ -41,7 +41,7 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
 
         val appBar = binding.appBarLayout.toolbar
         setSupportActionBar(appBar)
-        supportActionBar?.title = "Order Detail"
+        supportActionBar?.title = "Detail Pesanan"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val cal = Calendar.getInstance()
@@ -106,7 +106,7 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
             binding.setSchedule.setOnClickListener {
                 val insertCalendarIntent = Intent(Intent.ACTION_INSERT)
                     .setData(CalendarContract.Events.CONTENT_URI)
-                    .putExtra(CalendarContract.Events.TITLE, "Photoshoot with ${client.fullname}")
+                    .putExtra(CalendarContract.Events.TITLE, "Pemotretan dengan ${client.fullname}")
                     .putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false)
                     .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.timeInMillis)
 
@@ -114,7 +114,7 @@ class PhotographerOrderDetailActivity : AppCompatActivity() {
             }
 
             binding.orderStatus.setText(R.string.status_order_4)
-            binding.confirmOrder.text = "Photoshoot Done"
+            binding.confirmOrder.text = "Pemotretan Selesai"
             binding.confirmOrder.setOnClickListener {
                 order.uid?.let { it1 -> viewModel!!.confirmationOrderDone(it1) }
                 observeViewModel(viewModel!!, this)

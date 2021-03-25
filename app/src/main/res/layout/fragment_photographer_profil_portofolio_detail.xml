@@ -14,7 +14,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnUpdateImage"
         android:layout_marginBottom="8dp"
         android:layout_width="0dp"
@@ -29,12 +29,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/previewImage" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDeleteImage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/button_delete"
+        app:backgroundTint="@color/colorRed"
         android:text="@string/delete_image"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"

@@ -3,6 +3,7 @@ package com.tugasakhir.photographerbooking.view.client.activity.order.orderPhoto
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -50,8 +51,10 @@ class OrderPhotographerActivity : AppCompatActivity() {
         val paket = intent.getParcelableArrayListExtra<Package>("listPackage")
         photographer = intent.getParcelableExtra("photographer")!!
 
-        binding.photographerName.text = photographer.fullname
-        binding.photographerLocation.text = photographer.city
+        binding.photographerName.setText(photographer.fullname)
+        binding.photographerLocation.setText(photographer.city)
+
+        Log.d("paket pemotretan", paket.toString())
 
         val photoshootTypArray =
             resources.getStringArray(R.array.photoshoot_package)
@@ -64,19 +67,14 @@ class OrderPhotographerActivity : AppCompatActivity() {
 
         val typeSpinner = binding.photoshootType
 
-        typeSpinner.adapter = spinnerTypeAdapter
+        typeSpinner.setAdapter(spinnerTypeAdapter)
 
-        typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+        typeSpinner.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, position, id ->
                 if (paket != null) {
+                    listPackageTitle.clear()
                     for (data in paket) {
-                        listPackageTitle.clear()
-                        listPackageTitle.add("Select Package")
+                        Log.d("paket by tipe", data.title)
                         if (data.type == photoshootTypArray[position]) {
                             listPackageTitle.add(data.title)
                         }
@@ -86,47 +84,98 @@ class OrderPhotographerActivity : AppCompatActivity() {
                 stateType = true
 
                 binding.packageTitle.visibility = View.VISIBLE
-                binding.photoshootPackage.visibility = View.VISIBLE
+//                binding.photoshootPackage.visibility = View.VISIBLE
+//                type = binding.photoshootType.text.toString()
+//                stateType = true
+//                buttonState()
+            }
 
-                val packageSpinner = binding.photoshootPackage
-                packageSpinner.adapter = spinnerPackageAdapter
+        val packageSpinner = binding.photoshootPackage
+        packageSpinner.setAdapter(spinnerPackageAdapter)
 
-                packageSpinner.onItemSelectedListener =
-                    object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(
-                            parent: AdapterView<*>?,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                        ) {
-                            if (paket != null) {
-                                for (data in paket) {
-                                    if (data.title == listPackageTitle[position]) {
-                                        packageSelected = data
-                                    }
-                                }
-                            }
-
-                            binding.datePicker.visibility = View.VISIBLE
-                            statePackage = true
-
-                            stateButton()
+        packageSpinner.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, position, id ->
+                if (paket != null) {
+                    for (data in paket) {
+                        if (data.title == listPackageTitle[position]) {
+                            packageSelected = data
                         }
-
-                        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                        }
-
                     }
+                }
+
+                binding.datePicker.visibility = View.VISIBLE
+                statePackage = true
+
+                stateButton()
+//                binding.photoshootPackage.visibility = View.VISIBLE
+//                type = binding.photoshootType.text.toString()
+//                stateType = true
+//                buttonState()
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
+//        typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                if (paket != null) {
+//                    for (data in paket) {
+//                        listPackageTitle.clear()
+//                        listPackageTitle.add("Select Package")
+//                        if (data.type == photoshootTypArray[position]) {
+//                            listPackageTitle.add(data.title)
+//                        }
+//                    }
+//                }
+//
+//                stateType = true
+//
+//                binding.packageTitle.visibility = View.VISIBLE
+////                binding.photoshootPackage.visibility = View.VISIBLE
+//
+//                val packageSpinner = binding.photoshootPackage
+//                packageSpinner.setAdapter(spinnerPackageAdapter)
+//
+//                packageSpinner.onItemSelectedListener =
+//                    object : AdapterView.OnItemSelectedListener {
+//                        override fun onItemSelected(
+//                            parent: AdapterView<*>?,
+//                            view: View?,
+//                            position: Int,
+//                            id: Long
+//                        ) {
+//                            if (paket != null) {
+//                                for (data in paket) {
+//                                    if (data.title == listPackageTitle[position]) {
+//                                        packageSelected = data
+//                                    }
+//                                }
+//                            }
+//
+//                            binding.datePicker.visibility = View.VISIBLE
+//                            statePackage = true
+//
+//                            stateButton()
+//                        }
+//
+//                        override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//                        }
+//
+//                    }
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//
+//        }
 
-        }
 
-        binding.datePicker.setOnClickListener {
+            binding.selectedDate.setOnClickListener {
             val cal: Calendar = Calendar.getInstance()
             val year: Int = cal.get(Calendar.YEAR)
             val month: Int = cal.get(Calendar.MONTH)
@@ -150,7 +199,31 @@ class OrderPhotographerActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        binding.timePicker.setOnClickListener {
+//        binding.datePicker.setOnClickListener {
+//            val cal: Calendar = Calendar.getInstance()
+//            val year: Int = cal.get(Calendar.YEAR)
+//            val month: Int = cal.get(Calendar.MONTH)
+//            val day: Int = cal.get(Calendar.DAY_OF_MONTH)
+//
+//            val dialog = DatePickerDialog(
+//                this,
+//                { _, sYear, monthOfYear, dayOfMonth ->
+//                    dateListener(
+//                        sYear,
+//                        monthOfYear,
+//                        dayOfMonth
+//                    )
+//                },
+//                year,
+//                month,
+//                day
+//            )
+//
+//            dialog.datePicker.minDate = cal.timeInMillis
+//            dialog.show()
+//        }
+
+        binding.selectedTime.setOnClickListener {
             val cal: Calendar = Calendar.getInstance()
             val hour = cal.get(Calendar.HOUR_OF_DAY)
             val minute = cal.get(Calendar.MINUTE)
@@ -191,7 +264,7 @@ class OrderPhotographerActivity : AppCompatActivity() {
             "$day"
         }
 
-        binding.selectedDate.text = "$day / $bulan / $hari"
+        binding.selectedDate.setText("$day / $bulan / $hari")
 
         binding.selectedDate.visibility = View.VISIBLE
         binding.timePicker.visibility = View.VISIBLE
@@ -218,15 +291,16 @@ class OrderPhotographerActivity : AppCompatActivity() {
         }
 
         binding.selectedTime.visibility = View.VISIBLE
-        binding.selectedTime.text = "$jam : $menit"
+        binding.selectedTime.setText("$jam : $menit")
 
         stateButton()
     }
 
     private fun stateButton() {
         if (stateDate && stateTime) {
-            binding.btnOrder.isClickable = true
-            binding.btnOrder.setBackgroundResource(R.drawable.button_enabled)
+            binding.btnOrder.isEnabled = true
+//            binding.btnOrder.isClickable = true
+//            binding.btnOrder.setBackgroundResource(R.drawable.button_enabled)
 
             binding.btnOrder.setOnClickListener {
                 val cal = Calendar.getInstance()
@@ -240,6 +314,8 @@ class OrderPhotographerActivity : AppCompatActivity() {
 
                 ClientOrderReviewFragment(packageSelected,photographer,selectedDate).show(supportFragmentManager, "Order Review")
             }
+        } else {
+            binding.btnOrder.isEnabled = false
         }
     }
 }

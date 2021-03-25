@@ -10,11 +10,11 @@
         android:icon="@drawable/ic_order"
         android:title="@string/order" />
 
-    <item
-        android:id="@+id/clientInbox"
-        android:icon="@drawable/ic_inbox"
-        android:title="@string/inbox"
-        />
+<!--    <item-->
+<!--        android:id="@+id/clientInbox"-->
+<!--        android:icon="@drawable/ic_inbox"-->
+<!--        android:title="@string/inbox"-->
+<!--        />-->
 
     <item
         android:id="@+id/clientProfile"

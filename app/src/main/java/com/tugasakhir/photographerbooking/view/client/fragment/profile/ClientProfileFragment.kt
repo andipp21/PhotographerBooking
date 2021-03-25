@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.MainActivity
+import com.tugasakhir.photographerbooking.view.client.activity.ClientActivity
 import kotlinx.android.synthetic.main.fragment_client_profile.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,6 +47,8 @@ class ClientProfileFragment(val user: User) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as ClientActivity).supportActionBar?.title = "Profil"
 
         Glide.with(this)
             .load(user.profilePicture)

@@ -12,7 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
+import kotlinx.android.synthetic.main.fragment_photographer_add_portofolio.*
 import kotlinx.android.synthetic.main.fragment_photographer_profil_picture.*
+import kotlinx.android.synthetic.main.fragment_photographer_profil_picture.btnSavePicture
+import kotlinx.android.synthetic.main.fragment_photographer_profil_picture.btnSelectImage
+import kotlinx.android.synthetic.main.fragment_photographer_profil_picture.previewImage
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -72,6 +76,8 @@ class PhotographerProfilPortofolioAddFragment(val viewModel: PhotographerProfile
             btnSavePicture.setOnClickListener {
                 Log.d("btn","Btn Save On Click")
 
+                buttonSaveDisable()
+
                 data?.data?.let { it1 -> viewModel.addPortofolio(it1) }
                 observerViewModel(viewModel)
             }
@@ -94,13 +100,15 @@ class PhotographerProfilPortofolioAddFragment(val viewModel: PhotographerProfile
 
 
     private fun buttonSaveDisable(){
+        btnSavePicture.isEnabled = false
         btnSavePicture.isClickable = false
-        btnSavePicture.setBackgroundResource(R.drawable.button_disabled)
+//        btnSavePicture.setBackgroundResource(R.drawable.button_disabled)
     }
 
     private fun buttonSaveEnable(){
+        btnSavePicture.isEnabled = true
         btnSavePicture.isClickable = true
-        btnSavePicture.setBackgroundResource(R.drawable.button_white)
+//        btnSavePicture.setBackgroundResource(R.drawable.button_white)
     }
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

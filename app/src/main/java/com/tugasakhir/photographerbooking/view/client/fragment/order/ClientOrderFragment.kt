@@ -55,7 +55,7 @@ class ClientOrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as ClientActivity).supportActionBar?.title = "Order"
+        (activity as ClientActivity).supportActionBar?.title = "Pesanan"
 
         usrID = FirebaseAuth.getInstance().uid.toString()
 

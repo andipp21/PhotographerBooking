@@ -53,6 +53,7 @@ class RegisterAddDataFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_register_add_data, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

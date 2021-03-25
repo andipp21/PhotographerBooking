@@ -21,8 +21,8 @@
     <string name="minimal_8_karakter">Minimal 8 Karakter</string>
     <string name="password_tidak_sama">Password Tidak Sama</string>
     <string name="find_or_be_a_personal_photographer">Cari atau Pasarkan Jasa Layanan Fotografi Anda</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
     <string name="email">Email</string>
     <string name="forgot_password">Lupa Password?</string>
     <string name="photo_profil">Foto Profil</string>
@@ -55,12 +55,49 @@
     <string name="input_photoshoot_benefit">Masukan Keuntungan Pemotretan</string>
     <string name="button_add_benefit">Button Add Benefit</string>
 
+    <string-array name="array_filter">
+        <item>Semua</item>
+        <item>Aceh</item>
+        <item>Sumatera Utara</item>
+        <item>Sumatera Barat</item>
+        <item>Sumatera Selatan</item>
+        <item>Riau</item>
+        <item>Kepulauan Riau</item>
+        <item>Jambi</item>
+        <item>Kepulauan Bangka Belitung</item>
+        <item>Bengkulu</item>
+        <item>Lampung</item>
+        <item>DKI Jakarta</item>
+        <item>Banten</item>
+        <item>Jawa Barat</item>
+        <item>Jawa Tengah</item>
+        <item>DI Yogyakarta</item>
+        <item>Jawa Timur</item>
+        <item>Bali</item>
+        <item>Nusa Tenggara Barat</item>
+        <item>Nusa Tenggara Timur</item>
+        <item>Kalimantan Barat</item>
+        <item>Kalimantan Tengah</item>
+        <item>Kalimantan Selatan</item>
+        <item>Kalimantan Timur</item>
+        <item>Kalimantan Utara</item>
+        <item>Sulawesi Utara</item>
+        <item>Gorontalo</item>
+        <item>Sulawesi Tengah</item>
+        <item>Sulawesi Barat</item>
+        <item>Sulawesi Selatan</item>
+        <item>Sulawesi Tenggara</item>
+        <item>Maluku</item>
+        <item>Maluku Utara</item>
+        <item>Papua</item>
+        <item>Papua Barat</item>
+    </string-array>
+
     <string-array name="photoshoot_package">
-        <item>--Pilih Tipe Photoshoot--</item>
         <item>Pemotretan Pernikahan</item>
         <item>Pemotretan Kelulusan</item>
         <item>Pemotretan Acara</item>
-        <item>Pemotetan Endorsment</item>
+        <item>Pemotretan Endorsment</item>
     </string-array>
 
     <string-array name="provinsi_indonesia">
@@ -99,6 +136,7 @@
         <item>Papua</item>
         <item>Papua Barat</item>
     </string-array>
+
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
@@ -182,4 +220,8 @@
     <string name="direview">Direview</string>
     <string name="jumlah_pemotretan_berdasarkan_waktu">Jumlah Pemotretan Berdasarkan Waktu</string>
     <string name="provinsi">Provinsi</string>
+    <string name="nomor_ovo">Nomor Ovo</string>
+    <string name="nomor_link_aja">Nomor Link Aja</string>
+    <string name="nomor_gopay">Nomor Gopay</string>
+    <string name="nomor_dana">Nomor Dana</string>
 </resources>

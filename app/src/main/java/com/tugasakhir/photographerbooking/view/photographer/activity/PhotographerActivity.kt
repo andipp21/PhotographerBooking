@@ -1,6 +1,5 @@
 package com.tugasakhir.photographerbooking.view.photographer.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -14,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerBinding
 import com.tugasakhir.photographerbooking.model.pojo.User
-import com.tugasakhir.photographerbooking.view.MainActivity
 import com.tugasakhir.photographerbooking.view.photographer.fragment.home.PhotographerHomeFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.order.PhotographerOrderFragment
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.PhotographerProfileFragment
@@ -72,6 +70,10 @@ class PhotographerActivity : AppCompatActivity() {
                     goFragment(PhotographerProfileFragment.getUSer(user, viewModelPhotographer!!))
                     true
                 }
+                R.id.photographerReview -> {
+                    goFragment(PhotographerReviewFragment(viewModelOrder!!))
+                    true
+                }
                 else -> false
             }
         }
@@ -117,7 +119,7 @@ class PhotographerActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.btnLogout -> {
                 FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(this, MainActivity::class.java))
+//                startActivity(Intent(this, MainActivity::class.java))
                 finish()
                 true
             }

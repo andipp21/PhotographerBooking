@@ -8,13 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.model.pojo.User
+import com.tugasakhir.photographerbooking.utils.FormValidationHelper
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
 import kotlinx.android.synthetic.main.fragment_photographer_profil_payment.*
-import kotlinx.android.synthetic.main.fragment_photographer_profil_payment.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -96,8 +95,16 @@ class PhotographerProfilPaymentFragment(
 
             override fun afterTextChanged(s: Editable?) {
                 if (s?.length!! > 0) {
-                    numberDana = s.toString()
-                    stateDana = true
+                    if (FormValidationHelper.isNumeric(s.toString())){
+                        numberDana = s.toString()
+                        stateDana = true
+
+                        layoutDana.error = null
+                    } else {
+                        stateDana = false
+
+                        layoutDana.error = "Inputan harus berupa angka"
+                    }
                 } else {
                     stateDana = false
                 }
@@ -118,8 +125,16 @@ class PhotographerProfilPaymentFragment(
 
             override fun afterTextChanged(s: Editable?) {
                 if (s?.length!! > 0) {
-                    numberGopay = s.toString()
-                    stateGopay = true
+                    if (FormValidationHelper.isNumeric(s.toString())){
+                        numberGopay = s.toString()
+                        stateGopay = true
+
+                        layoutGopay.error = null
+                    } else {
+                        stateGopay = false
+                        layoutGopay.error = "Inputan harus berupa angka"
+                    }
+
                 } else {
                     stateGopay = false
                 }
@@ -140,8 +155,17 @@ class PhotographerProfilPaymentFragment(
 
             override fun afterTextChanged(s: Editable?) {
                 if (s?.length!! > 0) {
-                    numberLinkAja = s.toString()
-                    stateLinkAja = true
+                    if (FormValidationHelper.isNumeric(s.toString())){
+                        numberLinkAja = s.toString()
+                        stateLinkAja = true
+
+                        layoutLinkAja.error = null
+                    } else {
+                        stateLinkAja = false
+
+                        layoutLinkAja.error = "Inputan harus berupa angka"
+                    }
+
                 } else {
                     stateLinkAja = false
                 }
@@ -162,8 +186,18 @@ class PhotographerProfilPaymentFragment(
 
             override fun afterTextChanged(s: Editable?) {
                 if (s?.length!! > 0) {
-                    numberOvo = s.toString()
-                    stateOvo = true
+                    Log.d("Text Ovo", s.toString())
+
+                    if (FormValidationHelper.isNumeric(s.toString())){
+                        numberOvo = s.toString()
+                        stateOvo = true
+
+                        layoutOvo.error = null
+                    } else {
+                        stateOvo = false
+
+                        layoutOvo.error = "Inputan harus berupa angka"
+                    }
                 } else {
                     stateOvo = false
                 }
@@ -184,12 +218,8 @@ class PhotographerProfilPaymentFragment(
 
     private fun buttonEnable() {
         btnAddPayment.isClickable = true
-        btnAddPayment.setBackgroundResource(R.drawable.button_enabled)
-    }
 
-    private fun buttonDisable() {
-        btnAddPayment.isClickable = false
-        btnAddPayment.setBackgroundResource(R.drawable.button_disabled)
+        btnAddPayment.isEnabled = true
 
         btnAddPayment.setOnClickListener {
             val dt = User(
@@ -211,6 +241,13 @@ class PhotographerProfilPaymentFragment(
 
             observerViewModel(viewModel)
         }
+//        btnAddPayment.setBackgroundResource(R.drawable.button_enabled)
+    }
+
+    private fun buttonDisable() {
+        btnAddPayment.isClickable = false
+        btnAddPayment.isEnabled = false
+//        btnAddPayment.setBackgroundResource(R.drawable.button_disabled)
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel) {

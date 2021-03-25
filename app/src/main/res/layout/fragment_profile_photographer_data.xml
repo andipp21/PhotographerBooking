@@ -102,6 +102,7 @@
             android:layout_marginTop="@dimen/margin_content"
             android:background="@drawable/button_enabled"
             android:text="@string/save"
+            android:enabled="false"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent" />

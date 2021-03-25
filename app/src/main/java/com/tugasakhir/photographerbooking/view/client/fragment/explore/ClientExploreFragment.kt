@@ -61,7 +61,7 @@ class ClientExploreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as ClientActivity).supportActionBar?.title = "Explorer"
+        (activity as ClientActivity).supportActionBar?.title = "Explore"
 
         viewModel = ViewModelProvider(this).get(ClientHomeViewModel::class.java)
 

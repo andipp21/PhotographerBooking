@@ -47,10 +47,10 @@ class ClientActivity : AppCompatActivity() {
                     goFragment(ClientOrderFragment())
                     true
                 }
-                R.id.clientInbox -> {
-                    goFragment(ClientInboxFragment())
-                    true
-                }
+//                R.id.clientInbox -> {
+//                    goFragment(ClientInboxFragment())
+//                    true
+//                }
                 R.id.clientProfile -> {
                     goFragment(ClientProfileFragment(user))
                     true

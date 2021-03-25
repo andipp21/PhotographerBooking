@@ -94,7 +94,7 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
                         etFullnameLayout.error = null
                     } else {
                         stateName = false
-                        etFullnameLayout.error = "Nama tidak valid"
+                        etFullnameLayout.error = "Nama tidak valid, hanya menerima huruf dan spasi"
                     }
                 } else {
                     stateName = false
@@ -240,13 +240,15 @@ class ProfilePhotographerDataFragment(val viewModel: PhotographerProfileViewMode
     }
 
     fun enableButton() {
-        btnSaveAboutMe.setBackgroundResource(R.drawable.button_enabled)
+//        btnSaveAboutMe.setBackgroundResource(R.drawable.button_enabled)
         btnSaveAboutMe.isClickable = true
+        btnSaveAboutMe.isEnabled = true
     }
 
     private fun disableButton() {
-        btnSaveAboutMe.setBackgroundResource(R.drawable.button_disabled)
+//        btnSaveAboutMe.setBackgroundResource(R.drawable.button_disabled)
         btnSaveAboutMe.isClickable = false
+        btnSaveAboutMe.isEnabled = false
     }
 
 }

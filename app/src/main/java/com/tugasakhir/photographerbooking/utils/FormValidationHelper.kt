@@ -142,7 +142,7 @@ object FormValidationHelper {
      */
     fun isNumeric(value: Any, isSignedOnly: Boolean): Boolean {
         return try {
-            val result = value.toString().toInt()
+            val result = value.toString().toLong()
             !isSignedOnly || result >= 0
         } catch (e: NumberFormatException) {
             false

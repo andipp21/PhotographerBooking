@@ -41,7 +41,7 @@ class ClientHomeViewModel : ViewModel() {
     }
 
     fun fetchPhotographerByCity(city: String): List<User>{
-        if (city == "" || city == "Show All"){
+        if (city == "" || city == "Show All" || city == "Semua"){
             return responseLivePhotographer.value!!
         } else {
             return responseLivePhotographer.value?.filter {

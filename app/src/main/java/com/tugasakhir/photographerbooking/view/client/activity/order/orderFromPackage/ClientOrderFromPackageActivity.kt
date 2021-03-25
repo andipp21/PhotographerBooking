@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityClientOrderFromPackageBinding
-import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.model.pojo.User
 import com.tugasakhir.photographerbooking.view.client.fragment.order.orderReview.ClientOrderReviewFragment
 import java.util.*
 
@@ -47,12 +46,12 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
 
         Log.d("Photographer", photographer.toString())
 
-        binding.photographerName.text = photographer.fullname
-        binding.photographerLocation.text = photographer.city
-        binding.photoshootPackage.text = paket.title
-        binding.photoshootType.text = paket.type
+        binding.photographerName.setText(photographer.fullname)
+        binding.photographerLocation.setText(photographer.city)
+        binding.photoshootPackage.setText(paket.title)
+        binding.photoshootType.setText(paket.type)
 
-        binding.datePicker.setOnClickListener {
+        binding.selectedDate.setOnClickListener {
             val cal: Calendar = Calendar.getInstance()
             val year: Int = cal.get(Calendar.YEAR)
             val month: Int = cal.get(Calendar.MONTH)
@@ -76,7 +75,7 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        binding.timePicker.setOnClickListener {
+        binding.selectedTime.setOnClickListener {
             val cal: Calendar = Calendar.getInstance()
             val hour = cal.get(Calendar.HOUR_OF_DAY)
             val minute = cal.get(Calendar.MINUTE)
@@ -115,7 +114,7 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
             "$day"
         }
 
-        binding.selectedDate.text = "$day / $bulan / $hari"
+        binding.selectedDate.setText("$day / $bulan / $hari")
 
         binding.selectedDate.visibility = View.VISIBLE
         binding.timePicker.visibility = View.VISIBLE
@@ -142,15 +141,14 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
         }
 
         binding.selectedTime.visibility = View.VISIBLE
-        binding.selectedTime.text = "$jam : $menit"
+        binding.selectedTime.setText("$jam : $menit")
 
         stateButton()
     }
 
     private fun stateButton() {
         if (stateDate && stateTime) {
-            binding.btnOrder.isClickable = true
-            binding.btnOrder.setBackgroundResource(R.drawable.button_enabled)
+            binding.btnOrder.isEnabled = true
 
             binding.btnOrder.setOnClickListener {
                 val cal = Calendar.getInstance()
@@ -164,6 +162,8 @@ class ClientOrderFromPackageActivity : AppCompatActivity() {
 
                 ClientOrderReviewFragment(paket,photographer,selectedDate).show(supportFragmentManager, "Order Review")
             }
+        } else {
+            binding.btnOrder.isEnabled = false
         }
     }
 

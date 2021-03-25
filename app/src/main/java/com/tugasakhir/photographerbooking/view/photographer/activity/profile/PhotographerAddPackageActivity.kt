@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerAddPackageBinding
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.utils.FormValidationHelper
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerBenefitAdapter
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.bottomSheet.PhotographerProfilPackageBenefitAddFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
@@ -31,7 +31,8 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
     private var statePrice: Boolean = false
     private var type: String = ""
     private var stateType: Boolean = false
-//    private var time: String = ""
+
+    //    private var time: String = ""
 //    private var stateTime: Boolean = false
     private var title: String = ""
     private var stateTitle: Boolean = false
@@ -49,7 +50,7 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         val appBar = binding.appBarLayout.toolbar
         setSupportActionBar(appBar)
-        supportActionBar?.title = "Add New Package"
+        supportActionBar?.title = "Tambah Paket Pemotretan"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         buttonState()
@@ -86,9 +87,13 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
                 if (s?.length!! > 0) {
                     title = s.toString()
                     stateTitle = true
+
+                    binding.packageTitleLayout.error = null
                 } else {
                     title = ""
                     stateTitle = false
+
+                    binding.packageTitleLayout.error = "Judul paket harus diisi"
                 }
 
                 buttonState()
@@ -105,11 +110,12 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
+
                 binding.photoshootPrice.removeTextChangedListener(this)
 
                 binding.photoshootPrice.setText(convertMoney(s.toString()))
 
-                binding.photoshootPrice.setSelection(binding.photoshootPrice.text.length)
+                binding.photoshootPrice.text?.let { binding.photoshootPrice.setSelection(it.length) }
                 binding.photoshootPrice.addTextChangedListener(this)
 
             }
@@ -119,27 +125,35 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
 
         val photoshootType = binding.photoshootType
 
-        val spinnerAdapter =  ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, photoshootTypArray)
-        photoshootType.adapter = spinnerAdapter
+        val spinnerAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, photoshootTypArray)
+        photoshootType.setAdapter(spinnerAdapter)
 
-        photoshootType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                type = photoshootTypArray[position]
+        photoshootType.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, arg1, position, id ->
+                type = binding.photoshootType.text.toString()
                 stateType = true
-
                 buttonState()
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-        }
+//        photoshootType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                type = photoshootTypArray[position]
+//                stateType = true
+//
+//                buttonState()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//
+//        }
 
 //        binding.rbPhotoshootTime.setOnCheckedChangeListener { _, checkedId ->
 //            when (checkedId) {
@@ -179,10 +193,19 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
             textInput = textInput.replace("Rp ".toRegex(), "")
         }
 
-        price = if (textInput == "") {
-            0
+        if (FormValidationHelper.isEmpty(textInput)) {
+            price = 0
+            binding.photoshootPriceLayout.error = "Harga pemotretan tidak boleh kosong"
         } else {
-            textInput.toLong()
+
+            if (FormValidationHelper.isNumeric(textInput)){
+                price = textInput.toLong()
+                binding.photoshootPriceLayout.error = null
+            } else {
+                binding.photoshootPriceLayout.error = "Harga pemotretan harus berupa angka"
+            }
+
+
         }
 
         statePrice = when {
@@ -223,11 +246,14 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
     }
 
     private fun disableButton() {
-        binding.btnAddPackage.setBackgroundResource(R.drawable.button_disabled)
+//        binding.btnAddPackage.setBackgroundResource(R.drawable.button_disabled)
+
+        binding.btnAddPackage.isEnabled = false
     }
 
     private fun enableButton() {
-        binding.btnAddPackage.setBackgroundResource(R.drawable.button_enabled)
+//        binding.btnAddPackage.setBackgroundResource(R.drawable.button_enabled)
+        binding.btnAddPackage.isEnabled = true
 
         binding.btnAddPackage.setOnClickListener {
             GlobalScope.launch {
@@ -251,7 +277,7 @@ class PhotographerAddPackageActivity : AppCompatActivity() {
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel) {
-        viewModel.responseLiveData.observe(this, androidx.lifecycle.Observer{
+        viewModel.responseLiveData.observe(this, {
             Log.d("Add Package", it)
             runOnUiThread {
                 if (it == "Successfully Add Package") {

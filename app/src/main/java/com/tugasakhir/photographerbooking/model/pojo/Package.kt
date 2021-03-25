@@ -10,5 +10,5 @@ data class Package (
     var type: String,
     var price: Long,
     var benefit: List<String>,
-    val userID: String
+    var userID: String
 ) : Parcelable

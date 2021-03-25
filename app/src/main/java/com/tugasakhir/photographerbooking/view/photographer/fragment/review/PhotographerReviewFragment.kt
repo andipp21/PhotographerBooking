@@ -48,7 +48,7 @@ class PhotographerReviewFragment(val viewModel: OrderViewModel) : Fragment() {
 
         usrID = FirebaseAuth.getInstance().uid.toString()
 
-        (activity as PhotographerActivity).supportActionBar?.title = "Your Review"
+        (activity as PhotographerActivity).supportActionBar?.title = "Review"
 
         adapter = PhotographerDetailReviewAdapter()
         rvPhotographerReview.adapter = adapter

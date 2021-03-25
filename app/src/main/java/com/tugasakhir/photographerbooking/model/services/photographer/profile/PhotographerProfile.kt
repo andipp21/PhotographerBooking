@@ -222,7 +222,7 @@ class PhotographerProfile @Inject constructor() {
                                     doc["type"].toString(),
                                     doc["price"] as Long,
                                     doc["benefit"] as List<String>,
-                                    doc["userID"].toString()
+                                    doc["user_id"].toString()
                                 )
                             )
                         }

@@ -10,11 +10,11 @@
         android:icon="@drawable/ic_order"
         android:title="@string/order" />
 
-<!--    <item-->
-<!--        android:id="@+id/photographerReview"-->
-<!--        android:icon="@drawable/ic_inbox"-->
-<!--        android:title="@string/review_"-->
-<!--        />-->
+    <item
+        android:id="@+id/photographerReview"
+        android:icon="@drawable/ic_inbox"
+        android:title="@string/review_"
+        />
 
     <item
         android:id="@+id/photographerProfile"

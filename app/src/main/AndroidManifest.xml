@@ -31,10 +31,14 @@
         <activity android:name=".view.client.activity.photographerDetail.PhotographerDetailActivity" />
         <activity android:name=".view.photographer.activity.profile.PhotographerEditPackageActivity" />
         <activity android:name=".view.photographer.activity.profile.PhotographerAddPackageActivity" />
-        <activity android:name=".view.client.activity.ClientActivity" />
-        <activity android:name=".view.photographer.activity.PhotographerActivity" />
-        <activity android:name=".view.auth.register.RegisterActivity" />
-        <activity android:name=".view.auth.login.LoginActivity" />
+        <activity android:name=".view.client.activity.ClientActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".view.photographer.activity.PhotographerActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".view.auth.register.RegisterActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".view.auth.login.LoginActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

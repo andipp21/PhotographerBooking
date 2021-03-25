@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tugasakhir.photographerbooking.R
 import com.tugasakhir.photographerbooking.databinding.ActivityPhotographerEditPackageBinding
 import com.tugasakhir.photographerbooking.model.pojo.Package
+import com.tugasakhir.photographerbooking.utils.FormValidationHelper
 import com.tugasakhir.photographerbooking.view.photographer.adapter.profile.photographerPackage.PhotographerBenefitAdapter
 import com.tugasakhir.photographerbooking.view.photographer.fragment.profile.subFragment.bottomSheet.PhotographerProfilEditPackageBenefitAddFragment
 import com.tugasakhir.photographerbooking.viewModel.photographer.PhotographerProfileViewModel
@@ -30,7 +30,6 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
     private var formBenefit: MutableList<String> = mutableListOf()
     private var formPrice: Long = 0
     private var formType: String = ""
-    private var formTime: String = ""
     private var formTitle: String = ""
 
     lateinit var data: Package
@@ -46,7 +45,7 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
 
         val appBar = binding.appBarLayout.toolbar
         setSupportActionBar(appBar)
-        supportActionBar?.title = "Edit Photography Package"
+        supportActionBar?.title = "Ubah Paket Pemotretan"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         data = intent.getParcelableExtra("packageData")!!
@@ -69,13 +68,26 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
+
                 if (s?.length!! > 0) {
                     formTitle = s.toString()
                     enableButton()
+
+                    binding.packageTitleLayout.error = null
                 } else {
                     title = ""
                     disableButton()
+
+                    binding.packageTitleLayout.error = "Judul paket harus diisi"
                 }
+
+//                if (s?.length!! > 0) {
+//                    formTitle = s.toString()
+//                    enableButton()
+//                } else {
+//                    title = ""
+//                    disableButton()
+//                }
             }
         })
 
@@ -86,28 +98,47 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
 
         val spinnerAdapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, photoshootTypArray)
-        photoshootType.adapter = spinnerAdapter
 
-        if (formType != "") {
-            val spinnerPosition: Int = spinnerAdapter.getPosition(formType)
-            photoshootType.setSelection(spinnerPosition)
-        }
+        photoshootType.setAdapter(spinnerAdapter)
 
-        photoshootType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                formType = photoshootTypArray[position]
-                enableButton()
+        val selectedIndex = spinnerAdapter.getPosition(data.type)
+
+        photoshootType.setText(spinnerAdapter.getItem(selectedIndex), false)
+
+        photoshootType.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, _, _ ->
+                formType = binding.photoshootType.text.toString()
+
+                if (formType == data.type) {
+                    disableButton()
+                } else {
+                    enableButton()
+                }
+//                stateType = true
+//                buttonState()
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-        }
+//        photoshootType.adapter = spinnerAdapter
+//
+//        if (formType != "") {
+//            val spinnerPosition: Int = spinnerAdapter.getPosition(formType)
+//            photoshootType.setSelection(spinnerPosition)
+//        }
+//
+//        photoshootType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                formType = photoshootTypArray[position]
+//                enableButton()
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//
+//            }
+//        }
 
 //        //time
 //        if (formTime == "Daily") {
@@ -148,7 +179,7 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
 
                 binding.photoshootPrice.setText(convertMoney(s.toString()))
 
-                binding.photoshootPrice.setSelection(binding.photoshootPrice.text.length)
+                binding.photoshootPrice.text?.let { binding.photoshootPrice.setSelection(it.length) }
                 binding.photoshootPrice.addTextChangedListener(this)
 
             }
@@ -197,10 +228,19 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
             textInput = textInput.replace("Rp ".toRegex(), "")
         }
 
-        formPrice = if (textInput == "") {
-            0
+        if (FormValidationHelper.isEmpty(textInput)) {
+            formPrice = 0
+            binding.photoshootPriceLayout.error = "Harga pemotretan tidak boleh kosong"
         } else {
-            textInput.toLong()
+
+            if (FormValidationHelper.isNumeric(textInput)) {
+                formPrice = textInput.toLong()
+                binding.photoshootPriceLayout.error = null
+            } else {
+                binding.photoshootPriceLayout.error = "Harga pemotretan harus berupa angka"
+            }
+
+
         }
 
         when {
@@ -229,13 +269,15 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
     }
 
     private fun disableButton() {
-        binding.btnAddPackage.setBackgroundResource(R.drawable.button_disabled)
+//        binding.btnAddPackage.setBackgroundResource(R.drawable.button_disabled)
         binding.btnAddPackage.isClickable = false
+        binding.btnAddPackage.isEnabled = false
     }
 
     private fun enableButton() {
-        binding.btnAddPackage.setBackgroundResource(R.drawable.button_enabled)
+//        binding.btnAddPackage.setBackgroundResource(R.drawable.button_enabled)
         binding.btnAddPackage.isClickable = true
+        binding.btnAddPackage.isEnabled = true
 
         binding.btnAddPackage.setOnClickListener {
             GlobalScope.launch {
@@ -244,6 +286,7 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
                     type = formType
                     benefit = formBenefit
                     price = formPrice
+                    userID = data.userID
                 }
 
                 viewModel.updatePackage(data)
@@ -254,10 +297,10 @@ class PhotographerEditPackageActivity : AppCompatActivity() {
     }
 
     private fun observerViewModel(viewModel: PhotographerProfileViewModel) {
-        viewModel.responseLiveData.observe(this, androidx.lifecycle.Observer{
+        viewModel.responseLiveData.observe(this, {
             Log.d("Update Package", it)
-            runOnUiThread {
-                if (it == "Successfully Update Package") {
+            if (it == "Successfully Update Package") {
+                runOnUiThread {
                     finish()
                 }
             }
